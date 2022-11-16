@@ -13,13 +13,16 @@ class CustomPageController extends Controller
 {
     public function index($slug){
         $page=Page::where('slug',$slug)->first();
+        $setting=SiteSetting::first();
+        $partner=Ad::first();
         if($page != null){
-            return view('frontend.custom_page', compact('page'));
+            return view('frontend.custom_page', compact('page','partner','setting'));
         }
         
     }
     public function sub_category($slug){
         $sub_cat=SubCategory::where('slug',$slug)->first();
+        // dd($sub_cat);
         $setting=SiteSetting::first();
         $partner=Ad::first();
         $news=Post::where('category',$sub_cat->id)->latest()->get();

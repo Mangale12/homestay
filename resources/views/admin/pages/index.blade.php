@@ -26,7 +26,7 @@
                                 <tr>
                                     <td> {{$loop->iteration}} </td>
                                     
-                                    <td> {{$page->title}} </td>
+                                    <td> {{$page->name}} </td>
                                     
                                     <td>{{$page->slug}}</td>
 

@@ -26,7 +26,8 @@ class HomePageSettingController extends Controller
         $validated = $request->validate([
             'category'=>'required',
             'status'=>'required',
-            'layout'=>'required'
+            'layout'=>'required',
+            'order'=>'required'
         ]);
         $cat_section=new CategorySection();
         $cat_section->category_id=$request->category;
@@ -115,7 +116,8 @@ class HomePageSettingController extends Controller
         $validated = $request->validate([
             'category'=>'required',
             'status'=>'required',
-            'layout'=>'required'
+            'layout'=>'required',
+            'order'=>'required|unique:category_sections,section_order,'.$cat_section->id
         ]);
         $cat_section->category_id=$request->category;
         $cat_section->subcat_id=json_encode($request->sub_category);

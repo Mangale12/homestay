@@ -21,7 +21,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Title</label> <span class="text-danger"> * </span>
-                                            <input type="text" class="form-control" name="title" value="{{old('title',$page->title)}}" required>
+                                            <input type="text" class="form-control" name="title" value="{{old('title',$page->name)}}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

@@ -109,7 +109,7 @@
                                                         <div class="form-group">
                                                             <label>Meta Tags:</label><br />
                                                             <input type="text" name="tags[]" placeholder="Tags"
-                                                                class="tm-input form-control tm-input-info"
+                                                                class="form-control"
                                                                 data-role="tagsinput" />
                                                         </div>
                                                     </div>
@@ -117,7 +117,7 @@
                                                         <div class="form-group">
                                                             <label>Meta Keywords:</label><br />
                                                             <input type="text" name="keywords[]" placeholder="Keywords"
-                                                                class="tm-input form-control tm-input-info" data-role="tagsinput"/>
+                                                                class="form-control" data-role="tagsinput"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -220,6 +220,7 @@
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function (e) {
+        $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#photos").spartanMultiImagePicker({
             fieldName: 'image[]',
             maxCount: 10,
@@ -286,7 +287,6 @@
                 alert('File size too big');
             }
         });
-        $(".tm-input").tagsManager();
 
         $('#image').change(function () {
 

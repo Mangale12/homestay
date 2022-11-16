@@ -82,10 +82,17 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::resource('/pages', PageController::class);
 
         Route::get('/menu_settings',[MenuController::class,'index'])->name('menu_settings');
+        Route::get('/menu_settings/create', [MenuController::class,'create'])->name('menu_settings.create');
+        Route::post('/menu_settings/create', [MenuController::class,'store'])->name('menu_settings.store');
+        Route::get('/menu_settings/edit/{slug}', [MenuController::class,'edit'])->name('menu_settings.edit');
+        Route::post('/menu_settings/edit/{slug}', [MenuController::class,'update'])->name('menu_settings.update');
+        Route::get('/menu_settings/delete/{slug}', [MenuController::class,'destroy'])->name('menu_settings.destroy');
+        Route::post('/menu_settings/get_menu_items',[MenuController::class,'get_menu_items'])->name('get_menu_items');
+        Route::resource('/users', UserController::class);
 
     });
     
-    Route::resource('/users', UserController::class);
+    
 
     Route::get('/posts/update-feature',[PostController::class,'update_feature'])->name('post.update_feature');
     Route::delete('/deleteall', [PostController::class,'deleteAll'])->name('delete_all');

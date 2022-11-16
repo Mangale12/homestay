@@ -56,6 +56,9 @@
 @endif
 @foreach ($headline_news as $key => $news)
     <!-- MAIN HEADING -->
+    @php
+        $user_detail=App\Models\User::where('name',$news->author)->first();
+    @endphp
     <section class="main-new-first">
         <div class="container-fluid">
             <div class="main-news-first-start">
@@ -65,7 +68,11 @@
                 <div class="author-details d-flex align-items-center">
                     <div class="author d-flex align-items-center mr-3">
                         <div class="author-image">
-                            <img src="{{asset('frontend/assets/images/person.jpg')}}" alt="Author" class="img-fluid">
+                            @if ($user_detail->profile_image!=null)
+                                <img src="{{asset('admin/image/'.$user_detail->profile_image)}}" alt="Author" class="img-fluid">
+                            @else
+                                <img src="{{asset('frontend/assets/images/person.jpg')}}" alt="Author" class="img-fluid">
+                            @endif
                         </div>
                         <p>{{$news->author}}</p>
                     </div>

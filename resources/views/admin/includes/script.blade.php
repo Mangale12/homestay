@@ -9,7 +9,6 @@
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
 
 
 
@@ -47,6 +46,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+<script src="{{asset('assets/js/bootstrap-tagsinput.min.js')}}"></script>
 
 <script src="{{asset('assets/js/spartan-multi-image-picker-min.js')}}"></script>
 

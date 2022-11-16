@@ -42,7 +42,7 @@ class PageController extends Controller
             'title' => 'required',
             'slug' => 'required'
         ]);
-        $page->title = $request->title;
+        $page->name = $request->title;
         if (Page::where('slug', preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug)))->first() == null) {
             $page->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
             $page->content = $request->content;
@@ -108,7 +108,7 @@ class PageController extends Controller
             'title' => 'required',
             'slug' => 'required'
         ]);
-        $page->title = $request->title;
+        $page->name = $request->title;
         if (Page::where('slug', preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug)))->first() != null) {
             $page->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
             $page->content = $request->content;
@@ -149,12 +149,12 @@ class PageController extends Controller
     public function destroy($id)
     {
         $page=Page::findOrFail($id);
-        $image_path = public_path('uploads/custom-pages/' . $page->meta_image);    
-            if(file_exists($image_path)){
-                unlink($image_path);
-            }else{
+        // $image_path = public_path('uploads/custom-pages/' . $page->meta_image);    
+        //     if(file_exists($image_path)){
+        //         unlink($image_path);
+        //     }else{
                 
-            }
+        //     }
         $page->delete();
         return back()->with('message','Page deleted successfully');
     }

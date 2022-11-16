@@ -43,7 +43,7 @@
                         <ul>
                             <li><a href="{{route('home')}}">गृह पृष्ठ</a> </li>
                             @foreach (App\Models\Page::all() as $key => $link)
-                            <li><a href="{{ route('custom_page',['slug' => $link->slug]) }}">{{$link->title}}</a> </li>
+                            <li><a href="{{ route('custom_page',['slug' => $link->slug]) }}">{{$link->name}}</a> </li>
                             @endforeach
                         </ul>
                     </div>

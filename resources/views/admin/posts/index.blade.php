@@ -57,6 +57,7 @@
                     
                     </div>
                 </div>
+                {{-- {{dd(App\Models\Post::where('status','scheduled')->get())}} --}}
                 <div class="card-body p-0">
                     @include('admin.includes.message')
                     <form action="{{route('delete_all')}}" method="POST" id="del">
@@ -156,7 +157,17 @@
                                             @elseif($post->status == 'drafts')
                                                 <span class="badge badge-pill badge-primary">Draft</span>
                                             @else
+                                            @php
+                                                
+                                                $end = strtotime($post->scheduled_dt);
+                                                $start = strtotime(\Carbon\Carbon::now());
+                                                $mins = ($end - $start) / 60;
+                                            @endphp
+                                                @if ($mins<0)
+                                                <span class="badge badge-pill badge-success">Published</span>
+                                                @else
                                                 <span class="badge badge-pill badge-primary">Scheduled</span>
+                                                @endif
                                             @endif
                                         </td>
                                         
@@ -166,12 +177,13 @@
                                             @php
                                                 $timestamp = strtotime($post->scheduled_dt);
                                             @endphp
-                                            {{date("d/m/y H:i A", $timestamp)}}
+                                            {{date("d M Y h:i A", $timestamp)}}
+                                            
                                           	@elseif($post->status=="published" || $post->status=="drafts")
                                           	@php
                                                 $timestamp = strtotime($post->updated_at);
                                             @endphp
-                                            {{date("d/m/y H:i A", $timestamp)}}
+                                            {{date("d M Y h:i A", $timestamp)}}
                                             @endif
                                         </td>
 

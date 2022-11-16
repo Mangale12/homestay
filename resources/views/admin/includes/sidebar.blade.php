@@ -242,14 +242,16 @@
             </ul>
           </li>
           @endrole --}}
-          {{-- <li class="nav-item">
+          @role('Admin')
+          <li class="nav-item">
             <a href="{{route('menu_settings')}}" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Menu Settings
               </p>
             </a>
-          </li> --}}
+          </li>
+          @endrole
           
          {{-- <li class="nav-item">
             <a href="{{route('newsletters.index')}}" class="nav-link {{ Route::is('newsletters.index','newsletters.send') ? 'active' : '' }}">

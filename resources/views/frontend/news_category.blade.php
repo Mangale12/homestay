@@ -17,7 +17,7 @@
                 <li class="breadcrumb-item active" aria-current="page">{{$cat->name}}</li>
                 @else
                 @php
-                    $category=App\Models\Category::where('id',$sub_cat->id)->first();
+                    $category=App\Models\SubCategory::where('id',$sub_cat->id)->first();
                 @endphp
                 <li class="breadcrumb-item" aria-current="page"><a href="{{route('news_category',$category->slug)}}">{{$category->name}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{$sub_cat->name}}</li>

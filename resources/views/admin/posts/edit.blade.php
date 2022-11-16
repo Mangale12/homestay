@@ -118,13 +118,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Meta Tags:</label><br/>
-                                                    <input type="text" name="tags[]" placeholder="Tags" class="tm-input form-control tm-input-info" value="{{$post->tags}}" date-role="tagsinput"/>
+                                                    <input type="text" name="tags[]" placeholder="Tags" class="form-control" value="{{$post->tags}}" date-role="tagsinput"/>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Meta Keywords:</label><br/>
-                                                    <input type="text" name="keywords[]" placeholder="Keywords" class="tm-input form-control tm-input-info"/>
+                                                    <input type="text" name="keywords[]" value="{{$post->keywords}}" placeholder="Keywords" class="form-control"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -230,7 +231,7 @@
 <script type="text/javascript">
             
     $(document).ready(function (e) {
-        
+        $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 	
         $('.remove-files').on('click', function(){
             $(this).parents(".col-md-4").remove();
@@ -284,8 +285,6 @@
                     alert('File size too big');
                 }
         });
-        $(".tm-input").tagsManager();
-
 
         $('#category_id').on('change', function() {
             var category_id = $('#category_id').val();

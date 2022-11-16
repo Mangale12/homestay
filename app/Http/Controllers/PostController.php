@@ -73,7 +73,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
         $validated = $request->validate([
             'headline' => 'required',
             'category'=>'required',

@@ -13,6 +13,7 @@
   @endif
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
+
   <link rel='stylesheet'
          href='https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css'>
   <!-- Google Font: Source Sans Pro -->
@@ -55,8 +56,6 @@
 	<link rel="stylesheet" type="text/css" 
   href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
-  
 
 <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
   

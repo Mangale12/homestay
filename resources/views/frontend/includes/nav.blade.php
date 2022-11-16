@@ -1,4 +1,5 @@
 <!-- LOGO SECTION -->
+
 <section class="logo-bar">
     <div class="container">
         <div class="logo-bar-wrapper d-flex align-items-center">
@@ -82,6 +83,7 @@
     </div>
 </section>
 <!-- NAVBAR -->
+
 <section class="navbar-top">
     <!-- NAVBAR -->
     <div class="header-wrapper" id="topheader">
@@ -97,7 +99,46 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('home')}}"><i class="fas fa-home"></i></a>
                         </li>
+                        
                         @php
+                            $nav_menus=App\Models\Menu::orderBy('menu_order','ASC')->get();
+                        @endphp
+                        @foreach ($nav_menus as $nav_menu)
+                            @if ($nav_menu->menu_type == 'category')
+                                @php
+                                    $menu=App\Models\Category::where('id',$nav_menu->menu)->first();
+                                    $sub_menus=App\Models\SubCategory::where('parent_id',$menu->id)->where('status',1)->latest()->get();
+                                @endphp
+                                @if (count($sub_menus)>0)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{route('news_category',$menu->slug)}}">
+                                        {{$menu->name}}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        @foreach ($sub_menus as $sub_menu)
+                                            
+                                        <a class="dropdown-item" href="{{route('sub_category',$sub_menu->slug)}}">{{$sub_menu->name}}</a>
+                                        @endforeach
+                                    </div>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('news_category',$menu->slug)}}">{{$menu->name}}</a>
+                                </li>
+                                @endif
+                            
+                            @elseif($nav_menu->menu_type == 'page')
+                            @php
+                                $menu=App\Models\Page::where('id',$nav_menu->menu)->first();
+                            @endphp
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{route('custom_page',$menu->slug)}}">{{$menu->name}}</a>
+                            </li>
+                            @endif
+                            
+                        
+                        @endforeach
+                        {{-- @php
                             $menus=App\Models\Category::where('status',1)->latest()->take(12)->get();
                             
                         @endphp
@@ -123,8 +164,9 @@
                             <a class="nav-link" href="{{route('news_category',$menu->slug)}}">{{$menu->name}}</a>
                         </li>
                         @endif
-                        @endforeach
-                       
+                        @endforeach --}}
+                            
+                        
                         
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="category.php">अन्य </a>
@@ -137,7 +179,42 @@
                             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                             <ul>
                                 <li><a href="{{route('home')}}"><i class="fas fa-home mr-3"></i>गृहपृ्ठ</a></li>
-                                @foreach ($menus as $menu)
+                                @foreach ($nav_menus as $nav_menu)
+                                @if ($nav_menu->menu_type == 'category')
+                                    @php
+                                        $menu=App\Models\Category::where('id',$nav_menu->menu)->first();
+                                        $sub_menus=App\Models\SubCategory::where('parent_id',$menu->id)->where('status',1)->latest()->get();
+                                    @endphp
+                                    @if (count($sub_menus)>0)
+                                    <li>
+                                        <a class="samachar-btn" href="{{route('news_category',$menu->slug)}}">
+                                            {{$menu->name}}
+                                            <span class="fas fa-caret-down second"></span>
+                                        </a>
+                                        <ul class="samachar-show">
+                                            @foreach ($sub_menus as $sub_menu)
+                                            <li><a href="{{route('sub_category',$sub_menu->slug)}}">{{$sub_menu->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @else
+                                    <li>
+                                        <a href="{{route('news_category',$menu->slug)}}">{{$menu->name}}</a>
+                                    </li>
+                                    @endif
+                                
+                                @elseif($nav_menu->menu_type == 'page')
+                                @php
+                                    $menu=App\Models\Page::where('id',$nav_menu->menu)->first();
+                                @endphp
+                                <li>
+                                <a href="{{route('custom_page',$menu->slug)}}">{{$menu->name}}</a>
+                                </li>
+                                @endif
+                                
+                            
+                            @endforeach
+                                {{-- @foreach ($menus as $menu)
                                 @php
                                     $sub_menus=App\Models\SubCategory::where('parent_id',$menu->id)->where('status',1)->latest()->get();
                                     
@@ -157,8 +234,8 @@
                                 @else
                                 <li><a href="{{route('news_category',$menu->slug)}}">{{$menu->name}}</a></li>
                                 @endif
-                                @endforeach
-                                {{-- <li><a href="category.php">अन्य</a></li> --}}
+                                @endforeach --}}
+                                
                             </ul>
                         </div>
                         <span class="openNav" onclick="openNav()">&#9776; </span>

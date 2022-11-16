@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use App\Models\Category;
 use App\Models\CategorySection;
+use App\Models\Menu;
 use App\Models\Message;
 use App\Models\Post;
 use App\Models\SiteSetting;
@@ -20,6 +21,7 @@ class FrontendController extends Controller
         $cat_sec=CategorySection::where('status',1)->orderBy('section_order', 'asc')->get();
         $partner=Ad::first();
         $headline_news=Post::where('status','published')->latest()->take($headline_no)->get();
+        
         return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no'));
     }
     
