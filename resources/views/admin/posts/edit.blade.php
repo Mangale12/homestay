@@ -183,11 +183,11 @@
                         <div class="form-group">
                             <label for="sub_category">Sub Category</label>
                             <select class="form-control" name="sub_category" id="sub_cat">
-                                {{-- <option selected disabled>--Select--</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach --}}
+                                @if ($post->subcategory!=null)
+                                    
                                 
+                                <option value="{{$post->subcategory}}">{{\App\Models\SubCategory::where('id',$post->subcategory)->first()->pluck('name')}}</option>
+                                @endif
                             </select>
                         </div>
                     </div>

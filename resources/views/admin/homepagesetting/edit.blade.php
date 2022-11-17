@@ -86,7 +86,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                @for ($i = 1; $i < 5; $i++)
+                                @for ($i = 1; $i < 6; $i++)
                                 <label>
                                     <input type="checkbox" id="layout{{ $i }}" name="layout" value="layout{{$i}}" @if ($cat_section->layout == 'layout'.$i)
                                         checked

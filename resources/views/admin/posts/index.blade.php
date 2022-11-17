@@ -203,7 +203,12 @@
 
     </section>
 </div>
-
+<script>
+    let featured = Array.prototype.slice.call(document.querySelectorAll('.js-feature'));
+        featured.forEach(function(html) {
+            let switchery = new Switchery(html,  { size: 'small' });
+        });
+</script>
 @endsection
 @section('scripts')
 
@@ -247,10 +252,7 @@
          }    
         });  
 
-        let featured = Array.prototype.slice.call(document.querySelectorAll('.js-feature'));
-        featured.forEach(function(html) {
-            let switchery = new Switchery(html,  { size: 'small' });
-        });
+        
 
         $('.js-feature').change(function () {
             let featured = $(this).prop('checked') === true ? 1 : 0;

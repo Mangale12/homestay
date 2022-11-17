@@ -735,50 +735,176 @@
                                     <div class="col-lg-4 col-md-4">
                                         <div class="pradesh-samachar">
                                             @foreach ($sub_posts as $count => $post)
-                                            @if ($count==0 || $count==$count+5)
-                                            <div class="pradesh-samachar-top">
-                                                @if (!empty($post->featured_img))
-                                                    @if(file_exists('uploads/featured_img/'.$post->featured_img))
-                                                        <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid pradesh-image">
-                                                    @else
-                                                        <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
-                                                    @endif
-                                                @else
-                                                    <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
-                                                @endif
-                                                <h5><a href="{{route('single_news',$post->slug)}}">{{$post->title}}</a></h5>
-                                            </div>
-                                            @else
-                                            <div class="news-short-inner-right">
-                                                <div class="short-news-div pradesh-small">
-                                                    <div class="short-news">
-                                                        <a href="{{route('single_news',$post->slug)}}" class="d-flex">
-                                                            <div class="short-news-image">
-                                                                @if (!empty($post->featured_img))
-                                                                    @if(file_exists('uploads/featured_img/'.$post->featured_img))
-                                                                        <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid">
-                                                                    @else
-                                                                        <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
-                                                                    @endif
-                                                                @else
-                                                                    <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
-                                                                @endif
-                                                            </div>
-                                                            <div class="short-news-desc">
-                                                                <h6>{{$post->title}}</h6>
-                                                                <div class="author-date d-flex align-items-center">
-                                                                    <i class="far fa-clock f-20 mr-2"></i>
-                                                                    <p>१ घन्टा अगडि</p>
-                                                                </div>
-                                                            </div>
-                                                        </a>
+                                                @if ($count<5)
+                                                    @if ($count==0 )
+                                                    <div class="pradesh-samachar-top">
+                                                        @if (!empty($post->featured_img))
+                                                            @if(file_exists('uploads/featured_img/'.$post->featured_img))
+                                                                <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid pradesh-image">
+                                                            @else
+                                                                <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
+                                                            @endif
+                                                        @else
+                                                            <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
+                                                        @endif
+                                                        <h5><a href="{{route('single_news',$post->slug)}}">{{$post->title}}</a></h5>
                                                     </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            @endif
-                                            
-                                            
+                                                    @else
+                                                    <div class="news-short-inner-right">
+                                                        <div class="short-news-div pradesh-small">
+                                                            <div class="short-news">
+                                                                <a href="{{route('single_news',$post->slug)}}" class="d-flex">
+                                                                    <div class="short-news-image">
+                                                                        @if (!empty($post->featured_img))
+                                                                            @if(file_exists('uploads/featured_img/'.$post->featured_img))
+                                                                                <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid">
+                                                                            @else
+                                                                                <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
+                                                                            @endif
+                                                                        @else
+                                                                            <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="short-news-desc">
+                                                                        <h6>{{$post->title}}</h6>
+                                                                        <div class="author-date d-flex align-items-center">
+                                                                            <i class="far fa-clock f-20 mr-2"></i>
+                                                                            <p>
+                                                                                @if($post->created_at->diffInMinutes(\Carbon\Carbon::now())<60)
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInMinutes(\Carbon\Carbon::now())) }} मनेट अगाडिि
+                                                                                @elseif($post->created_at->diffInHours(\Carbon\Carbon::now())<24)
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInHours(\Carbon\Carbon::now())) }} न्टा अाडि
+                                                                                @else
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInDays(\Carbon\Carbon::now())) }} दिन गाडि
+                                                                                @endif
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="pradesh-samachar">
+                                            @foreach ($sub_posts as $count => $post)
+                                                @if ($count>4 && $count <10)
+                                                    @if ($count==5 )
+                                                    <div class="pradesh-samachar-top">
+                                                        @if (!empty($post->featured_img))
+                                                            @if(file_exists('uploads/featured_img/'.$post->featured_img))
+                                                                <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid pradesh-image">
+                                                            @else
+                                                                <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
+                                                            @endif
+                                                        @else
+                                                            <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
+                                                        @endif
+                                                        <h5><a href="{{route('single_news',$post->slug)}}">{{$post->title}}</a></h5>
+                                                    </div>
+                                                    @else
+                                                    <div class="news-short-inner-right">
+                                                        <div class="short-news-div pradesh-small">
+                                                            <div class="short-news">
+                                                                <a href="{{route('single_news',$post->slug)}}" class="d-flex">
+                                                                    <div class="short-news-image">
+                                                                        @if (!empty($post->featured_img))
+                                                                            @if(file_exists('uploads/featured_img/'.$post->featured_img))
+                                                                                <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid">
+                                                                            @else
+                                                                                <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
+                                                                            @endif
+                                                                        @else
+                                                                            <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="short-news-desc">
+                                                                        <h6>{{$post->title}}</h6>
+                                                                        <div class="author-date d-flex align-items-center">
+                                                                            <i class="far fa-clock f-20 mr-2"></i>
+                                                                            <p>
+                                                                                @if($post->created_at->diffInMinutes(\Carbon\Carbon::now())<60)
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInMinutes(\Carbon\Carbon::now())) }} मनेट अगाडिि
+                                                                                @elseif($post->created_at->diffInHours(\Carbon\Carbon::now())<24)
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInHours(\Carbon\Carbon::now())) }} न्टा अाडि
+                                                                                @else
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInDays(\Carbon\Carbon::now())) }} दिन गाडि
+                                                                                @endif
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="pradesh-samachar">
+                                            @foreach ($sub_posts as $count => $post)
+                                                @if ($count>9 && $count <15)
+                                                    @if ($count==10 )
+                                                    <div class="pradesh-samachar-top">
+                                                        @if (!empty($post->featured_img))
+                                                            @if(file_exists('uploads/featured_img/'.$post->featured_img))
+                                                                <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid pradesh-image">
+                                                            @else
+                                                                <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
+                                                            @endif
+                                                        @else
+                                                            <img src="{{asset('placeholder.jpg')}}" class="img-fluid pradesh-image">
+                                                        @endif
+                                                        <h5><a href="{{route('single_news',$post->slug)}}">{{$post->title}}</a></h5>
+                                                    </div>
+                                                    @else
+                                                    <div class="news-short-inner-right">
+                                                        <div class="short-news-div pradesh-small">
+                                                            <div class="short-news">
+                                                                <a href="{{route('single_news',$post->slug)}}" class="d-flex">
+                                                                    <div class="short-news-image">
+                                                                        @if (!empty($post->featured_img))
+                                                                            @if(file_exists('uploads/featured_img/'.$post->featured_img))
+                                                                                <img src="{{asset('uploads/featured_img/'.$post->featured_img)}}" class="img-fluid">
+                                                                            @else
+                                                                                <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
+                                                                            @endif
+                                                                        @else
+                                                                            <img src="{{asset('placeholder.jpg')}}" class="img-fluid">
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="short-news-desc">
+                                                                        <h6>{{$post->title}}</h6>
+                                                                        <div class="author-date d-flex align-items-center">
+                                                                            <i class="far fa-clock f-20 mr-2"></i>
+                                                                            <p>
+                                                                                @if($post->created_at->diffInMinutes(\Carbon\Carbon::now())<60)
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInMinutes(\Carbon\Carbon::now())) }} मनेट अगाडिि
+                                                                                @elseif($post->created_at->diffInHours(\Carbon\Carbon::now())<24)
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInHours(\Carbon\Carbon::now())) }} न्टा अाडि
+                                                                                @else
+                                                                                {{ ent_to_nepali_num_convert($post->created_at->diffInDays(\Carbon\Carbon::now())) }} दिन गाडि
+                                                                                @endif
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                @endif
                                             @endforeach
 
                                         </div>
@@ -789,1362 +915,7 @@
                         </div>
                     </div>
                     @endforeach
-                    {{-- <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="land-tab">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news4.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">ेकपाले गोल िराँतीलई अ्यक्षबा हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकठाक रहेो’ भन्ने प्तिवेदन तयार पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्ा अाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिठक रहको’ भने प्तिवेदन या पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘ब िकठाक रहे’ भन्ने प्तवेदन तयार परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकक रहेको’ भने प्रतिवेद तयार पारेक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news1.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेाले गोपल िरँतीला ध्यक्षबाट टायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठकठाक रहेको भन्ने प्रतवेन तयार परेक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घन्ा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सब ठिकठाक हक’ भन्न प्रवेदन यार पाको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगड</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठकाक हेको भनने परतवेदन तया परेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सबै ठकठाक हेको’ न्न प्रतिवेदन यार पारेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news3.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">नेकपले गोपल किाँतीलाई अधयकषबाट हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकाक रहेक’ भ्ने प्रतवदन तयार पाको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सै ठिकठक रहको’ भन्े परतिवेदन यर पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घटा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सै ठिकाक रेक’ भ्ने परतिदन तया पारक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सै िकठाक हको’ भन्ने रतिवेदन तयर पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="rent-tab">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news4.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एेकपाले गोपाल किराँतीला ध्क्षबाट टय</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘ै ठिकठाक रहो भन्ने प्तेदन तयार रेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकाक रहेको भनन प्रतिेदन ार पारको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकाक रहेको भनने प्रतवेदन तयार परेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठा रहेको’ भन् प्रतिवेदन र पारेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन् अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news1.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपाले गोपाल किराँतीलाई धक्षबाट हयो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सबै िकठाक हेको भन्ने प्रतवदन तयार पाको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकठाक रहेो’ भन्ने प्तिवेदन तयर ारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै िकठाक रहेको’ भन्ने प्रतिदन तयार पारो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकाक हेको’ भ्ने ्रतिवदन तय पारेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news3.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपले गपाल किरँतलाई अध्यषबाट हटाय</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै िकठाक रहेको’ भन्ने प्रतिवद तयार पारे छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठा रहेको’ भन्े प्रतिवेदन तयर पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घना अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सै ठिकठाक रहको’ भन्न प्तिवेद तार परेक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घनटा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सै ठिकठाक रहको’ भन्ने परतिवेदन तयार पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ् अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="house-tab">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news4.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">नेकाले गोप कराँतीलाई ्यक्षबाट हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिठाक रहेको’ न्ने प्रतिेदन तयर पाेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘ब ठिकाक रेक’ भन्े ्रतवेदन तर पाेको छ </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिठाक रहेक’ न्ने प्रतेदन तयार पाको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>बै ठिकठाक रको’ भन्ने तिवेदन तार रेको छ </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news1.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपे गपाल किरतीलई अध्कषबाट टायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठक रहेको’ भनने प्रतिवेन तयार पारेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकठक रहेो’ भन्े प्तिवेन या पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ ्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>बै ठिकठक रेो’ भनने परतवेन तयार पाेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकाक रहेो’ भनने प्तिवदन या पारेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news3.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेपाले गोपाल िराँलाई अधयकषाट हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठकठाक रहेको’ भन्न प्रतिवेदन यार पारेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घन्टा अगा</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठ रहेको भन्े प्रतवेदन या परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सबै ठकठाक हेको’ न्न ्रतिवेन यार पारेक  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ न्ट अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सब ठिकठाक रेो भन्ने प्वेदन तयार पको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="five" role="tabpanel" aria-labelledby="house-tab">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news4.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपे गोपाल किातीलाई अधयकषबाट हटो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिाक रहको’ भ्े प्तिवेदन यार पारेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सै ठिकठाक रहको’ भन्ने परतिवदन तयार पारको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घनटा अगा</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकक रहेको’ भ्े प्रतिवेदन तयर पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घनटा अगडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘स ठिकठाक रहक’ भन्ने परतवेदन तया पाेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घनट अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news1.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपाल गपाल किरातीाई अध्क्षबाट हटाो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिकठा रहको’ भन्े ्तिवेदन तयार पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घन्ट अगाड</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै िकठाक रहेक’ भन्ने प्रिवन तयार ारेक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घ्ट अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिकठा हेो’ भन्े ्रतवेदन तार पाेको छ </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घन्टा अगा</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै िकठा रहेक’ भन्न प्रिवेदन तार ारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news3.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकाले गपाल किाँतलाई अध्क्षाट हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिठाक रेको’ भ्ने ्रतिवेन तार पारेक  </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ न्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिठाक हेको’ न्ने ्रतिेदन तयार पाेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगाड</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिकठा रेको भन्ने ्रतिेदन तार पारको छ </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिक रहेको’ न् प्रतिेदन यर पाेको छ </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="six" role="tabpanel" aria-labelledby="house-tab">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news4.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपाल गपाल किरातीलाई अ्य्षबा हटाो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिका रहेो’ भने प्रतवेद यार पारक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सबै ठिकठाक हेक’ भन्ने रिवेदन तयार ारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकठा रहेक’ भन्े प्रतवेद तयार पाेक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अगडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिठाक रहेक भ्ने प्रिवदन तयार ारेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news1.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेकपाले गपाल किराँताई अध्यक्ब हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकक रहेको’ भ्े प्रतिवदन ार पारेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ न्टा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठाक रहेको’ भन्ने प्रतिेदन तयार पाेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा गडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिकाक रेको’ भनने ्रतिवेद तर पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ नटा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘बै ठिकठाक रेको’ भन्ने ्रतिेदन तयार पाेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ट ाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news3.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">नेकपाे गोपाल किरँतीलई अध्यकषबट हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै िकठाक रहेक’ भन्ने प्रिवेन तया परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ नटा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>सबै ठिकठाक हेको’ भन्न प्रतिेन तयर पारो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगड</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठकठक रहेको’ नने प्रतिवेदन तया पारेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घनटा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठा रहेको’ भन् प्रतिवेन तर पारेो छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घनट अगडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="seven" role="tabpanel" aria-labelledby="house-tab">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news4.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एेकपाले गपा किराँीलाई ध्यकषबा हटायो</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकाक रहेको’ भ्न प्रतिवेन यार पारेक  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ न्टा अगाड</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठक रहेको भन्े प्रतवेदन यार परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्ा अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘ै ठिकठाक रहो’ भन्न प्तवेदन यार ारको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा गाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै िकठाक रहेको भन्ने प्रतवेदन तयार परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news1.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एनेपाले गोपाल िराँतीाई अध्यक्ाट हटाय</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सै ठकठाक रहेो भन्ने प्रवेदन तयर पाको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकाक रहेको’ भ्ने प्रतिवन तयार पारक छ </h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p> घन्टा अाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकठा रहेको’ भन्े प्रतिवेदन तयर पारेको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घ्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिकाक रहेको’ भ्ने प्रतिवन तयर पारको  ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ न्ा अाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="pradesh-samachar">
-                                    <div class="pradesh-samachar-top">
-                                        <img src="assets/images/news3.jpg" alt="Pradesh Samachar"
-                                            class="img-fluid pradesh-image">
-                                        <h5><a href="news-details.php">एेकपाले गोपाल किराँतीला अ्क्षबा हटा</a>
-                                        </h5>
-                                    </div>
-                                    <div class="news-short-inner-right">
-                                        <div class="short-news-div pradesh-small">
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news1.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘स ठिकठाक रहक’ भन्ने परतवेदन तयार परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन् अगाडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news3.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सब ठिकठाक रहेो’ भन्ने प्तिवेद तयार ारेक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा गाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news4.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठकठाक रहेको भन्ने प्रतवेदन तयार परेको छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्ा अडि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="short-news">
-                                                <a href="news-details.php" class="d-flex">
-                                                    <div class="short-news-image">
-                                                        <img src="assets/images/news5.jpg" alt="News Image Small"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="short-news-desc">
-                                                        <h6>‘सबै ठिाक रहेको’ नने प्रतिेद यार पारक छ ।</h6>
-                                                        <div class="author-date d-flex align-items-center">
-                                                            <i class="far fa-clock f-20 mr-2"></i>
-                                                            <p>१ घन्टा अगाि</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                    
                 </div>
             </div>
         </div>
