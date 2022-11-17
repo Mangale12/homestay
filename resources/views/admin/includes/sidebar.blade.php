@@ -177,7 +177,14 @@
                   <p>Category Page Ad </p>
                 </a>
               </li>
-             
+              <li class="nav-item">
+                <a href="{{route('menu_settings')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Menu Settings
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
           @endrole
@@ -243,11 +250,15 @@
           </li>
           @endrole --}}
           @role('Admin')
+          
+          @endrole
+
+          @role('Admin')
           <li class="nav-item">
-            <a href="{{route('menu_settings')}}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+            <a href="{{route('medias')}}" class="nav-link">
+              <i class="nav-icon fas fa-file-image"></i>
               <p>
-                Menu Settings
+                Media
               </p>
             </a>
           </li>

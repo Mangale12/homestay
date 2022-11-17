@@ -5,6 +5,7 @@ use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\HomePageSettingController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
@@ -89,6 +90,9 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('/menu_settings/delete/{slug}', [MenuController::class,'destroy'])->name('menu_settings.destroy');
         Route::post('/menu_settings/get_menu_items',[MenuController::class,'get_menu_items'])->name('get_menu_items');
         Route::resource('/users', UserController::class);
+
+        Route::get('/medias',[MediaController::class,'index'])->name('medias');
+        Route::post('/delete',[MediaController::class,'delete'])->name('medias.delete');
 
     });
     
