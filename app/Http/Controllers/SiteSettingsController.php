@@ -84,7 +84,6 @@ class SiteSettingsController extends Controller
     {
 
         $setting = SiteSetting::find($id);
-        $this->validateData($request);
 
 
         $logo = $setting->logo;
@@ -111,17 +110,17 @@ class SiteSettingsController extends Controller
             $reqFav->move($this->destination, $favName);
             $setting['favicon'] = "$favName";
         }
-        $setting->title = $request['title'];
+        // $setting->title = $request['title'];
         $setting->address = $request['address'];
         $setting->contact = $request['contact'];
         $setting->email = $request['email'];
-        $setting->footer = $request['footer'];
-        $setting->headline_no = $request['headline_no'];
-        $setting->primary_color = $request['primary_color'];
-        $setting->secondary_color = $request['secondary_color'];
-      	$setting->editor_name = $request['editor_name'];
-        $setting->registration_no = $request['registration_no'];
-        $setting->chairman = $request['chairman'];
+        // $setting->footer = $request['footer'];
+        // $setting->headline_no = $request['headline_no'];
+        // $setting->primary_color = $request['primary_color'];
+        // $setting->secondary_color = $request['secondary_color'];
+      	// $setting->editor_name = $request['editor_name'];
+        // $setting->registration_no = $request['registration_no'];
+        // $setting->chairman = $request['chairman'];
         $setting->update();
 
         return back()->with('message', 'Settings has been updated successfully');
@@ -147,14 +146,14 @@ class SiteSettingsController extends Controller
     protected function validateData(Request $request)
     {
 
-        return $request->validate([
-            'title' => 'required',
-            'contact' => 'required',
-            'address' => 'required',
-            'email' => 'required|email',
-            'footer' => 'required',
-            'primary_color'=>'max:7',
-            'secondary_color'=>'max:7'
-        ]);
+        // return $request->validate([
+        //     'title' => 'required',
+        //     'contact' => 'required',
+        //     'address' => 'required',
+        //     'email' => 'required|email',
+        //     'footer' => 'required',
+        //     'primary_color'=>'max:7',
+        //     'secondary_color'=>'max:7'
+        // ]);
     }
 }

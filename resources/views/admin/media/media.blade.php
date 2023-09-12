@@ -23,6 +23,7 @@
                                 <input type="date" class="form-control mr-2" name="from" id="date_from" value="{{$from}}">
                                 <input type="date" class="form-control mr-2" name="to" id="date_to" value="{{$to}}">
                                 <button type="submit" class="btn btn-success">Filter</button>
+                                <a href="" class="ml-5 btn btn-primary">Add Media</a>
                                 </form>
                             </div>
                         </div>
@@ -39,7 +40,7 @@
                             @if (file_exists(public_path('uploads/featured_img/' . $media->featured_img)))
                             <div class="col-md-2">
                                 <div class="img-upload-preview">
-                                    <img loading="lazy"  src="{{ asset('uploads/featured_img/'.$media->featured_img) }}" alt="" class="img-responsive" style="max-height:150px;">
+                                    <img loading="lazy"  src="{{ asset('public/uploads/featured_img/'.$media->featured_img) }}" alt="" class="img-responsive" style="max-height:150px;">
                                     <input type="checkbox" class="close-btn sub_chk" name="ids[{{$media->id}}]" value="{{$media->id}}" style="right: 0px; top:-3px; width:15px;">
                                 </div>
                             </div>

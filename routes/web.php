@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomebannerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TestimonialController;
 
 
 // use Analytics;
@@ -124,6 +125,9 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
         Route::resource('service', ServiceController::class);
         Route::get('service/delete/{id}',[ServiceController::class, 'delete'])->name('services.delete');
+
+        Route::resource('testimonial', TestimonialController::class);
+        Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
 
 
     });

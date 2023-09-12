@@ -426,7 +426,7 @@
     </section>
 
     <!-- Professionals-->
-    <section class="section section-xl bg-default">
+    {{-- <section class="section section-xl bg-default">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left">
@@ -506,7 +506,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Years of experience-->
     <section class="section section-xl context-dark bg-secondary-custom">
@@ -685,7 +685,7 @@
     </section>
 
     <!-- Popular news-->
-    <section class="section section-xl bg-default">
+    {{-- <section class="section section-xl bg-default">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left">
@@ -785,6 +785,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     @endsection

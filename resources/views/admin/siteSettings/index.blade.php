@@ -17,13 +17,13 @@
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-6">
                                         <label for="Title">Site Name</label>
                                         <input type="text" class="form-control" name="title" value="{{old('Title',$setting->title)}}">
-                                    </div>
-                                    <div class="form-group col-md-6">
+                                    </div> --}}
+                                    <div class="form-group col-12">
                                         <label for="Address">Address</label>
-                                        <input type="text" class="form-control" name="address" value="{{old('Address',$setting->address)}}">
+                                        <textarea name="address" id="address" class="form-control">{!! $setting->address !!}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -36,7 +36,7 @@
                                         <input type="email" class="form-control" name="email" value="{{old('Email',$setting->email)}}">
                                     </div>
                                 </div>
-                              @can('logo-color-show')
+
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <div>
@@ -55,7 +55,7 @@
                                         <img id="preview-favicon-before-upload"  style="max-height: 100px;">
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="primary_color">Primary Color</label>
                                         <input type="text" class="form-control" name="primary_color" value="{{old('primary_color',$setting->primary_color)}}" placeholder="#000000">
@@ -64,9 +64,9 @@
                                         <label for="secondary_color">Secondary Color</label>
                                         <input type="text" class="form-control" name="secondary_color" value="{{old('secondary_color',$setting->secondary_color)}}" placeholder="#000000">
                                     </div>
-                                </div>
-                                @endcan
-                              <div class="row">
+                                </div> --}}
+
+                                {{-- <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="editor_name">Editor Name</label>
                                         <input type="text" class="form-control" name="editor_name" value="{{old('editor_name',$setting->editor_name)}}">
@@ -91,7 +91,7 @@
                                         <label for="Footer">Chairman Name</label>
                                         <input type="text" name="chairman" class="form-control"value="{{old('chairman',$setting->chairman)}}"/>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -1,13 +1,13 @@
   @php
       $setting = \App\Models\SiteSetting::first();
   @endphp
-  
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('dashboard')}}" class="brand-link">
       <!--@if (!empty($setting->logo))-->
-      <!--  <img src="{{asset('admin/image/'.$setting->logo)}}" alt="{{$setting->title}}" class="brand-image elevation-3" style="opacity: .8">-->
+      <!--  <img src="{{asset('public/admin/image/'.$setting->logo)}}" alt="{{$setting->title}}" class="brand-image elevation-3" style="opacity: .8">-->
       <!--@endif-->
       @if (!empty($setting->title))
         <span class="brand-text font-weight-light">{{$setting->title}}</span>
@@ -17,13 +17,13 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      
+
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
             @if (Auth::user()->profile_image != null)
-              <img src="{{asset('admin/image/'.Auth::user()->profile_image )}}" class="img-circle elevation-2" style="opacity: .8">
+              <img src="{{asset('public/admin/image/'.Auth::user()->profile_image )}}" class="img-circle elevation-2" style="opacity: .8">
             @else
-              <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+              <img src="{{asset('public/assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
             @endif
           </div>
           <div class="info">
@@ -31,11 +31,11 @@
           </div>
           <div class="visit-web">
             <a href="{{route('home')}}" target="_blank">
-              <img src="{{asset('admin/www.png')}}" class="img-circle">
+              <img src="{{asset('public/admin/www.png')}}" class="img-circle">
             </a>
           </div>
         </div>
-       
+
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -61,27 +61,33 @@
                 Dashboard
               </p>
             </a>
-            
+
           </li>
           <li class="nav-item">
-            <a href="{{route('posts.index')}}" class="nav-link {{ Route::is('posts.index','posts.create','posts.edit') ? 'active' : '' }}">
+            <a href="{{route('homebanner.index')}}" class="nav-link {{ Route::is('homebanner.index','homebanner.create','homebanner.edit') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Home Banner
+              </p>
+            </a>
+
+          </li>
+          <li class="nav-item">
+            <a href="{{route('room.index')}}" class="nav-link {{ Route::is('room.index','room.create','room.edit') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Posts
+                Room
               </p>
             </a>
           </li>
-          @hasanyrole('Admin|Super Admin')
           <li class="nav-item">
-            <a href="{{route('pages.index')}}" class="nav-link {{ Route::is('pages.index','pages.create','pages.edit','pages.show') ? 'active' : '' }}">
+            <a href="{{route('service.index')}}" class="nav-link {{ Route::is('service.index','service.create','service.edit') ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Pages
+                Service
               </p>
             </a>
           </li>
-          @endhasanyrole
-          @hasanyrole('Admin|Super Admin')
           <li class="nav-item">
             <a href="{{route('medias')}}" class="nav-link">
               <i class="nav-icon fas fa-file-image"></i>
@@ -90,17 +96,14 @@
               </p>
             </a>
           </li>
-          @endhasanyrole
-          @hasanyrole('Admin|Super Admin')
-          <li class="nav-item">
-            <a href="#" class="nav-link {{Route::is('categories.index','categories.create','categories.edit') ? 'active' : (Route::is('sub-categories.index','sub-categories.create','sub-categories.edit') ? 'active' : '')}}">
+          {{-- <li class="nav-item">
+            <a href="{{ route('testimonial.index') }}" class="nav-link {{Route::is('testimonial.index','testimonial.create','testimonial.edit') ? 'active' : (Route::is('sub-categories.index','sub-categories.create','sub-categories.edit') ? 'active' : '')}}">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
-                Category
-                <i class="right fas fa-angle-right"></i>
+                Testimonials
               </p>
-            </a>
-            <ul class="nav nav-treeview">
+            </a> --}}
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('categories.index')}}" class="nav-link {{ Route::is('categories.index','categories.create','categories.edit') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -113,11 +116,11 @@
                   <p>Sub Category</p>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
           </li>
-          @endhasanyrole
-          @hasanyrole('Admin|Super Admin')
-          <li class="nav-item">
+
+
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link {{ Route::is('users.index','users.create','users.edit') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -140,8 +143,7 @@
               </li>
             </ul>
           </li>
-          @endhasanyrole
-          @hasanyrole('Admin|Super Admin')
+
           <li class="nav-item">
             <a href="#" class="nav-link {{ Route::is('social','settings.index','homepageSetting.index','homepageSetting.create','homepageSetting.edit','homepageAd','singleNewsAd','categoryAd') ? 'active' : '' }}">
               <i class="nav-icon fas fa-cogs"></i>
@@ -162,8 +164,8 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>General Settings</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> --}}
+              {{-- <li class="nav-item">
                 <a href="{{route('homepageSetting.index')}}" class="nav-link {{ Route::is('homepageSetting.index','homepageSetting.create','homepageSetting.edit') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Homepage Settings</p>
@@ -194,12 +196,11 @@
                     Menu Settings
                   </p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
-          @endhasanyrole
-          
-          @hasanyrole('Super Admin')
+
+          {{-- @hasanyrole('Super Admin')
           <li class="nav-item">
             <a href="#" class="nav-link {{Route::is('roles.index','roles.create','roles.edit','permissions.index','permissions.create','permissions.edit') ? 'active' : ''}}">
               <i class="nav-icon fas fa-user-tag"></i>
@@ -215,7 +216,7 @@
                   <p>Roles</p>
                 </a>
               </li>
-              
+
               <li class="nav-item">
                 <a href="{{route('permissions.index')}}" class="nav-link {{Route::is('permissions.index','permissions.create','permissions.edit') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
@@ -224,9 +225,9 @@
               </li>
             </ul>
           </li>
-          @endhasanyrole
-          
-          
+          @endhasanyrole --}}
+
+
 
           {{-- @hasanyrole('Admin|Super Admin')
           <li class="nav-item">
@@ -259,10 +260,10 @@
             </ul>
           </li>
           @endhasanyrole --}}
-         
 
-          
-          
+
+
+
          {{-- <li class="nav-item">
             <a href="{{route('newsletters.index')}}" class="nav-link {{ Route::is('newsletters.index','newsletters.send') ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
@@ -280,7 +281,7 @@
             </a>
           </li>--}}
 
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
