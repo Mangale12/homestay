@@ -59,11 +59,15 @@ body {
 }
 
 .logo img {
-    width: 110px;
+    width: 200px;
 }
 
 .date {
     text-align: right;
+}
+
+img{
+    border-radius: 0.8rem;
 }
 
 /*LOGOBAR ENDS*/
@@ -192,7 +196,7 @@ body {
     border-radius: 11px;
 }
 
-/* top-header */
+/* top-header */.
 /* form */
 .user input,
 .pass input {
@@ -564,12 +568,14 @@ p.last a:hover {
 
 .openNav {
     /* margin-left: -2.75rem; */
-    font-size: 25px;
+    font-size: 20px;
     color: var(--white-color);
     cursor: pointer;
     margin-top: 0.5rem;
 }
-
+.last-open{
+    display: none;
+}
 .second-bg ul {
     padding-top: 1rem;
 }
@@ -721,13 +727,13 @@ p.last a:hover {
 }
 
 .main-news-first-start h2 a {
-    color: var(--dark-color);
+    color: var(--primary-color);
     font-weight: 700;
     font-size: 50px;
 }
 
 .main-news-first-start h2 a:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .author-details {
@@ -754,6 +760,7 @@ p.last a:hover {
 .short-news-div {
     padding: 20px;
     box-shadow: var(--box-shadow);
+    border-radius: 0.8rem;
 }
 
 .short-news-div {
@@ -816,7 +823,7 @@ p.last a:hover {
     width: 210px;
     height: 100px;
     object-fit: cover;
-    border-radius: 0.2rem;
+    border-radius: 0.8rem;
 }
 
 .short-news-image {
@@ -942,6 +949,7 @@ p.last a:hover {
     box-shadow: var(--box-shadow);
     padding: 15px;
     margin-bottom: 25px;
+    border-radius: 0.8rem;
 }
 
 .antarbarta-card:hover {
@@ -1002,6 +1010,7 @@ p.last a:hover {
     padding: 20px;
     box-shadow: var(--box-shadow);
     margin-bottom: 2rem;
+    border-radius: 0.8rem;
 }
 
 .pradesh h2 a {
@@ -1191,6 +1200,8 @@ p.last a:hover {
     height: 160px;
     width: 100%;
     object-fit: cover;
+    border-radius:0.8rem;
+    box-shadow: var(--box-shadow-light);
 }
 
 .share-bazar .card-text a {
@@ -1280,4 +1291,315 @@ p.last a:hover {
 .photo-gallery-carousel .item img{
     height: 500px;
     object-fit: cover;
+}
+/*ADDED*/
+.news-short-inner-left:hover{
+    margin-top: -5px;
+    transition: 0.3s ease-in-out;
+    box-shadow: var(--box-shadow);
+}
+
+ 
+.copyright-part{
+    display: flex;
+    
+}
+
+.brand-link .brand-image {
+    border-radius: 0 !important;
+}
+
+.user-panel{
+    justify-content: space-between;
+}
+
+/*11/22/2022*/
+.navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link, .nav-item, .nav-eng, .navbar-light .navbar-nav .nav-link {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .active a {
+    color: #86dee7 !important;
+    transition: 0.4s ease-in;
+}
+
+.related-img img{
+    height: 250px;
+    object-fit: cover;
+}
+
+.main-news-first-start {
+    padding: 0;
+}
+
+.mobile-nav-bottom{
+    display: none;
+}
+.mobile-nav-container{
+    padding: 20px;
+}
+.navbar-bottom-flex{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.navbar-bottom{
+    display: none;
+}
+
+
+.floating-icons {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translate(-50%, -50%);
+    background: var(--primary-color);
+    padding: 10px;
+    z-index: 200;
+}
+
+.floating-icons ul li a img {
+    width: 30px;
+}
+
+.floating-icons ul li {
+    padding-bottom: 10px;
+}
+
+.floating-icons ul li:last-child {
+    padding-bottom: 0px;
+}
+
+.weather-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #e5e5e5;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.weather-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.weather-nav a:hover {
+    color: #f1f1f1;
+}
+
+.weather-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .weather-nav {
+        padding-top: 15px;
+    }
+    .weather-nav a {
+        font-size: 18px;
+    }
+}
+
+.patro-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #e5e5e5;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.patro-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.patro-nav a:hover {
+    color: #f1f1f1;
+}
+
+.patro-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .patro-nav {
+        padding-top: 15px;
+    }
+    .patro-nav a {
+        font-size: 18px;
+    }
+}
+
+.forex-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #e5e5e5;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.forex-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.forex-nav a:hover {
+    color: #f1f1f1;
+}
+
+.forex-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .forex-nav {
+        padding-top: 15px;
+    }
+    .forex-nav a {
+        font-size: 18px;
+    }
+}
+
+.horoscope-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #e5e5e5;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.horoscope-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.horoscope-nav a:hover {
+    color: #f1f1f1;
+}
+
+.horoscope-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .horoscope-nav {
+        padding-top: 15px;
+    }
+    .horoscope-nav a {
+        font-size: 18px;
+    }
+}
+
+.gold-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #e5e5e5;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.gold-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.gold-nav a:hover {
+    color: #f1f1f1;
+}
+
+.gold-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .gold-nav {
+        padding-top: 15px;
+    }
+    .gold-nav a {
+        font-size: 18px;
+    }
+}
+
+.partner-side {
+    margin-top: 20px;
+}
+
+.money-image-section {
+    padding: 0px 0;
+}
+
+.category-partner{
+    width: 75%;
+    margin: 10px auto;
+}
+.eng-date{
+    margin-left: 0;
 }

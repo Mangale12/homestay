@@ -14,7 +14,7 @@ class SocialSettingsController extends Controller
             $social->facebook='https://www.facebook.com/';
             $social->twitter='https://www.twitter.com/';
             $social->instagram='https://www.instagram.com/';
-            $social->linkedin='https://www.linkedin.com/';
+            $social->youtube='https://www.youtube.com/';
             $social->save();
 
         }
@@ -28,7 +28,7 @@ class SocialSettingsController extends Controller
         $social->facebook=$request->facebook;
         $social->twitter=$request->twitter;
         $social->instagram=$request->instagram;
-        $social->linkedin=$request->linkedin;
+        $social->youtube=$request->youtube;
         $social->map=$request->map;
         $social->update();
         return back()->with('message','Settings has been updated successfully');
@@ -37,12 +37,11 @@ class SocialSettingsController extends Controller
     // Validate Data
     protected function validateData(Request $request)
     {
-
-        return $request->validate([
-            'facebook'=>'required',
-            'twitter'=>'required',
-            'instagram' => 'required',
-            'linkedin'=> 'required'
-        ]);
+     // return $request->validate([
+        //     'facebook'=>'required',
+        //     'twitter'=>'required',
+        //     'instagram' => 'required',
+        //     'linkedin'=> 'required'
+        // ]);
     }
 }

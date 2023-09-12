@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
 
 :root {
     --primary-color: #27244f;
-    --secondary-color: #D80822;
+    --secondary-color: #d80822;
     --white-color: #ffffff;
     --black-color: #000000;
     --font-color: rgb(131, 131, 131);
     --section-color: #f1f1f1;
     --dark-color: #090706;
-    --primary-font: 'Mukta', sans-serif;
-    --secondary-font: 'Poppins', sans-serif;
+    --primary-font: "Mukta", sans-serif;
+    --secondary-font: "Poppins", sans-serif;
     --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     --breadcrumb: rgb(240, 239, 239);
+    --box-shadow-light: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 :hover {
@@ -38,7 +39,6 @@ img {
     height: auto;
     width: 100%;
 }
-
 
 h1,
 h2,

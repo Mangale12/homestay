@@ -140,6 +140,7 @@
     height: 25rem;
     width: 100%;
     object-fit: cover;
+    border-radius: 0.8rem;
 }
 
 .medium-card .card-img {

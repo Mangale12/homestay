@@ -7,9 +7,20 @@ use App\Models\Category;
 use App\Models\CategorySection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
 
 class HomePageSettingController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:section_layout-show|section_layout-create|section_layout-edit|section_layout-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:section_layout-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:section_layout-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:section_layout-delete', ['only' => ['destroy']]);
+
+    }
     public function index()
     {
         $cat_section= CategorySection::orderBy('section_order', 'asc')->get();
@@ -27,81 +38,69 @@ class HomePageSettingController extends Controller
             'category'=>'required',
             'status'=>'required',
             'layout'=>'required',
-            'order'=>'required'
+            'order'=>'required|unique:category_sections,section_order',
         ]);
         $cat_section=new CategorySection();
         $cat_section->category_id=$request->category;
         $cat_section->subcat_id=json_encode($request->sub_category);
-       
+
         if ($request->hasFile('category_partner')) {
-            
-            $imageName = time().'.'.$request->category_partner->extension();  
+
+            $imageName = time().'.'.$request->category_partner->extension();
             $request->category_partner->move(public_path('uploads/partners/category_partner/'), $imageName);
-           
+            $data = [
+              'url' => $request->category_partner_url,
+              'img' => $imageName
+          ];
+          $cat_section->category_partner=json_encode($data);
+
         }
-        // dd($imageName);
-        $data = [
-            'url' => $request->category_partner_url,
-            'img' => $imageName
-        ];
-        // dd(json_encode($data));
-        $cat_section->category_partner=json_encode($data);
-        
+
+
         $cat_section->status=$request->status;
         $cat_section->section_order=$request->order;
         $cat_section->layout=$request->layout;
-        // $data=[];
-        // if ($request->hasFile('section')) {
-        //     foreach($request->file('section') as $key => $file)
-        //     {
-        //         $name = time(). $key. '.'.$file->extension();
-        //         $file->move(public_path().'/uploads/partners/sidebarAds', $name);  
-        //         array_push($data,$name);  
-        //     }
-        // }
-        // // dd($data);
-        // $cat_section->sidebar_partners=json_encode($data);
-        // dd($cat_section);
+
         if ($request->hasFile('section1')) {
-            
-            $imageName = 'section1'.time().'.'.$request->section1->extension();  
-            
+
+            $imageName = 'section1'.time().'.'.$request->section1->extension();
+
             $request->section1->move(public_path().'/uploads/partners/sidebarAds', $imageName);
-           
-        }
-        $data = [
+           $data = [
             'url' => $request->section1_url,
             'img' => $imageName
         ];
         $cat_section->section1=json_encode($data);
-        
+        }
+
+
 
         if ($request->hasFile('section2')) {
-            
-            $imageName = 'section2'.time().'.'.$request->section2->extension();  
+
+            $imageName = 'section2'.time().'.'.$request->section2->extension();
             $request->section2->move(public_path().'/uploads/partners/sidebarAds', $imageName);
-           
-        }
-        $data = [
+           $data = [
             'url' => $request->section2_url,
             'img' => $imageName
         ];
         $cat_section->section2=json_encode($data);
+        }
+
 
         if ($request->hasFile('section3')) {
-            
-            $imageName = 'section3'.time().'.'.$request->section3->extension();  
+
+            $imageName = 'section3'.time().'.'.$request->section3->extension();
             $request->section3->move(public_path().'/uploads/partners/sidebarAds', $imageName);
-           
-        }
-        $data = [
+           $data = [
             'url' => $request->section3_url,
             'img' => $imageName
         ];
         $cat_section->section3=json_encode($data);
+        }
+
 
         $cat_section->save();
-        return redirect()->route('homepageSetting.index')->with('message','Category Section added successfully');   
+        return redirect()->route('homepageSetting.index')->with('message','Category Section added successfully');
 
     }
     public function edit($id)
@@ -113,38 +112,55 @@ class HomePageSettingController extends Controller
     public function update(Request $request,$id)
     {
         $cat_section=CategorySection::findOrFail($id);
-        $validated = $request->validate([
-            'category'=>'required',
-            'status'=>'required',
-            'layout'=>'required',
-            'order'=>'required|unique:category_sections,section_order,'.$cat_section->id
-        ]);
+
+        if (Auth::user()->hasRole('Super Admin')) {
+            $validated = $request->validate([
+                'category'=>'required',
+                'status'=>'required',
+                'layout'=>'required',
+                'order'=>'required|unique:category_sections,section_order,'.$cat_section->id,
+
+            ]);
+        } else{
+            $validated = $request->validate([
+                'category'=>'required',
+                'status'=>'required',
+                'order'=>'required|unique:category_sections,section_order,'.$cat_section->id,
+
+            ]);
+        }
+
         $cat_section->category_id=$request->category;
         $cat_section->subcat_id=json_encode($request->sub_category);
         $cat_section->status=$request->status;
-        $cat_section->layout=$request->layout;
+      	if (Auth::user()->hasRole('Super Admin')) {
+            $cat_section->layout=$request->layout;
+        } else {
+            $cat_section->layout=$cat_section->layout;
+        }
+        //$cat_section->layout=$request->layout;
         $cat_section->section_order=$request->order;
-        
+
 
         if ($request->hasFile('category_partner')) {
             if ($request->previous_category_partners != null) {
                 // dd($request->previous_category_partners);
-                $featured = public_path('uploads/partners/category_partner/' . $request->previous_category_partners); 
+                $featured = public_path('uploads/partners/category_partner/' . $request->previous_category_partners);
                 if(file_exists($featured)){
                     unlink($featured);
-                    
-                } 
-                $imageName = time().'.'.$request->category_partner->extension();  
+
+                }
+                $imageName = time().'.'.$request->category_partner->extension();
                 $request->category_partner->move(public_path('uploads/partners/category_partner/'), $imageName);
-                // $ad->category_partner= $imageName;  
-                
+                // $ad->category_partner= $imageName;
+
             } else{
-                $imageName = time().'.'.$request->category_partner->extension();  
+                $imageName = time().'.'.$request->category_partner->extension();
                 $request->category_partner->move(public_path('uploads/partners/category_partner/'), $imageName);
-            } 
+            }
         }else {
             $imageName=$request->previous_category_partners;
-           
+
         }
         // dd($imageName);
         $data = [
@@ -165,30 +181,30 @@ class HomePageSettingController extends Controller
         //     foreach($request->file('section') as $key => $file)
         //     {
         //         $name = time(). $key . '.'.$file->extension();
-        //         $file->move(public_path().'/uploads/partners/sidebarAds', $name);  
-        //         array_push($data,$name);  
+        //         $file->move(public_path().'/uploads/partners/sidebarAds', $name);
+        //         array_push($data,$name);
         //     }
         // }
         // $cat_section->sidebar_partners=json_encode($data);
         if ($request->hasFile('section1')) {
             if ($request->section1 != null) {
                 // dd($request->section1);
-                $featured = public_path('uploads/partners/sidebarAds/' . $request->section1); 
+                $featured = public_path('uploads/partners/sidebarAds/' . $request->section1);
                 if(file_exists($featured)){
                     unlink($featured);
-                    
-                } 
-                $imageName = 'section1'.time().'.'.$request->section1->extension();  
+
+                }
+                $imageName = 'section1'.time().'.'.$request->section1->extension();
                 $request->section1->move(public_path('uploads/partners/sidebarAds/'), $imageName);
-                // $ad->sidebarAds= $imageName;  
-                
+                // $ad->sidebarAds= $imageName;
+
             } else{
-                $imageName = 'section1'.time().'.'.$request->section1->extension();  
+                $imageName = 'section1'.time().'.'.$request->section1->extension();
                 $request->section1->move(public_path('uploads/partners/sidebarAds/'), $imageName);
-            } 
+            }
         }else {
             $imageName=$request->section1;
-           
+
         }
         // dd($imageName);
         $data = [
@@ -201,22 +217,22 @@ class HomePageSettingController extends Controller
         if ($request->hasFile('section2')) {
             if ($request->section2 != null) {
                 // dd($request->section2);
-                $featured = public_path('uploads/partners/sidebarAds/' . $request->section2); 
+                $featured = public_path('uploads/partners/sidebarAds/' . $request->section2);
                 if(file_exists($featured)){
                     unlink($featured);
-                    
-                } 
-                $imageName = 'section2'.time().'.'.$request->section2->extension();  
+
+                }
+                $imageName = 'section2'.time().'.'.$request->section2->extension();
                 $request->section2->move(public_path('uploads/partners/sidebarAds/'), $imageName);
-                // $ad->sidebarAds= $imageName;  
-                
+                // $ad->sidebarAds= $imageName;
+
             } else{
-                $imageName = 'section2'.time().'.'.$request->section2->extension();  
+                $imageName = 'section2'.time().'.'.$request->section2->extension();
                 $request->section2->move(public_path('uploads/partners/sidebarAds/'), $imageName);
-            } 
+            }
         }else {
             $imageName=$request->section2;
-           
+
         }
         // dd($imageName);
         $data = [
@@ -229,22 +245,22 @@ class HomePageSettingController extends Controller
         if ($request->hasFile('section3')) {
             if ($request->section3 != null) {
                 // dd($request->section3);
-                $featured = public_path('uploads/partners/sidebarAds/' . $request->section3); 
+                $featured = public_path('uploads/partners/sidebarAds/' . $request->section3);
                 if(file_exists($featured)){
                     unlink($featured);
-                    
-                } 
-                $imageName = 'section3'.time().'.'.$request->section3->extension();  
+
+                }
+                $imageName = 'section3'.time().'.'.$request->section3->extension();
                 $request->section3->move(public_path('uploads/partners/sidebarAds/'), $imageName);
-                // $ad->sidebarAds= $imageName;  
-                
+                // $ad->sidebarAds= $imageName;
+
             } else{
-                $imageName = 'section3'.time().'.'.$request->section3->extension();  
+                $imageName = 'section3'.time().'.'.$request->section3->extension();
                 $request->section3->move(public_path('uploads/partners/sidebarAds/'), $imageName);
-            } 
+            }
         }else {
             $imageName=$request->section3;
-           
+
         }
         // dd($imageName);
         $data = [
@@ -254,31 +270,31 @@ class HomePageSettingController extends Controller
         // dd(json_encode($data));
         $cat_section->section3=json_encode($data);
         $cat_section->update();
-        return redirect()->route('homepageSetting.index')->with('message','Category Section updated successfully');   
-        
+        return redirect()->route('homepageSetting.index')->with('message','Category Section updated successfully');
+
     }
     public function destroy($id){
         $cat_section=CategorySection::findOrFail(decrypt($id));
         // dd($cat_section);
         if($cat_section->category_partner != null){
-            $featured = public_path('uploads/partners/category_partner/' . $cat_section->category_partner); 
+            $featured = public_path('uploads/partners/category_partner/' . $cat_section->category_partner);
             if(file_exists($featured)){
                 unlink($featured);
-            } 
+            }
         }
         if($cat_section->sidebar_partners != null){
             foreach (json_decode($cat_section->sidebar_partners) as $key => $value) {
-                $featured = public_path('uploads/partners/sidebarAds/' . $value); 
+                $featured = public_path('uploads/partners/sidebarAds/' . $value);
                 if(file_exists($featured)){
                     unlink($featured);
-                } 
+                }
             }
         }
-        
-        
-        
+
+
+
         $cat_section->delete();
-        return back()->with('message','Category Section deleted successfully');   
+        return back()->with('message','Category Section deleted successfully');
 
     }
     public function update_status(Request $request)
@@ -289,7 +305,7 @@ class HomePageSettingController extends Controller
         $category->status = $request->status;
         // dd($category);
         $category->save();
-    
+
         return response()->json(['message' => 'Status updated successfully.']);
     }
 
@@ -323,7 +339,83 @@ class HomePageSettingController extends Controller
                 $ads->save();
             }
             return view('admin.ads.category',compact('ads'));
-        } 
+        }
+    }
+    function ad_delete(Request $request){
+        $ad = Ad::first();
+        if(json_decode($ad->previous_header)->img == $request->ad_name){
+            $featured = public_path('uploads/partners/before_header/'.$request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->after_header1 == $request->ad_name){
+            $featured = public_path('uploads/partners/after_header/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->after_header2 == $request->ad_name){
+            $featured = public_path('uploads/partners/after_header/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->after_header3 == $request->ad_name){
+            $featured = public_path('uploads/partners/after_header/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->before_footer == $request->ad_name){
+            $featured = public_path('uploads/partners/before_footer/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->single_news == $request->ad_name){
+            $featured = public_path('uploads/partners/single_news/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->after_single_headline == $request->ad_name){
+            $featured = public_path('uploads/partners/after_single_headline/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->single_after_header == $request->ad_name){
+            $featured = public_path('uploads/partners/single_after_header/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->single_sidebar1 == $request->ad_name){
+            $featured = public_path('uploads/partners/single_sidebar1/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->single_sidebar2 == $request->ad_name){
+            $featured = public_path('uploads/partners/single_sidebar2/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->single_sidebar3 == $request->ad_name){
+            $featured = public_path('uploads/partners/single_sidebar3/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        else if($ad->category_page == $request->ad_name){
+            $featured = public_path('uploads/partners/category_page/' . $request->ad_name);
+            if(file_exists($featured)){
+                File::delete($featured);
+            }
+        }
+        return response()->json(['message'=>'Deleted']);
     }
 
     public function adStore(Request $request,$id){
@@ -332,22 +424,22 @@ class HomePageSettingController extends Controller
             if ($request->hasFile('before_header')) {
                 if ($request->previous_header != null) {
                     // dd($request->previous_header);
-                    $featured = public_path('uploads/partners/before_header/' . $request->previous_header); 
+                    $featured = public_path('uploads/partners/before_header/' . $request->previous_header);
                     if(file_exists($featured)){
                         unlink($featured);
-                        
-                    } 
-                    $imageName = time().'.'.$request->before_header->extension();  
+
+                    }
+                    $imageName = time().'.'.$request->before_header->extension();
                     $request->before_header->move(public_path('uploads/partners/before_header/'), $imageName);
-                    // $ad->before_header= $imageName;  
-                    
+                    // $ad->before_header= $imageName;
+
                 } else{
-                    $imageName = time().'.'.$request->before_header->extension();  
+                    $imageName = time().'.'.$request->before_header->extension();
                     $request->before_header->move(public_path('uploads/partners/before_header/'), $imageName);
-                } 
+                }
             }else {
                 $imageName=$request->previous_header;
-               
+
             }
             // dd($imageName);
             $data = [
@@ -355,18 +447,18 @@ class HomePageSettingController extends Controller
                 'img' => $imageName
             ];
             $ad->before_header=json_encode($data);
-            
+
             if ($request->hasFile('before_footer')) {
                 if ($request->previous_footer != null) {
-                    $feature = public_path('uploads/partners/before_footer/' . $request->previous_footer); 
+                    $feature = public_path('uploads/partners/before_footer/' . $request->previous_footer);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = time().'.'.$request->before_footer->extension();  
-                    $request->before_footer->move(public_path('uploads/partners/before_footer/'), $imageName); 
+
+                    }
+                    $imageName = time().'.'.$request->before_footer->extension();
+                    $request->before_footer->move(public_path('uploads/partners/before_footer/'), $imageName);
                 }  else{
-                    $imageName = time().'.'.$request->before_footer->extension();  
+                    $imageName = time().'.'.$request->before_footer->extension();
                     $request->before_footer->move(public_path('uploads/partners/before_footer/'), $imageName);
                 }
             } else{
@@ -380,15 +472,15 @@ class HomePageSettingController extends Controller
 
             if ($request->hasFile('after_header1')) {
                 if ($request->after_header1 != null) {
-                    $feature = public_path('uploads/partners/after_header/' . $request->after_header1); 
+                    $feature = public_path('uploads/partners/after_header/' . $request->after_header1);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = 'after_header1'.time().'.'.$request->after_header1->extension();  
-                    $request->after_header1->move(public_path('uploads/partners/after_header/'), $imageName); 
+
+                    }
+                    $imageName = 'after_header1'.time().'.'.$request->after_header1->extension();
+                    $request->after_header1->move(public_path('uploads/partners/after_header/'), $imageName);
                 }  else{
-                    $imageName = 'after_header1'.time().'.'.$request->after_header1->extension();  
+                    $imageName = 'after_header1'.time().'.'.$request->after_header1->extension();
                     $request->after_header1->move(public_path('uploads/partners/after_header/'), $imageName);
                 }
             } else{
@@ -402,15 +494,15 @@ class HomePageSettingController extends Controller
 
             if ($request->hasFile('after_header2')) {
                 if ($request->after_header2 != null) {
-                    $feature = public_path('uploads/partners/after_header/' . $request->after_header2); 
+                    $feature = public_path('uploads/partners/after_header/' . $request->after_header2);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = 'after_header2'.time().'.'.$request->after_header2->extension();  
-                    $request->after_header2->move(public_path('uploads/partners/after_header/'), $imageName); 
+
+                    }
+                    $imageName = 'after_header2'.time().'.'.$request->after_header2->extension();
+                    $request->after_header2->move(public_path('uploads/partners/after_header/'), $imageName);
                 }  else{
-                    $imageName = 'after_header2'.time().'.'.$request->after_header2->extension();  
+                    $imageName = 'after_header2'.time().'.'.$request->after_header2->extension();
                     $request->after_header2->move(public_path('uploads/partners/after_header/'), $imageName);
                 }
             } else{
@@ -424,15 +516,15 @@ class HomePageSettingController extends Controller
 
             if ($request->hasFile('after_header3')) {
                 if ($request->after_header3 != null) {
-                    $feature = public_path('uploads/partners/after_header/' . $request->after_header3); 
+                    $feature = public_path('uploads/partners/after_header/' . $request->after_header3);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = 'after_header3'.time().'.'.$request->after_header3->extension();  
-                    $request->after_header3->move(public_path('uploads/partners/after_header/'), $imageName); 
+
+                    }
+                    $imageName = 'after_header3'.time().'.'.$request->after_header3->extension();
+                    $request->after_header3->move(public_path('uploads/partners/after_header/'), $imageName);
                 }  else{
-                    $imageName = 'after_header3'.time().'.'.$request->after_header3->extension();  
+                    $imageName = 'after_header3'.time().'.'.$request->after_header3->extension();
                     $request->after_header3->move(public_path('uploads/partners/after_header/'), $imageName);
                 }
             } else{
@@ -445,7 +537,7 @@ class HomePageSettingController extends Controller
             $ad->after_header3=json_encode($data);
 
             // if ($request->has('previous_after')) {
-                
+
             //     // $data=json_decode($ad->after_header);
             //     // dd(json_decode($data));
             //     $data = $request->previous_after;
@@ -457,16 +549,16 @@ class HomePageSettingController extends Controller
             //     foreach($request->file('after_header') as $key => $file)
             //     {
             //         $name = time(). $key . '.'.$file->extension();
-            //         $file->move(public_path().'/uploads/partners/after_header/', $name);  
-                    
-            //         array_push($data,$name);  
+            //         $file->move(public_path().'/uploads/partners/after_header/', $name);
+
+            //         array_push($data,$name);
 
             //         // $a=[
             //         //     'id'=>$key,
             //         //     'url'=>$request->after_header_url,
             //         //     'img'=>$name
             //         // ];
-            //         // array_push($data,$a);  
+            //         // array_push($data,$a);
 
             //         // $ad->after_header=json_encode($data);
             //     }
@@ -481,25 +573,25 @@ class HomePageSettingController extends Controller
             // $ad->after_header_url=json_encode($urls);
             $ad->update();
             return back()->with('message','Ad added successfully');
-            
+
         } elseif(Route::is('singleNewsAd.store')){
 
             $ad=Ad::find(decrypt($id));
             // if ($request->hasFile('single_news')) {
             //     if ($request->previous_single_news != null) {
             //         $data = $request->previous_single_news;
-            //         $feature = public_path('uploads/partners/single_news/' . $request->previous_single_news); 
+            //         $feature = public_path('uploads/partners/single_news/' . $request->previous_single_news);
             //         if(file_exists($feature)){
             //             unlink($feature);
-                        
-            //         } 
-                    
-            //         $imageName = time().'.'.$request->single_news->extension();  
+
+            //         }
+
+            //         $imageName = time().'.'.$request->single_news->extension();
             //         $request->single_news->move(public_path('uploads/partners/single_news/'), $imageName);
-            //         // $ad->single_news= $imageName;  
-            //     }  
+            //         // $ad->single_news= $imageName;
+            //     }
             //     else {
-            //         $imageName = time().'.'.$request->single_news->extension();  
+            //         $imageName = time().'.'.$request->single_news->extension();
             //         $request->single_news->move(public_path('uploads/partners/single_news/'), $imageName);
             //     }
             //     $data = [
@@ -513,22 +605,22 @@ class HomePageSettingController extends Controller
             if ($request->hasFile('single_news')) {
                 if ($request->previous_single_news != null) {
                     // dd($request->previous_single_news);
-                    $featured = public_path('uploads/partners/single_news/' . $request->previous_single_news); 
+                    $featured = public_path('uploads/partners/single_news/' . $request->previous_single_news);
                     if(file_exists($featured)){
                         unlink($featured);
-                        
-                    } 
-                    $imageName = time().'.'.$request->single_news->extension();  
+
+                    }
+                    $imageName = time().'.'.$request->single_news->extension();
                     $request->single_news->move(public_path('uploads/partners/single_news/'), $imageName);
-                    // $ad->single_news= $imageName;  
-                    
+                    // $ad->single_news= $imageName;
+
                 } else{
-                    $imageName = time().'.'.$request->single_news->extension();  
+                    $imageName = time().'.'.$request->single_news->extension();
                     $request->single_news->move(public_path('uploads/partners/single_news/'), $imageName);
-                } 
+                }
             }else {
                 $imageName=$request->previous_single_news;
-               
+
             }
             // dd($imageName);
             $data = [
@@ -539,27 +631,27 @@ class HomePageSettingController extends Controller
             $ad->single_news=json_encode($data);
 
 
-            
+
 
             if ($request->hasFile('after_single_headline')) {
                 if ($request->previous_after_single_headline != null) {
                     // dd($request->previous_after_single_headline);
-                    $featured = public_path('uploads/partners/after_single_headline/' . $request->previous_after_single_headline); 
+                    $featured = public_path('uploads/partners/after_single_headline/' . $request->previous_after_single_headline);
                     if(file_exists($featured)){
                         unlink($featured);
-                        
-                    } 
-                    $imageName = time().'.'.$request->after_single_headline->extension();  
+
+                    }
+                    $imageName = time().'.'.$request->after_single_headline->extension();
                     $request->after_single_headline->move(public_path('uploads/partners/after_single_headline/'), $imageName);
-                    // $ad->after_single_headline= $imageName;  
-                    
+                    // $ad->after_single_headline= $imageName;
+
                 } else{
-                    $imageName = time().'.'.$request->after_single_headline->extension();  
+                    $imageName = time().'.'.$request->after_single_headline->extension();
                     $request->after_single_headline->move(public_path('uploads/partners/after_single_headline/'), $imageName);
-                } 
+                }
             }else {
                 $imageName=$request->previous_after_single_headline;
-               
+
             }
             // dd($imageName);
             $data = [
@@ -569,27 +661,27 @@ class HomePageSettingController extends Controller
             // dd(json_encode($data));
             $ad->after_single_headline=json_encode($data);
 
-            
+
 
             if ($request->hasFile('single_after_header')) {
                 if ($request->previous_single_after_header != null) {
                     // dd($request->previous_single_after_header);
-                    $featured = public_path('uploads/partners/single_after_header/' . $request->previous_single_after_header); 
+                    $featured = public_path('uploads/partners/single_after_header/' . $request->previous_single_after_header);
                     if(file_exists($featured)){
                         unlink($featured);
-                        
-                    } 
-                    $imageName = time().'.'.$request->single_after_header->extension();  
+
+                    }
+                    $imageName = time().'.'.$request->single_after_header->extension();
                     $request->single_after_header->move(public_path('uploads/partners/single_after_header/'), $imageName);
-                    // $ad->single_after_header= $imageName;  
-                    
+                    // $ad->single_after_header= $imageName;
+
                 } else{
-                    $imageName = time().'.'.$request->single_after_header->extension();  
+                    $imageName = time().'.'.$request->single_after_header->extension();
                     $request->single_after_header->move(public_path('uploads/partners/single_after_header/'), $imageName);
-                } 
+                }
             }else {
                 $imageName=$request->previous_single_after_header;
-               
+
             }
             // dd($imageName);
             $data = [
@@ -609,22 +701,22 @@ class HomePageSettingController extends Controller
             //     foreach($request->file('single_sidebar') as $key => $file)
             //     {
             //         $name = time(). $key . '.'.$file->extension();
-            //         $file->move(public_path().'/uploads/partners/single_sidebar/', $name);  
-            //         array_push($data,$name);  
+            //         $file->move(public_path().'/uploads/partners/single_sidebar/', $name);
+            //         array_push($data,$name);
             //     }
             // }
             // $ad->single_sidebar=json_encode($data);
             if ($request->hasFile('single_sidebar1')) {
                 if ($request->single_sidebar1 != null) {
-                    $feature = public_path('uploads/partners/single_sidebar/' . $request->single_sidebar1); 
+                    $feature = public_path('uploads/partners/single_sidebar/' . $request->single_sidebar1);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = 'single_sidebar1'.time().'.'.$request->single_sidebar1->extension();  
-                    $request->single_sidebar1->move(public_path('uploads/partners/single_sidebar/'), $imageName); 
+
+                    }
+                    $imageName = 'single_sidebar1'.time().'.'.$request->single_sidebar1->extension();
+                    $request->single_sidebar1->move(public_path('uploads/partners/single_sidebar/'), $imageName);
                 }  else{
-                    $imageName = 'single_sidebar1'.time().'.'.$request->single_sidebar1->extension();  
+                    $imageName = 'single_sidebar1'.time().'.'.$request->single_sidebar1->extension();
                     $request->single_sidebar1->move(public_path('uploads/partners/single_sidebar/'), $imageName);
                 }
             } else{
@@ -638,15 +730,15 @@ class HomePageSettingController extends Controller
 
             if ($request->hasFile('single_sidebar2')) {
                 if ($request->single_sidebar2 != null) {
-                    $feature = public_path('uploads/partners/single_sidebar/' . $request->single_sidebar2); 
+                    $feature = public_path('uploads/partners/single_sidebar/' . $request->single_sidebar2);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = 'single_sidebar2'.time().'.'.$request->single_sidebar2->extension();  
-                    $request->single_sidebar2->move(public_path('uploads/partners/single_sidebar/'), $imageName); 
+
+                    }
+                    $imageName = 'single_sidebar2'.time().'.'.$request->single_sidebar2->extension();
+                    $request->single_sidebar2->move(public_path('uploads/partners/single_sidebar/'), $imageName);
                 }  else{
-                    $imageName = 'single_sidebar2'.time().'.'.$request->single_sidebar2->extension();  
+                    $imageName = 'single_sidebar2'.time().'.'.$request->single_sidebar2->extension();
                     $request->single_sidebar2->move(public_path('uploads/partners/single_sidebar/'), $imageName);
                 }
             } else{
@@ -660,15 +752,15 @@ class HomePageSettingController extends Controller
 
             if ($request->hasFile('single_sidebar3')) {
                 if ($request->single_sidebar3 != null) {
-                    $feature = public_path('uploads/partners/single_sidebar/' . $request->single_sidebar3); 
+                    $feature = public_path('uploads/partners/single_sidebar/' . $request->single_sidebar3);
                     if(file_exists($feature)){
                         unlink($feature);
-                        
-                    } 
-                    $imageName = 'single_sidebar3'.time().'.'.$request->single_sidebar3->extension();  
-                    $request->single_sidebar3->move(public_path('uploads/partners/single_sidebar/'), $imageName); 
+
+                    }
+                    $imageName = 'single_sidebar3'.time().'.'.$request->single_sidebar3->extension();
+                    $request->single_sidebar3->move(public_path('uploads/partners/single_sidebar/'), $imageName);
                 }  else{
-                    $imageName = 'single_sidebar3'.time().'.'.$request->single_sidebar3->extension();  
+                    $imageName = 'single_sidebar3'.time().'.'.$request->single_sidebar3->extension();
                     $request->single_sidebar3->move(public_path('uploads/partners/single_sidebar/'), $imageName);
                 }
             } else{
@@ -684,26 +776,26 @@ class HomePageSettingController extends Controller
             return back()->with('message','Ad added successfully');
         } elseif(Route::is('categoryAd.store')){
             $ad=Ad::find(decrypt($id));
-            
+
             if ($request->hasFile('category_page')) {
                 if ($request->previous_category_page != null) {
                     // dd($request->previous_category_page);
-                    $featured = public_path('uploads/partners/category_page/' . $request->previous_category_page); 
+                    $featured = public_path('uploads/partners/category_page/' . $request->previous_category_page);
                     if(file_exists($featured)){
                         unlink($featured);
-                        
-                    } 
-                    $imageName = time().'.'.$request->category_page->extension();  
+
+                    }
+                    $imageName = time().'.'.$request->category_page->extension();
                     $request->category_page->move(public_path('uploads/partners/category_page/'), $imageName);
-                    // $ad->category_page= $imageName;  
-                    
+                    // $ad->category_page= $imageName;
+
                 } else{
-                    $imageName = time().'.'.$request->category_page->extension();  
+                    $imageName = time().'.'.$request->category_page->extension();
                     $request->category_page->move(public_path('uploads/partners/category_page/'), $imageName);
-                } 
+                }
             }else {
                 $imageName=$request->previous_category_page;
-               
+
             }
             // dd($imageName);
             $data = [
@@ -714,8 +806,8 @@ class HomePageSettingController extends Controller
             $ad->category_page=json_encode($data);
             $ad->update();
             return back()->with('message','Ad added successfully');
-            
+
         }
     }
-    
+
 }

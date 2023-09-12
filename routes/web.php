@@ -18,7 +18,15 @@ use App\Http\Controllers\SiteSettingsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 
+use App\Http\Controllers\HomebannerController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ServiceController;
+
+
+// use Analytics;
+use Spatie\Analytics\Period;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,16 +42,27 @@ Route::get('clear', function () {
 	Artisan::call('config:clear');
 	Artisan::call('config:cache');
 });
+Route::get('tests', function(){
+    return view("test");
+})->name("test.file");
+Route::post("post/test", [PostController::class, "testf"])->name("test.file");
 
+Route::get('/test',function(){
+	//fetch the most visited pages for today and the past week
+	$a = Analytics::fetchMostVisitedPages(Period::days(7));
 
+	//fetch visitors and page views for the past week
+	$b = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+  	echo "<pre>"; print_r($a); die();
+});
 Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-    
-    
-    Route::group(['middleware' => ['role:Admin']],function(){
+
+
+    Route::group(['middleware' => ['role:Super Admin|Admin']],function(){
         Route::get('/social_settings', [SocialSettingsController::class, 'index'])->name('social');
         Route::patch('/social_settings/edit/{id}', [SocialSettingsController::class, 'update'])->name('socialUpdate');
         Route::resource('/settings', SiteSettingsController::class);
@@ -58,26 +77,27 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
 
         Route::get('/homepageSettings/update-status',[HomePageSettingController::class,'update_status'])->name('cat_section.update_status');
-        
 
-        
-        
+
+
+
         Route::get('/homepageAdSettings',[HomePageSettingController::class,'ad'])->name('homepageAd');
         Route::get('/singleNewsAdSettings',[HomePageSettingController::class,'ad'])->name('singleNewsAd');
         Route::get('/CategoryAdSettings',[HomePageSettingController::class,'ad'])->name('categoryAd');
+        Route::get('/CategoryAdSettings/delete',[HomePageSettingController::class,'ad_delete'])->name('add.delete_image');
 
         Route::patch('/homepageAdSettings/edit/{id}', [HomePageSettingController::class, 'adStore'])->name('homepageAd.store');
         Route::patch('/singleNewsAdSettings/edit/{id}', [HomePageSettingController::class, 'adStore'])->name('singleNewsAd.store');
         Route::patch('/CategoryAdSettings/edit/{id}', [HomePageSettingController::class, 'adStore'])->name('categoryAd.store');
 
-        
-        
-        
+
+
+
         Route::get('/categories/update-status',[CategoryController::class,'update_status'])->name('category.update_status');
         Route::get('/categories/update-feature',[CategoryController::class,'update_feature'])->name('category.update_feature');
 
         Route::get('/sub-categories/update-status',[SubCategoryController::class,'update_status'])->name('sub-category.update_status');
-        Route::post('ckeditor/upload', [CkeditorController::class,'upload'])->name('ckeditor.upload');
+
         Route::resource('/categories', CategoryController::class);
         Route::resource('/sub-categories', SubCategoryController::class);
         Route::resource('/pages', PageController::class);
@@ -94,40 +114,59 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('/medias',[MediaController::class,'index'])->name('medias');
         Route::post('/delete',[MediaController::class,'delete'])->name('medias.delete');
 
-    });
-    
-    
 
+        //home stay start
+        Route::resource('homebanner', HomebannerController::class);
+        Route::get('homebanner/delete/{id}',[HomebannerController::class, 'delete'])->name('homebanners.delete');
+
+        Route::resource('room', RoomController::class);
+        Route::get('room/delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');
+
+        Route::resource('service', ServiceController::class);
+        Route::get('service/delete/{id}',[ServiceController::class, 'delete'])->name('services.delete');
+
+
+    });
+
+
+	Route::post('ckeditor/upload', [CkeditorController::class,'upload'])->name('ckeditor.upload');
     Route::get('/posts/update-feature',[PostController::class,'update_feature'])->name('post.update_feature');
-    Route::delete('/deleteall', [PostController::class,'deleteAll'])->name('delete_all');
+    Route::get('/posts/update-trending',[PostController::class,'update_trending'])->name('post.update_trending');
+    Route::get('/posts/update-banner-news',[PostController::class,'update_banner'])->name('post.update_banner_news');
+    Route::post('/deleteall', [PostController::class,'deleteAll'])->name('delete_all');
     Route::get('/posts/delete/{slug}',[PostController::class,'delete'])->name('delete.post');
+  	Route::post('file-upload/upload-large-files', [PostController::class, 'uploadLargeFiles'])->name('files.upload.large');
+  	Route::post('featured-image/get', [PostController::class, 'get_featured_img'])->name('featured_img.get');
     Route::resource('/posts',PostController::class);
     Route::get('/profile',[ProfileController::class,'edit_profile'])->name('profile.edit');
     Route::post('/profile',[ProfileController::class,'update_profile'])->name('profile.update');
     Route::get('/profile/change_password',[ProfileController::class,'changePassword'])->name('profile.change_password');
     Route::post('/profile/change_password',[ProfileController::class,'updatePassword'])->name('profile.update_password');
+    Route::get('pagination/fetch_data',[PostController::class,'modal_pagination'])->name('ajax.pagination');
+    Route::get('post/view/pdf/{id}',[PostController::class,'view_pdf'])->name('post.view_pdf');
 
-    
+
+
 
     // Route::get('/newsletter', [NewsletterController::class,'index'])->name('newsletters.index');
 	// Route::post('/newsletter/send', [NewsletterController::class,'send'])->name('newsletters.send');
 
     Route::post('/subcat/get_subcat_by_category',[SubCategoryController::class,'sub_cat_by_category'])->name('subcat.get_subcat_by_category');
 
-    
-    
+
+
     // Route::get('/blogs/update-status',[BlogController::class,'update_status'])->name('blog.update_status');
     // Route::get('/programs/update-status',[ProgramController::class,'update_status'])->name('program.update_status');
 
     // Route::get('/banners/update-status',[BannerController::class,'update_status'])->name('banner.update_status');
     // Route::get('/sliders/update-status',[SliderController::class,'update_status'])->name('slider.update_status');
 
-   
-    
-    
-    
+
+
+
+
     // Route::resource('/blogs',BlogController::class);
-    
+
 
 
     // Route::resource('/testimonials', TestimonialController::class);
@@ -137,7 +176,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
     // Route::resource('/sliders', SliderController::class);
     // Route::resource('/steps', StepController::class);
     // Route::resource('/medias', MediaController::class);
-	
+
 	// Route::resource('/gallery', GalleryController::class);
 
     // Route::get('gallery/photo',[GalleryController::class,'index'])->name('photo.index');
@@ -149,11 +188,11 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
     // Route::delete('/photo/destroy/{id}', [GalleryController::class,'delete_photo'])->name('delete.photo');
     // Route::delete('/video/destroy/{id}', [GalleryController::class,'delete_video'])->name('delete.video');
 
-   
+
 
     // Route::get('/contact', [MessageController::class,'index'])->name('messages.index');
 	// Route::get('/contact/{id}', [MessageController::class,'show'])->name('messages.show');
-	// Route::delete('/contact/{id}', [MessageController::class,'delete'])->name('messages.destroy'); 
+	// Route::delete('/contact/{id}', [MessageController::class,'delete'])->name('messages.destroy');
 
     // Route::get('/jobs', [MessageController::class,'index'])->name('job.index');
 	// Route::get('/jobs/{id}', [MessageController::class,'show'])->name('job.show');
@@ -169,14 +208,14 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
 	// Route::resource('/opportunity', OpportunityController::class);
 	// Route::resource('/programs', ProgramController::class);
-    
-   
+
+
 });
 
 
 Route::get('/auth/github/redirect',[SocialController::class,'githubRedirect'])->name('githubLogin');
 Route::get('/auth/github/callback',[SocialController::class,'callback']);
- 
+
 // Route::get('auth/facebook', [FacebookSocialiteController::class, 'redirectToFB']);
 // Route::get('callback/facebook', [FacebookSocialiteController::class, 'handleCallback']);
 require __DIR__ . '/auth.php';
@@ -189,9 +228,11 @@ Route::post('/layout3', [FrontendController::class,'layout'])->name('layout3');
 Route::post('/layout4', [FrontendController::class,'layout'])->name('layout4');
 Route::post('/layout5', [FrontendController::class,'layout'])->name('layout5');
 Route::get('/news/single-news/{slug}',[FrontendController::class,'single_news'])->name('single_news');
-Route::get('/news_category/{id}',[FrontendController::class,'news_category'])->name('news_category');
-Route::get('/category/sub_category/{id}',[CustomPageController::class,'sub_category'])->name('sub_category');
+Route::get('/category/{id}',[FrontendController::class,'news_category'])->name('news_category');
+Route::get('/category/{category}/{id}',[CustomPageController::class,'sub_category'])->name('sub_category');
 
+
+Route::get('/search', [FrontendController::class,'search'])->name('search');
 
 
 

@@ -39,6 +39,29 @@
         top: 50%;
         position: absolute;
     }
+
+    .openNav {
+        /* margin-left: -2.75rem; */
+        font-size: 18px;
+        color: var(--white-color);
+        cursor: pointer;
+        margin-top: 0.5rem;
+    }
+    
+
+    .openNav {
+        /* margin-left: -2.75rem; */
+        font-size: 25px;
+        color: var(--black-color);
+        cursor: pointer;
+        margin-top: 0rem;
+        font-weight: bold;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
 }
 
 @media (max-width: 769px) {
@@ -93,6 +116,42 @@
     .news-short-inner-left {
         margin-bottom: 25px;
     }
+    .last-open{
+        display: block;
+    }
+    
+    .last-open {
+        display: block;
+    }
+
+    .copyright-part {
+        display: block;
+    }
+
+    .main-footer [class^="col-"]:not(:last-child) {
+        border-right: none;
+    }
+
+    .footer-img img {
+        width: 80%;
+        object-fit: contain;
+        padding-top: 5px;
+    }
+
+    .desktop-navbar {
+        display: none;
+    }
+
+    .mobile-nav-bottom {
+        display: block;
+    }
+
+    .mobile-nav-container {
+        border-bottom: 2px solid #e5e5e5;
+    }
+    .logo img {
+    width: 170px;
+}
 }
 
 @media (max-width: 426px) {
@@ -142,8 +201,33 @@
         top: 50%;
         position: absolute;
     }
-}
 
+    .logo-bar-wrapper {
+        justify-content: center;
+    }
+
+    .logo-side-bottom {
+        width: 60%;
+    }
+
+    .navbar-side-bottom {
+        width: 40%;
+    }
+
+    .last-open {
+        text-align: right;
+    }
+
+    .heading h1 {
+        color: #fff;
+        width: 70%;
+        font-size: 2rem;
+        padding: 0.5rem;
+        padding-left: 1.5rem;
+        background-color: var(--primary-color);
+        /* clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%); */
+    }
+}
 @media (max-width: 376px) {
     .main-news-first-start h2 a {
         font-size: 25px;
@@ -151,6 +235,9 @@
 
     .news-image img {
         height: 40vh;
+    }
+    .eng-date{
+        margin-left: -1px;
     }
 }
 
@@ -160,5 +247,18 @@
         height: 25px;
         width: 25px;
         margin-right: 10px;
+    }
+    
+    
+    .logo-side-bottom {
+        width: 80%;
+    }
+
+    .navbar-side-bottom {
+        width: 20%;
+    }
+
+    .added-top h2 a:after {
+        left: 140px;
     }
 }

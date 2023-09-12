@@ -24,6 +24,7 @@
 .news-details-first-img a img {
     margin: 0 0 2rem 0;
     height: 400px;
+    object-fit: cover;
 }
 
 .about-news {

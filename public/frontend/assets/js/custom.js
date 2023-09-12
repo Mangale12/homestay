@@ -81,6 +81,21 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
+
+function openNav() {
+  document.getElementById("mySidenavtwo").style.width = "320px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenavtwo").style.width = "0";
+}
+$(document).ready(function () {
+  $('textarea#body').summernote({
+    height: '300px'
+  });
+});
+
 $(document).ready(function () {
   $('textarea#body').summernote({
     height: '300px'
@@ -197,3 +212,53 @@ $(window).scroll(function () {
   }
 });
 
+
+function myFunction() {
+  var x = document.getElementById("b-nav");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
+function openWeather() {
+    document.getElementById("weather").style.width = "250px";
+}
+
+function closeWeather() {
+    document.getElementById("weather").style.width = "0";
+}
+
+function openPatro() {
+    document.getElementById("patro").style.width = "250px";
+}
+
+function closePatro() {
+    document.getElementById("patro").style.width = "0";
+}
+
+function openForex() {
+    document.getElementById("forex").style.width = "250px";
+}
+
+function closeForex() {
+    document.getElementById("forex").style.width = "0";
+}
+
+function openHoroscope() {
+    document.getElementById("horoscope").style.width = "250px";
+}
+
+function closeHoroscope() {
+    document.getElementById("horoscope").style.width = "0";
+}
+
+function openGold() {
+    document.getElementById("gold").style.width = "250px";
+}
+
+function closeGold() {
+    document.getElementById("gold").style.width = "0";
+}

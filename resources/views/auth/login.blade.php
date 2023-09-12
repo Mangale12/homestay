@@ -1,14 +1,15 @@
 @include('admin.includes.head')
 @php
-    
+
 $setting=App\Models\SiteSetting::first();
 @endphp
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <img src="{{asset('admin/image/'.$setting->logo)}}" alt="{{$setting->title}}" class="w-20 h-20 fill-current text-gray-500">
+                <!-- <img src="{{asset('admin/image/'.$setting->logo)}}" alt="{{$setting->title}}" class="w-20 h-20 fill-current text-gray-500"> -->
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
+                News Portal Login
             </a>
         </x-slot>
 
@@ -53,11 +54,11 @@ $setting=App\Models\SiteSetting::first();
                 </a>
                 </div> --}}
                 <div>
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+                <!--@if (Route::has('password.request'))-->
+                <!--    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">-->
+                <!--        {{ __('Forgot your password?') }}-->
+                <!--    </a>-->
+                <!--@endif-->
 
                 <x-button class="ml-3">
                     {{ __('Log in') }}
@@ -71,5 +72,5 @@ $setting=App\Models\SiteSetting::first();
 
         </form>
     </x-auth-card>
-    
+
 </x-guest-layout>

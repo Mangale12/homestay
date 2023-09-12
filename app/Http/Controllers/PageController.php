@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 
@@ -40,31 +41,16 @@ class PageController extends Controller
         $page = new Page;
         $request->validate([
             'title' => 'required',
-            'slug' => 'required'
+            'slug' => 'required|unique:pages'
+            
         ]);
         $page->name = $request->title;
-        if (Page::where('slug', preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug)))->first() == null) {
-            $page->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
-            $page->content = $request->content;
-            $page->meta_title = $request->meta_title;
-            $page->meta_description = $request->meta_description;
-            // $page->keywords = $request->keywords;
+        $b=str_replace('/','-',$request->slug);
+        $page->slug=str_replace(' ','-',$b);
+        $page->content = $request->content;
+        $page->save();
 
-            if ($request->hasFile('meta_image')) {
-                $imageName = time().'.'.$request->meta_image->extension();  
-         
-                $request->meta_image->move(public_path('uploads/custom-pages/'), $imageName);
-                $page->meta_image= $imageName;
-                // $blog->image = $request->image->store('uploads/blogs');
-            }
-
-            $page->save();
-
-            return redirect()->route('pages.index')->with('message','New page has been created successfully');
-        }
-
-        return redirect()->route('pages.create')->with('warning','Slug has been already used');
-        return back();
+        return redirect()->route('pages.index')->with('message','New page has been created successfully');
     }
 
     /**
@@ -106,38 +92,15 @@ class PageController extends Controller
         $page = Page::findOrFail($id);
         $request->validate([
             'title' => 'required',
-            'slug' => 'required'
+            'slug'=>'required|unique:pages,slug,'.$id,
         ]);
         $page->name = $request->title;
-        if (Page::where('slug', preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug)))->first() != null) {
-            $page->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
-            $page->content = $request->content;
-            $page->meta_title = $request->meta_title;
-            $page->meta_description = $request->meta_description;
-            $page->keywords = $request->keywords;
+        $b=str_replace('/','-',$request->slug);
+        $page->slug=str_replace(' ','-',$b);
+        $page->content = $request->content;
+        $page->update();
 
-            if ($image = $request->file('meta_image')) {
-                $image_path = public_path('uploads/custom-pages/' . $page->meta_image);
-                
-                if(is_file($image_path)){
-                    unlink($image_path);
-                }
-                    $destinationPath = 'uploads/custom-pages/';
-                    $profileImage = time() . "." .$image->extension();
-                    $image->move($destinationPath, $profileImage);
-                    $page->meta_image = "$profileImage";
-                
-            }else{
-                unset($page->meta_image);
-            }
-
-            $page->save();
-
-            return redirect()->route('pages.index')->with('message','Page has been successfully updated');
-        }
-
-        return redirect()->route('pages.edit')->with('warning','Slug has been used already');
-        return back();
+        return redirect()->route('pages.index')->with('message','Page has been updated successfully');
     }
 
     /**
@@ -155,6 +118,10 @@ class PageController extends Controller
         //     }else{
                 
         //     }
+      	$menu=Menu::where('menu',$id)->first();
+        if($menu!=null){
+            $menu->delete();
+        }
         $page->delete();
         return back()->with('message','Page deleted successfully');
     }

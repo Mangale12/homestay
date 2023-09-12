@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Users</h3>
-                   
+
                     <a href="{{route('users.create')}}" class="btn btn-success btn-sm float-right">Add User</a>
-                    
+
                 </div>
                 <div class="card-body p-0">
                     @include('admin.includes.message')
@@ -24,16 +24,20 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($users as $user)
+                            @if (!$user->hasRole('Super Admin'))
                             <tr>
                                 <td> {{$loop->iteration}} </td>
-                                <td> {{$user->name}} </td>
+                                <td>
+                                    {{$user->name}}
+                                </td>
                                 <td>{{$user->email}}</td>
                                 <td>
                                     @foreach ($user->roles as $role)
-                                    
+
                                     <span class="badge badge-success">{{$role->name}}</span>
-                                    @endforeach  
+                                    @endforeach
                                 </td>
                                 <form action="{{route('users.destroy',$user->id)}}" method="post">
                                     @csrf
@@ -52,9 +56,9 @@
                                     </td>
                                 </form>
                             </tr>
-                            
+                            @endif
                             @endforeach
-                           
+
                         </tbody>
                     </table>
                 </div>
@@ -64,7 +68,7 @@
 </div>
 @endsection
 @section('scripts')
-    
+
 <script>
     $(document).ready(function (e) {
         $('#myTable').DataTable();

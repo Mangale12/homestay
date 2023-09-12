@@ -36,23 +36,23 @@
 <!-- Summernote -->
 {{-- <script src="{{asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script> --}}
 <!-- overlayScrollbars -->
-<script src="{{asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src="{{asset('public/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
+<script src="{{asset('public/assets/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('assets/dist/js/demo.js')}}"></script>
+<script src="{{asset('public/assets/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{-- <script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script> --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
-<script src="{{asset('assets/js/bootstrap-tagsinput.min.js')}}"></script>
+<script src="{{asset('public/assets/js/bootstrap-tagsinput.min.js')}}"></script>
 
-<script src="{{asset('assets/js/spartan-multi-image-picker-min.js')}}"></script>
+<script src="{{asset('public/assets/js/spartan-multi-image-picker-min.js')}}"></script>
 
 
-<script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('public/js/custom.js')}}"></script>
 
 <script>
 
@@ -64,7 +64,7 @@
     filter = input.value.toUpperCase();
     ul = document.getElementById("myUL");
     li = ul.getElementsByTagName('li');
-  
+
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
       a = li[i].getElementsByTagName("a")[0];

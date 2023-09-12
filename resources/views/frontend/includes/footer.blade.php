@@ -1,114 +1,139 @@
-@if(json_decode($partner->before_footer)->img != null)
-<div class="money-image mb-3">
-    @if (!empty($partner->before_footer))
-    <a href="{{json_decode($partner->before_footer)->url}}">
-        @if(file_exists('uploads/partners/before_footer/'.json_decode($partner->before_footer)->img))
-            <img src="{{asset('uploads/partners/before_footer/'.json_decode($partner->before_footer)->img)}}" class="img-fluid">
-        @endif
-    </a>
-    @endif
-</div>
-@endif
-<footer class="main-footer">
-    
-    <div class="container">
-        <div class="footer-desc">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="footer-img">
-                        @if (!empty($setting->logo))
-                            @if(file_exists('admin/image/'.$setting->logo))
-                                <img src="{{asset('admin/image/'.$setting->logo)}}" class="img-fluid">
-                            @else
-                                <img src="{{asset('frontend/assets/images/logo.png')}}" alt="Logo" class="img-fluid">
-                            @endif
-                        @else
-                            <img src="{{asset('frontend/assets/images/logo.png')}}" alt="Logo" class="img-fluid">
-                        @endif
-                    </div>
-                    <div class="site-detail">
-                        <ul>
-                            <li><span>सम्पादक :</span>जीवन कुमार ाही </li>
-                            <li><span>रेिस्त्रेशन नम्बर :</span>२२७७६/०७६/०७७</li>
-                            <li><span>कम्पनीको नाम :</span>{{$setting->title}}</li>
-                            <li><span>सम्प्क :</span>{{$setting->contact}}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="footer-links">
-                        <h5>जरु िंकहरु</h5>
-                    </div>
-                    <div class="links-listing">
-                        <ul>
-                            <li><a href="{{route('home')}}">गृह पृष्ठ</a> </li>
-                            @foreach (App\Models\Page::all() as $key => $link)
-                            <li><a href="{{ route('custom_page',['slug' => $link->slug]) }}">{{$link->name}}</a> </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="footer-links">
-                        <h5>डेमो खबर</h5>
-                    </div>
-                    <div class="site-detail">
-                        <div class="links-listing">
-                            @php
-                                $categories=App\Models\Category::where('status',1)->take(6)->get();
-                            @endphp
-                            <ul>
-                                @foreach ($categories as $category)
-                                    <li><a href="{{route('news_category',$category->slug)}}">{{$category->name}}</a></li>
-                                @endforeach
-
+ <!-- Page Footer-->
+ <footer class="section footer-corporate footer-corporate-2 context-dark">
+    <div class="footer-corporate-inset">
+        <div class="container">
+            <div class="row row-40 justify-content-lg-between">
+                <div class="col-sm-6 col-md-12 col-lg-3 col-xl-4">
+                    <div class="oh-desktop">
+                        <div class="wow slideInRight" data-wow-delay="0s">
+                            <h5 class="text-spacing-100">Our Contacts</h5>
+                            <ul class="footer-contacts d-inline-block d-sm-block">
+                                <li>
+                                    <div class="unit">
+                                        <div class="unit-left"><span class="icon fa fa-phone"></span></div>
+                                        <div class="unit-body"><a class="link-phone" href="tel:#">+977 9818888383</a></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="unit">
+                                        <div class="unit-left"><span class="icon fa fa-envelope"></span></div>
+                                        <div class="unit-body"><a class="link-aemail" href="mailto:#">emailhere@gmail.com</a></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="unit">
+                                        <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
+                                        <div class="unit-body"><a class="link-location" href="#">Raniban, Kathmandu Nepal</a></div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="footer-links">
-                        <h5>फेसबुक फोो गर्नुहोस </h5>
+                {{-- <div class="col-sm-6 col-md-5 col-lg-3 col-xl-4">
+                    <div class="oh-desktop">
+                        <div class="wow slideInDown" data-wow-delay="0s">
+                            <h5 class="text-spacing-100">Popular news</h5>
+                            <!-- Post Minimal 2-->
+                            <article class="post post-minimal-2">
+                                <p class="post-minimal-2-title"><a href="blog-post.html">5 Facilities Every Hotel Should Have</a></p>
+                                <div class="post-minimal-2-time">
+                                    <time datetime="2019-05-04">May 04, 2019</time>
+                                </div>
+                            </article>
+                            <!-- Post Minimal 2-->
+                            <article class="post post-minimal-2">
+                                <p class="post-minimal-2-title"><a href="blog-post.html">Making the Most of Your Stay at Resort Hotel</a></p>
+                                <div class="post-minimal-2-time">
+                                    <time datetime="2019-05-04">May 04, 2019</time>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                    <iframe
-                        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fformal.khabar.5&tabs=timeline&width=0&height=0&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                        width="0" height="0" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-                        allowfullscreen="true"
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                </div> --}}
+                <div class="col-sm-11 col-md-7 col-lg-5 col-xl-4">
+                    <div class="oh-desktop">
+                        <div class="wow slideInLeft" data-wow-delay="0s">
+                            <h5 class="text-spacing-100">Navigation</h5>
+                            <ul class="row-6 list-0 list-marked list-marked-md list-marked-primary list-custom-2">
+                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="our-team.html">Our Team</a></li>
+                                <li><a href="rooms.html">Rooms</a></li>
+                                <li><a href="classic-blog.html">Blog</a></li>
+                                <li><a href="grid-gallery.html">Gallery</a></li>
+                            </ul>
+                            {{-- <div class="group-md group-middle justify-content-sm-start"><a class="button button-lg button-primary button-ujarak" href="#">Get in touch</a></div> --}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    @php
-        $social=App\Models\SocialSetting::first();
-    @endphp
-    <div class="copyright">
-        <div class="social-buttons">
-            <a href="{{$social->facebook}}" class="social-buttons__button social-button social-button--facebook"
-                aria-label="Facebook">
-                <span class="social-button__inner">
-                    <i class="fab fa-facebook-f"></i>
-                </span>
-            </a>
-            <a href="{{$social->youtube}}" class="social-buttons__button social-button social-button--youtube"
-                aria-label="Youtube">
-                <span class="social-button__inner">
-                    <i class="fab fa-youtube"></i>
-                </span>
-            </a>
-            <a href="{{$social->instagram}}" class="social-buttons__button social-button social-button--instagram"
-                aria-label="Instagram">
-                <span class="social-button__inner">
-                    <i class="fab fa-instagram"></i>
-                </span>
-            </a>
+    <div class="footer-corporate-bottom-panel">
+        <div class="container">
+            <div class="row row-10 align-items-md-center">
+                <div class="col-sm-6 col-md-4 text-sm-right text-md-center">
+                    <div>
+                        <ul class="list-inline list-inline-sm footer-social-list-2">
+                            <li><a class="icon fa fa-facebook" href="#"></a></li>
+                            <li><a class="icon fa fa-twitter" href="#"></a></li>
+                            <li><a class="icon fa fa-google-plus" href="#"></a></li>
+                            <li><a class="icon fa fa-instagram" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                {{-- <div class="col-sm-6 col-md-4 order-sm-first">
+                    <!-- Rights-->
+                    <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span> <span>Resort</span>. All rights reserved
+                    </p>
+                </div> --}}
+                {{-- <div class="col-sm-6 col-md-4 text-md-right">
+                    <p class="rights"><a href="privacy-policy.html">Privacy Policy</a></p>
+                </div> --}}
+            </div>
         </div>
-        <div class="copyright-part">
-            <p>Copyright  2022 <a href="https://itarrow.com">IT Arrow Pvt Ltd</a> Pvt. Ltd. All Rights Reserved.</p>
-        </div>
-    </div>
-    <div class="scrollTop float-right">
-        <i class=" fas fa-chevron-up" onclick="topFunction()" id="myBtn"></i>
     </div>
 </footer>
+</div>
+<!-- Global Mailform Output-->
+<div class="snackbars" id="form-output-global"></div>
+<!-- Javascript-->
+<script src="{{ asset('public/frontend/js/core.min.js') }}"></script>
+<script src="{{ asset('public/frontend/js/script.js') }}"></script>
+
+<!--LIVEDEMO_00 -->
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-7078796-5']);
+_gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-P9FT69');
+</script>
+<!-- End Google Tag Manager -->
+</body>
+
+</html>

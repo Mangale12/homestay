@@ -7,9 +7,19 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Models\Menu;
+use App\Models\Post;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:category-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +55,15 @@ class CategoryController extends Controller
 
         $input = $request->all();
         if ($request->slug != null) {
-        $input['slug']=str_replace(' ', '-', $request->slug);
+          $b=str_replace('/','-',$request->slug);
+        $input['slug']=str_replace(' ','-',$b);
+        //$input['slug']=str_replace(' ', '-', $request->slug);
 
         }
         else {
-        $input['slug']=str_replace(' ', '-', $request->category);
+          $b=str_replace('/','-',$request->category);
+        $input['slug']=str_replace(' ','-',$b);
+        //$input['slug']=str_replace(' ', '-', $request->category);
 
         }
         $validator = Validator::make($input,[
@@ -114,18 +128,21 @@ class CategoryController extends Controller
         $id=$category->id;
         $input = $request->all();
         if ($request->slug != null) {
-        $input['slug']=str_replace(' ', '-', $request->slug);
+           $b=str_replace('/','-',$request->slug);
+        $input['slug']=str_replace(' ','-',$b);
+        //$input['slug']=str_replace(' ', '-', $request->slug);
 
         }
         else {
-        $input['slug']=str_replace(' ', '-', $request->category);
+           $b=str_replace('/','-',$request->category);
+        $input['slug']=str_replace(' ','-',$b);
+        //$input['slug']=str_replace(' ', '-', $request->category);
 
         }
         $validator = Validator::make($input,[
             'category' => 'required',
             'status'=>'required',
-            // 'slug'=>'unique:categories',
-            Rule::unique('categories')->ignore($id),
+            'slug'=>'unique:categories,slug,'.$id,
           ]);
 
           if ($validator->fails()) {
@@ -175,14 +192,39 @@ class CategoryController extends Controller
     {
         // dd($id);
         $category=Category::where('slug',$id)->first();
-        
-        // $image_path = public_path('category/' . $category->image);    
-        //     if(file_exists($image_path)){
-        //         unlink($image_path);
-        //     }else{
-                
-        //     }
-        // dd($category->id);
+        $cat_menu=Menu::where('menu',$category->id)->first();
+        $posts=Post::where('category',$category->id)->get();
+        if($posts != null){
+            foreach ($posts as $key => $post) {
+                if($post->featured_img != null){
+                    $featured = public_path('uploads/featured_img/' . $post->featured_img); 
+                    if(file_exists($featured)){
+                        unlink($featured);
+                    } 
+                }
+                if($post->headline_image != null){  
+                    $head =public_path('uploads/headline_img/' . $post->headline_image);
+                    if(file_exists($head)){
+                        unlink($head);
+                    }
+                }
+                if($post->fb_image!=null){
+                    $fb =public_path('uploads/fb_image/' . $post->fb_image);
+                    if(file_exists($fb)){
+                        unlink($fb);
+                    }
+                }
+                if($post->video!=null){
+                $path = parse_url($post->video);
+                File::delete(public_path($path['path']));
+                }
+                $post->delete();
+            }
+        }
+        if($cat_menu!=null){
+
+            $cat_menu->delete();
+        }
         $sub_cat=SubCategory::where('parent_id',$category->id)->first();
         if($sub_cat!=null){
 

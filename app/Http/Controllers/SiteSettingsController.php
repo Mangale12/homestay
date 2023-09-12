@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use Illuminate\Http\Request;
 use App\Models\SiteSetting;
 use DB;
@@ -18,9 +19,9 @@ class SiteSettingsController extends Controller
         $setting = SiteSetting::first();
         if(empty($setting)){
             $setting=new SiteSetting();
-            $setting->title = 'Nehums';
+            $setting->title = 'News Portal';
             $setting->address = 'address';
-            $setting->contact = 'contact';
+            $setting->contact = '0000000000';
             $setting->email = 'email';
             $setting->footer = 'footer';
             $setting->headline_no = 1;
@@ -116,9 +117,11 @@ class SiteSettingsController extends Controller
         $setting->email = $request['email'];
         $setting->footer = $request['footer'];
         $setting->headline_no = $request['headline_no'];
-
-
-
+        $setting->primary_color = $request['primary_color'];
+        $setting->secondary_color = $request['secondary_color'];
+      	$setting->editor_name = $request['editor_name'];
+        $setting->registration_no = $request['registration_no'];
+        $setting->chairman = $request['chairman'];
         $setting->update();
 
         return back()->with('message', 'Settings has been updated successfully');
@@ -139,6 +142,7 @@ class SiteSettingsController extends Controller
         //
     }
 
+
     // Validate Data
     protected function validateData(Request $request)
     {
@@ -149,6 +153,8 @@ class SiteSettingsController extends Controller
             'address' => 'required',
             'email' => 'required|email',
             'footer' => 'required',
+            'primary_color'=>'max:7',
+            'secondary_color'=>'max:7'
         ]);
     }
 }

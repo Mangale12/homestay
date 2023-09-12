@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class SubCategoryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:category-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +61,7 @@ class SubCategoryController extends Controller
         $validator = Validator::make($input,[
             'category' => 'required',
             'status'=>'required',
-            'slug'=>'unique:categories',
+            'slug'=>'unique:sub_categories',
           ]);
 
           if ($validator->fails()) {
@@ -125,7 +134,7 @@ class SubCategoryController extends Controller
         $validator = Validator::make($input,[
             'category' => 'required',
             'status'=>'required',
-            Rule::unique('sub_categories')->ignore($id),
+            'slug'=>'unique:sub_categories,slug,'.$id,
           ]);
 
           if ($validator->fails()) {
@@ -160,7 +169,34 @@ class SubCategoryController extends Controller
     public function destroy($id)
     {
         $category=SubCategory::where('slug',$id)->first();
-        
+        $posts=Post::where('subcategory',$category->id)->get();
+        if($posts != null){
+            foreach ($posts as $key => $post) {
+                if($post->featured_img != null){
+                    $featured = public_path('uploads/featured_img/' . $post->featured_img); 
+                    if(file_exists($featured)){
+                        unlink($featured);
+                    } 
+                }
+                if($post->headline_image != null){  
+                    $head =public_path('uploads/headline_img/' . $post->headline_image);
+                    if(file_exists($head)){
+                        unlink($head);
+                    }
+                }
+                if($post->fb_image!=null){
+                    $fb =public_path('uploads/fb_image/' . $post->fb_image);
+                    if(file_exists($fb)){
+                        unlink($fb);
+                    }
+                }
+                if($post->video!=null){
+                $path = parse_url($post->video);
+                File::delete(public_path($path['path']));
+                }
+                $post->delete();
+            }
+        }
         $category->delete();
         return back()->with('message','Sub Category deleted successfully');
     }

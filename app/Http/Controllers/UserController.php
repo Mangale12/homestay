@@ -18,6 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $users = User::get();
         return view('admin.user.index', compact('users'));
     }
@@ -98,11 +99,11 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,id,' . $id,
             'password' => 'required|same:confirmPassword',
             'role' => 'required'
         ]);
-        if (Auth::user()->id == $id) {
+        if (Auth::user()->hasRole('Super Admin|Admin')) {
             $user = User::findOrFail($id);
             $user->name = $request['name'];
             $user->email = $request['email'];
@@ -110,9 +111,9 @@ class UserController extends Controller
             $user->assignRole($request->input('role'));
             $user->update();
 
-            return redirect()->route('users.index')->with('message', 'User has been updated successfully');
+            return redirect()->route('user.index')->with('message', 'User has been updated successfully');
         } else {
-            return redirect()->route('users.index')->with('message', 'Only authenticated user can edit');
+            return redirect()->route('user.index')->with('message', 'Only authenticated user can edit');
         }
     }
 
