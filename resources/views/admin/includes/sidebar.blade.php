@@ -96,6 +96,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('inquiries')}}" class="nav-link">
+              <i class="nav-icon fas fa-file-image"></i>
+              <p>
+                Inquiry
+              </p>
+            </a>
+          </li>
           {{-- <li class="nav-item">
             <a href="{{ route('testimonial.index') }}" class="nav-link {{Route::is('testimonial.index','testimonial.create','testimonial.edit') ? 'active' : (Route::is('sub-categories.index','sub-categories.create','sub-categories.edit') ? 'active' : '')}}">
               <i class="nav-icon fas fa-shopping-cart"></i>

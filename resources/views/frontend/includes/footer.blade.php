@@ -11,19 +11,19 @@
                                 <li>
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                                        <div class="unit-body"><a class="link-phone" href="tel:#">+977 9818888383</a></div>
+                                        <div class="unit-body"><a class="link-phone" href="tel:#">+977 {{ $setting->contact }}</a></div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-envelope"></span></div>
-                                        <div class="unit-body"><a class="link-aemail" href="mailto:#">emailhere@gmail.com</a></div>
+                                        <div class="unit-body"><a class="link-aemail" href="mailto:#">{{ $setting->email }}</a></div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
-                                        <div class="unit-body"><a class="link-location" href="#">Raniban, Kathmandu Nepal</a></div>
+                                        <div class="unit-body"><a class="link-location" href="#">{{ $setting->address }}</a></div>
                                     </div>
                                 </li>
                             </ul>
@@ -75,10 +75,10 @@
                 <div class="col-sm-6 col-md-4 text-sm-right text-md-center">
                     <div>
                         <ul class="list-inline list-inline-sm footer-social-list-2">
-                            <li><a class="icon fa fa-facebook" href="#"></a></li>
-                            <li><a class="icon fa fa-twitter" href="#"></a></li>
+                            <li><a class="icon fa fa-facebook" href="{{ $socialmedia->facebook }}"></a></li>
+                            <li><a class="icon fa fa-twitter" href="{{ $socialmedia->twitter }}"></a></li>
                             <li><a class="icon fa fa-google-plus" href="#"></a></li>
-                            <li><a class="icon fa fa-instagram" href="#"></a></li>
+                            <li><a class="icon fa fa-instagram" href="{{ $socialmedia->instagram }}"></a></li>
                         </ul>
                     </div>
                 </div>

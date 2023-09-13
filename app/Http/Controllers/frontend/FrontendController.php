@@ -11,11 +11,22 @@ use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Krishnahimself\DateConverter\DateConverter;
+use App\Models\HomeBanner;
+use App\Models\Room;
+use App\Models\Service;
+use App\Models\Testimonial;
+use App\Models\SocialSetting;
 // $2y$10$DBw7tc6Gpynp80RYDZcdcOMnQoIgDNdGn9E09UC5E1kKPjEw91PUS
 class FrontendController extends Controller
 {
     public function index(){
+        $homebanners = HomeBanner::get();
+        // dd($homebanners);
+        $rooms = Room::get();
+        $services = Service::get();
+        $testimonials = Testimonial::get();
         $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
         $headline_no=$setting->headline_no;
         $cat_sec=CategorySection::where('status',1)->orderBy('section_order', 'asc')->get();
         $partner=Ad::first();
@@ -25,7 +36,7 @@ class FrontendController extends Controller
        })->latest()->take($headline_no)->get();
 
 
-        return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no'));
+        return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no','homebanners','rooms','services','testimonials','socialmedia'));
     }
 
 

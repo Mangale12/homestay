@@ -24,6 +24,7 @@ use App\Http\Controllers\HomebannerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\HomeController;
 
 
 // use Analytics;
@@ -129,6 +130,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::resource('testimonial', TestimonialController::class);
         Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
 
+        Route::get('inquiries', [HomeController::class, 'inquiry'])->name('inquiries');
 
     });
 

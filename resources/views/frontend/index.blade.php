@@ -13,45 +13,21 @@
     <!-- Swiper-->
     <section class="section swiper-container swiper-slider swiper-slider-tara" data-loop="true" data-autoplay="5000" data-simulate-touch="true" data-nav="false" data-slide-effect="fade">
         <div class="swiper-wrapper text-center context-dark">
-            <div class="swiper-slide" data-slide-bg="{{ asset('public/frontend/images/slider-1-1920x679.jpg') }}">
+            @foreach($homebanners as $key => $homebanner)
+            <div class="swiper-slide" data-slide-bg="{{ asset('public/uploads/homebanner/'.$homebanner->banner_img) }}">
                 <div class="swiper-slide-caption section-md">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-sm-8 col-xxl-7">
-                                <h6 class="swiper-subtitle" data-caption-animate="fadeInRight" data-caption-delay="300">Welcome to resort hotel</h6>
-                                <h2 class="oh swiper-title"><span class="d-block" data-caption-animate="slideInLeft" data-caption-delay="0">You don't just stay here, you enjoy your stay</span></h2><a class="button button-primary button-ujarak" href="#" data-caption-animate="fadeInRight"
+                                <h6 class="swiper-subtitle" data-caption-animate="fadeInRight" data-caption-delay="300">{{ $homebanner->title }}</h6>
+                                <h2 class="oh swiper-title"><span class="d-block" data-caption-animate="slideInLeft" data-caption-delay="0">{{ $homebanner->description }}</span></h2><a class="button button-primary button-ujarak" href="#" data-caption-animate="fadeInRight"
                                     data-caption-delay="300">Book now</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide" data-slide-bg="{{ asset('public/frontend/images/slider-2-1920x679.jpg') }}">
-                <div class="swiper-slide-caption section-md">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-sm-8 col-xxl-7">
-                                <h6 class="swiper-subtitle" data-caption-animate="fadeInRight" data-caption-delay="300">Comfortable Rooms</h6>
-                                <h2 class="oh swiper-title"><span class="d-block" data-caption-animate="slideInDown" data-caption-delay="0">Experience the highest level of coziness</span></h2>
-                                <div class="oh button-wrap"><a class="button button-primary button-ujarak" href="#" data-caption-animate="slideInLeft" data-caption-delay="300">Book now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide" data-slide-bg="{{ asset('public/frontend/images/slider-3-1920x679.jpg') }}">
-                <div class="swiper-slide-caption section-md">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-sm-8 col-xxl-7">
-                                <h6 class="oh swiper-subtitle"><span class="d-inline-block" data-caption-animate="slideInDown" data-caption-delay="300">Catering to Every Palate</span></h6>
-                                <h2 class="swiper-title"><span class="d-block" data-caption-animate="fadeInRight" data-caption-delay="0">have a Unique Dining Experience at Resort Restaurant</span></h2>
-                                <div class="oh button-wrap"><a class="button button-primary button-ujarak" href="#" data-caption-animate="slideInUp" data-caption-delay="300">Book now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- Swiper Pagination-->
         <div class="swiper-pagination"></div>
@@ -73,40 +49,24 @@
             <!-- Owl Carousel-->
             <div class="owl-carousel owl-services-2" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-margin="30" data-animation-in="fadeIn" data-animation-out="fadeOut" data-autoplay="false" data-navigation-class="#owl-custom-nav-1">
                 <!-- Services Modern-->
-                <article class="services-modern"><a class="services-modern-figure" href="single-room.html"><img src="{{ asset('public/frontend/images/home-1-270x415.jpg') }}" alt="" width="270" height="415"/></a>
+                @foreach ($rooms as $room)
+
+                <article class="services-modern">
+                    <a class="services-modern-figure" href="single-room.html">
+                        @if($room->image != null)
+                        @if(file_exists(public_path('uploads/room/'.$room->image)))
+                        <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="270" height="415"/>
+                        @endif
+                        @endif
+                    </a>
                     <div class="services-modern-content">
-                        <h5 class="services-modern-title"><a href="single-room.html">Double Room</a></h5>
+                        <h5 class="services-modern-title"><a href="single-room.html">{{ $room->type }}</a></h5>
                         <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">$380</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
                     </div>
                 </article>
+                @endforeach
                 <!-- Services Modern-->
-                <article class="services-modern"><a class="services-modern-figure" href="single-room.html"><img src="{{ asset('public/frontend/images/home-2-270x415.jpg') }}" alt="" width="270" height="415"/></a>
-                    <div class="services-modern-content">
-                        <h5 class="services-modern-title"><a href="single-room.html">Executive Room</a></h5>
-                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">$450</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
-                    </div>
-                </article>
-                <!-- Services Modern-->
-                <article class="services-modern"><a class="services-modern-figure" href="single-room.html"><img src="{{ asset('public/frontend/images/home-3-270x415.jpg') }}" alt="" width="270" height="415"/></a>
-                    <div class="services-modern-content">
-                        <h5 class="services-modern-title"><a href="single-room.html">Hollywood Twin Room</a></h5>
-                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">$350</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
-                    </div>
-                </article>
-                <!-- Services Modern-->
-                <article class="services-modern"><a class="services-modern-figure" href="single-room.html"><img src="{{ asset('public/frontend/images/home-4-270x415.jpg') }}" alt="" width="270" height="415"/></a>
-                    <div class="services-modern-content">
-                        <h5 class="services-modern-title"><a href="single-room.html">Single Room</a></h5>
-                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">$200</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
-                    </div>
-                </article>
-                <!-- Services Modern-->
-                <article class="services-modern"><a class="services-modern-figure" href="single-room.html"><img src="{{ asset('public/frontend/images/home-5-270x415.jpg') }}" alt="" width="270" height="415"/></a>
-                    <div class="services-modern-content">
-                        <h5 class="services-modern-title"><a href="single-room.html">VIP Suite</a></h5>
-                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">$620</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
-                    </div>
-                </article>
+
             </div>
         </div>
     </section>
@@ -122,6 +82,7 @@
                 <div class="heading-panel-decor wow fadeIn"></div>
             </div>
             <div class="row row-30">
+                @foreach ($services as $service)
                 <div class="col-sm-6 col-lg-4">
                     <article class="box-icon-classic box-icon-classic-3 wow fadeInDown" data-wow-delay=".2s">
                         <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
@@ -129,77 +90,13 @@
                                 <div class="box-icon-classic-icon linearicons-apartment"></div>
                             </div>
                             <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">Accommodation</a></h5>
-                                <p class="box-icon-classic-text">Our rooms offer comfortable accommodation with free Wi-Fi, central heating etc.</p>
+                                <h5 class="box-icon-classic-title"><a href="#">{{ $service->title }}</a></h5>
+                                <p class="box-icon-classic-text">{!! $service->description !!}</p>
                             </div>
                         </div>
                     </article>
                 </div>
-                <div class="col-sm-6 col-lg-4">
-                    <article class="box-icon-classic box-icon-classic-3 wow fadeInDown" data-wow-delay=".1s">
-                        <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
-                            <div class="unit-left">
-                                <div class="box-icon-classic-icon linearicons-platter"></div>
-                            </div>
-                            <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">Dining</a></h5>
-                                <p class="box-icon-classic-text">Dine in style and at its finest in the Resort Restaurant that serves a wide range of tastes.</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <article class="box-icon-classic box-icon-classic-3 wow fadeInDown">
-                        <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
-                            <div class="unit-left">
-                                <div class="box-icon-classic-icon linearicons-leaf"></div>
-                            </div>
-                            <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">Spa &amp; Massage</a></h5>
-                                <p class="box-icon-classic-text">Visit the Resort Spa &amp; Massage Salon to indulge yourself with unique relaxing atmosphere.</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <article class="box-icon-classic box-icon-classic-3 wow fadeInUp">
-                        <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
-                            <div class="unit-left">
-                                <div class="box-icon-classic-icon linearicons-user"></div>
-                            </div>
-                            <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">Concierge Services</a></h5>
-                                <p class="box-icon-classic-text">Our concierge will be pleased to arrange airline transfers, dinner reservations, and more.</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <article class="box-icon-classic box-icon-classic-3 wow fadeInUp" data-wow-delay=".1s">
-                        <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
-                            <div class="unit-left">
-                                <div class="box-icon-classic-icon linearicons-broom"></div>
-                            </div>
-                            <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">Room Service</a></h5>
-                                <p class="box-icon-classic-text">Room service is available around the clock, including breakfast deliveries.</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <article class="box-icon-classic box-icon-classic-3 wow fadeInUp" data-wow-delay=".2s">
-                        <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
-                            <div class="unit-left">
-                                <div class="box-icon-classic-icon linearicons-star"></div>
-                            </div>
-                            <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">Business Center</a></h5>
-                                <p class="box-icon-classic-text">Our business center offers two well-appointed meeting rooms and a privately equipped office.</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -642,44 +539,31 @@
             <!-- Owl Carousel-->
             <div class="owl-carousel owl-quote-2" data-items="1" data-md-items="2" data-autoplay="true" data-margin="30" data-animation-in="fadeIn" data-animation-out="fadeOut" data-navigation-class="#owl-custom-nav-2">
                 <!-- Quote Modern-->
+                @foreach ($testimonials as $testimonial)
                 <article class="quote-modern quote-modern-2 quote-modern-custom">
                     <div class="unit unit-spacing-md align-items-center">
-                        <div class="unit-left"><a class="quote-modern-figure" href="#"><img class="img-circles" src="images/user-11-75x75.jpg" alt="" width="75" height="75"/></a></div>
+                        <div class="unit-left">
+                            <a class="quote-modern-figure" href="#">
+                            @if($testimonial->profile != null)
+                            @if(file_exists(public_path('uploads/testimonial/'.$testimonial->profile)))
+                            <img class="img-circles" src="{{ asset('public/uploads/testimonial/'.$testimonial->profile) }}" alt="{{ $testimonial->name }}" width="75" height="75"/>
+                            @endif
+                            @endif
+                            </a>
+                    </div>
                         <div class="unit-body">
-                            <h5 class="quote-modern-cite"><a href="#">Catherine Williams</a></h5>
-                            <p class="quote-modern-status">Client</p>
+                            <h5 class="quote-modern-cite"><a href="#">{{ $testimonial->name }}</a></h5>
+                            <p class="quote-modern-status">{{ $testimonial->position }}</p>
                         </div>
                     </div>
                     <div class="quote-modern-text">
-                        <p class="q">Resort Hotel is an excellent choice for anybody considering hosting their events there. Top level facilities and excellent staff make for a brilliant environment within which to operate.</p>
+                        <p class="q">{!! $testimonial->message !!}</p>
                     </div>
                 </article>
+                @endforeach
+
                 <!-- Quote Modern-->
-                <article class="quote-modern quote-modern-2 quote-modern-custom">
-                    <div class="unit unit-spacing-md align-items-center">
-                        <div class="unit-left"><a class="quote-modern-figure" href="#"><img class="img-circles" src="images/user-12-75x75.jpg" alt="" width="75" height="75"/></a></div>
-                        <div class="unit-body">
-                            <h5 class="quote-modern-cite"><a href="#">Rupert Wood</a></h5>
-                            <p class="quote-modern-status">Client</p>
-                        </div>
-                    </div>
-                    <div class="quote-modern-text">
-                        <p class="q">I had a marvelous time at Resort Hotel. From accommodation to spa, massage and room service, everything was wonderfully organized and delivered. This was definitely the best experience.</p>
-                    </div>
-                </article>
-                <!-- Quote Modern-->
-                <article class="quote-modern quote-modern-2 quote-modern-custom">
-                    <div class="unit unit-spacing-md align-items-center">
-                        <div class="unit-left"><a class="quote-modern-figure" href="#"><img class="img-circles" src="images/user-20-75x75.jpg" alt="" width="75" height="75"/></a></div>
-                        <div class="unit-body">
-                            <h5 class="quote-modern-cite"><a href="#">Samantha Brown</a></h5>
-                            <p class="quote-modern-status">Client</p>
-                        </div>
-                    </div>
-                    <div class="quote-modern-text">
-                        <p class="q">This is a beautiful hotel with fantastic food, beautiful rooms &amp; very professional staff, who were very polite, knowledgeable &amp; always willing to help. My stay with you was fantastic!</p>
-                    </div>
-                </article>
+
             </div>
         </div>
     </section>
