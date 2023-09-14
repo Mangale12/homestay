@@ -40,17 +40,21 @@ class RoomController extends Controller
     public function update(Request $request, Room $room){
         $request->validate([
             'type'=>"required",
-            'price'=>'required',
+            'price'=>'required|numeric',
         ]);
-        $image_name = $room->image;
+
         if($request->hasFile('image')){
             $image = $request->file('image');
             $image_name = time().'.'.$image->extension();
             $image->move(public_path('uploads/room/'),$image_name);
+            $room->image = $image_name;
+        }
+        else{
+            $room->image = $room->image;
         }
         $room->type = $request->type;
-        $room->image = $image_name;
         $room->description = $request->description;
+        $room->price = $request->price;
         $room->update();
         return redirect()->route('room.index')->with(['message'=>'Room Updated ']);
     }
