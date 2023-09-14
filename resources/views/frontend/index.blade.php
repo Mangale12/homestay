@@ -52,7 +52,7 @@
                 @foreach ($rooms as $room)
 
                 <article class="services-modern">
-                    <a class="services-modern-figure" href="single-room.html">
+                    <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
                         @if($room->image != null)
                         @if(file_exists(public_path('uploads/room/'.$room->image)))
                         <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="270" height="415"/>
@@ -61,7 +61,7 @@
                     </a>
                     <div class="services-modern-content">
                         <h5 class="services-modern-title"><a href="single-room.html">{{ $room->type }}</a></h5>
-                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">$380</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
+                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">US$ {{ $room->price }}</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
                     </div>
                 </article>
                 @endforeach

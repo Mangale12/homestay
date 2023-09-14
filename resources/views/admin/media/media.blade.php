@@ -23,7 +23,7 @@
                                 <input type="date" class="form-control mr-2" name="from" id="date_from" value="{{$from}}">
                                 <input type="date" class="form-control mr-2" name="to" id="date_to" value="{{$to}}">
                                 <button type="submit" class="btn btn-success">Filter</button>
-                                <a href="" class="ml-5 btn btn-primary">Add Media</a>
+                                <a href="{{ route('medias.create') }}" class="ml-5 btn btn-primary">Add Media</a>
                                 </form>
                             </div>
                         </div>

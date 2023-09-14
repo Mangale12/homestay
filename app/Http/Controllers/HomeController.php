@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Enquiry;
+use App\Models\Inquiry;
 use Mail;
 class HomeController extends Controller
 {
 
     public function inquiry(){
-        $inquiries = Enquiry::get();
+        $inquiries = Inquiry::get();
         return view('admin.inquiry.index', compact('inquiries'));
     }
 

@@ -6,19 +6,19 @@
         display: none;
     }
 </style>
-<form action="{{route('room.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('medias.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
-        <div class="col-lg-9 col-md-12">
+        <div class="col-lg-12 col-md-12">
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Add Room</h3>
-                                    <a href="{{route('room.index')}}" class="btn btn-success btn-sm float-right">View
-                                        Rooms</a>
+                                    <h3 class="card-title">Add Home Banner</h3>
+                                    <a href="{{route('medias')}}" class="btn btn-success btn-sm float-right">View
+                                        Medias</a>
                                 </div>
                                 <div class="col-md-12 p-0">
                                     @include('admin.includes.message')
@@ -26,23 +26,13 @@
 
 
                                 <div class="card-body">
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="headline"> Type</label> <span class="text-danger"> *
+                                                <label for="headline"> Title</label> <span class="text-danger"> *
                                                 </span>
-                                                <input type="text" class="form-control" name="type"
-                                                    value="{{old('type')}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="headline">Price</label> <span class="text-danger"> *
-                                                </span>
-                                                <input type="text" class="form-control" name="price"
-                                                    value="{{old('price')}}">
+                                                <input type="text" class="form-control" name="title"
+                                                    value="{{old('title')}}">
                                             </div>
                                         </div>
                                     </div>
@@ -50,16 +40,17 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="kicker">Description</label>
-                                                <textarea name="description" id="description" class="form-control"></textarea>
+                                                <input type="text" class="form-control" name="description"
+                                                    value="{{old('description')}}">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="head_img">Room Image</label>
+                                                <label for="head_img">New Image</label>
                                                 <div id="featured_img" class="row">
                                                 </div>
                                             </div>
@@ -91,13 +82,13 @@
 
 
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     CKEDITOR.replace('description', {
         filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
         filebrowserUploadMethod: 'form'
     });
 
-</script>
+</script> --}}
 <script>
     let featured = Array.prototype.slice.call(document.querySelectorAll('.js-feature'));
         featured.forEach(function(html) {
@@ -187,11 +178,11 @@
 
         $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#featured_img").spartanMultiImagePicker({
-            fieldName: 'image',
-            maxCount: 1,
+            fieldName: 'medias',
+            maxCount: 10,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
-            groupClassName: 'col-md-12 col-lg-12',
+            groupClassName: 'col-md-4 col-lg-4',
             maxFileSize: '',
             dropFileLabel: "Drop Here",
             onExtensionErr: function (index, file) {

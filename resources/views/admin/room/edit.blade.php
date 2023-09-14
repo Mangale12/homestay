@@ -40,6 +40,16 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <label for="headline"> Price</label> <span class="text-danger"> *
+                                                </span>
+                                                <input type="text" class="form-control" name="price"
+                                                    value="{{$room->price}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label for="kicker">Description</label>
                                                 <textarea name="description" id="description" class="form-control">{!! $room->description !!}</textarea>
 

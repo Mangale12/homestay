@@ -29,7 +29,7 @@
                             <li>
                                 <div class="unit unit-spacing-xs">
                                     <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                                    <div class="unit-body"><a class="link-phone" href="tel:#">+977 988888098746</a></div>
+                                    <div class="unit-body"><a class="link-phone" href="tel:#">{{ $setting->contact }}</a></div>
                                 </div>
                             </li>
                         {{-- </ul><a class="button button-md button-ujarak button-default-outline" href="#">Get in touch</a> --}}
@@ -47,11 +47,11 @@
                         </ul>
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
-                            <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a>
+                            <li class="rd-nav-item active"><a class="rd-nav-link" href="{{ route('home') }}">Home</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">About Us</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.about_us') }}">About Us</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="rooms.html">Rooms</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.room') }}">Rooms</a>
                                 <!-- RD Navbar Dropdown-->
                                 {{-- <ul class="rd-menu rd-navbar-dropdown">
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-room.html">Single Room</a></li>
@@ -76,7 +76,9 @@
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog-post.html">Blog Post</a></li>
                                 </ul>
                             </li> --}}
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contact Us</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Contact Us</a>
+                                <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Trecks & Tours</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Food Menu</a>
                             </li>
 
                         </ul>

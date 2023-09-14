@@ -18,6 +18,7 @@ class RoomController extends Controller
         $request->validate([
             'type'=>"required",
             'image'=>'required',
+            'price'=>'required|numeric|digits:4',
         ]);
         $image_name = null;
         if($request->hasFile('image')){
@@ -27,6 +28,7 @@ class RoomController extends Controller
         }
         Room::create([
             'type'=>$request->type,
+            'price'=>$request->price,
             'description'=>$request->description,
             'image'=>$image_name,
         ]);
@@ -38,6 +40,7 @@ class RoomController extends Controller
     public function update(Request $request, Room $room){
         $request->validate([
             'type'=>"required",
+            'price'=>'required',
         ]);
         $image_name = $room->image;
         if($request->hasFile('image')){

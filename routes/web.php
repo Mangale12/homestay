@@ -115,6 +115,8 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
         Route::get('/medias',[MediaController::class,'index'])->name('medias');
         Route::post('/delete',[MediaController::class,'delete'])->name('medias.delete');
+        Route::get('/medias/create',[MediaController::class, 'create'])->name('medias.create');
+        Route::post('/medias/store',[MediaController::class, 'store'])->name('medias.store');
 
 
         //home stay start
@@ -228,6 +230,10 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('/',[FrontendController::class,'index'])->name('home');
+Route::get('room/details/{id}',[FrontendController::class,'room_details'])->name('frontend.room_details');
+Route::get('about-us/',[FrontendController::class,'about_us'])->name('frontend.about_us');
+Route::get('contact-us/',[FrontendController::class,'contact_us'])->name('frontend.contact_us');
+Route::get('room/',[FrontendController::class,'room'])->name('frontend.room');
 Route::post('/layout1', [FrontendController::class,'layout'])->name('layout1');
 Route::post('/layout2', [FrontendController::class,'layout'])->name('layout2');
 Route::post('/layout3', [FrontendController::class,'layout'])->name('layout3');

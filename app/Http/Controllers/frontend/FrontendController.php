@@ -38,8 +38,32 @@ class FrontendController extends Controller
 
         return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no','homebanners','rooms','services','testimonials','socialmedia'));
     }
+    public function room(){
+        $rooms = Room::get();
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        return view('frontend.rooms',compact('rooms','setting','socialmedia'));
+    }
+    public function room_details($id){
+        $room = Room::findOrFail($id);
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
 
+        return view('frontend.room-details',compact('room','setting','socialmedia'));
+    }
 
+    public function about_us(){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        $testimonials = Testimonial::get();
+        $services = Service::get();
+        return view('frontend.about_us',compact('setting','socialmedia','testimonials','services'));
+    }
+    public function contact_us(){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        return view('frontend.contact-us',compact('setting','socialmedia'));
+    }
     public function layout(){
         if (Route::is('layout1')) {
             return view('frontend.layouts.layout1');

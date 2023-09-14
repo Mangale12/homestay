@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
-                        <div class="col-lg-2 col-md-2">
-                            {{-- @can('create-post')
-                                <a href="{{route('homebanner.create')}}" class="btn btn-success btn-sm">Add Post</a>
-                            @endcan --}}
+                        <div class="col-6">
+
+                            <a href="{{route('homebanner.create')}}" class="btn btn-success d-inline">New Inquiries</a>
+                            <a href="{{route('homebanner.create')}}" class="btn btn-success d-inline">Old Inquiries</a>
 
                         </div>
                             {{-- <button class="btn btn-primary delete_all btn-danger" onclick="del()"><i class="fas fa-trash">
@@ -32,6 +32,7 @@
                                     <th>Email </th>
                                     <th>Phone</th>
                                     <th>Country</th>
+                                    <th>Arrival Date</th>
                                     <th>Action</th>
                                     {{-- <th>Pdf File</th>
                                     <th>Sub Category</th>
@@ -54,6 +55,7 @@
                                         <td>{{ $inquiry->email }}</td>
                                         <td>{{ $inquiry->phone }}</td>
                                         <td>{{ $inquiry->country }}</td>
+                                        <td>{{ $inquiry->arrival_date }}</td>
                                         <td><a href="{{ route('homebanner.edit', $homebanner->id) }}"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('homebanners.delete', $homebanner->id) }}"><i class="fas fa-trash-alt"></i></a></td>
 

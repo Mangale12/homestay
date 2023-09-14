@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Media;
 
 class MediaController extends Controller
 {
@@ -18,6 +19,22 @@ class MediaController extends Controller
             $medias=Post::get();
         }
         return view('admin.media.media',compact('medias','from','to'));
+    }
+    public function create(){
+        return view('admin.media.create');
+    }
+    public function store(Request $request){
+        if ($request->hasFile('medias')) {
+            foreach($request->file('medias') as $key=>$image){
+                $image_name = time().$key.'.'.$image->extension();
+                $image->move(public_path('uploads/featured_img/'),$image_name);
+                Media::create([
+                    'image'=>$image_name,
+                    'media_type'=>null,
+                ]);
+            }
+        }
+        return redirect()->route('medias')->with(['message'=>"Msdia Added"]);
     }
     public function delete(Request $request){
         $ids = $request->ids;
