@@ -112,8 +112,8 @@ class SiteSettingsController extends Controller
         }
         // $setting->title = $request['title'];
         $setting->address = $request['address'];
-        $setting->contact = $request['contact'];
-        $setting->email = $request['email'];
+        $setting->contact = ($request->contact[0] != null)?$request->contact[0]:null;
+        $setting->email = ($request->email[0] != null)?$request->email[0]:null;
         // $setting->footer = $request['footer'];
         // $setting->headline_no = $request['headline_no'];
         // $setting->primary_color = $request['primary_color'];

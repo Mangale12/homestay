@@ -104,53 +104,24 @@
               </p>
             </a>
           </li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a href="{{ route('testimonial.index') }}" class="nav-link {{Route::is('testimonial.index','testimonial.create','testimonial.edit') ? 'active' : (Route::is('sub-categories.index','sub-categories.create','sub-categories.edit') ? 'active' : '')}}">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Testimonials
               </p>
-            </a> --}}
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('categories.index')}}" class="nav-link {{ Route::is('categories.index','categories.create','categories.edit') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Parent Category</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('sub-categories.index')}}" class="nav-link {{ Route::is('sub-categories.index','sub-categories.create','sub-categories.edit') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sub Category</p>
-                </a>
-              </li>
-            </ul> --}}
+            </a>
           </li>
-
-
-          {{-- <li class="nav-item">
-            <a href="#" class="nav-link {{ Route::is('users.index','users.create','users.edit') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-users"></i>
+          <li class="nav-item">
+            <a href="{{ route('food.index') }}" class="nav-link {{Route::is('food.index','food.create','food.edit') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
-                Users
-                <i class="fas fa-angle-right right"></i>
+                Food
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link {{Route::is('users.index') ? 'active' : ''}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Users</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('users.create')}}" class="nav-link {{Route::is('users.create') ? 'active' : ''}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add User</p>
-                </a>
-              </li>
-            </ul>
           </li>
+
+
 
           <li class="nav-item">
             <a href="#" class="nav-link {{ Route::is('social','settings.index','homepageSetting.index','homepageSetting.create','homepageSetting.edit','homepageAd','singleNewsAd','categoryAd') ? 'active' : '' }}">
@@ -172,7 +143,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>General Settings</p>
                 </a>
-              </li> --}}
+              </li>
               {{-- <li class="nav-item">
                 <a href="{{route('homepageSetting.index')}}" class="nav-link {{ Route::is('homepageSetting.index','homepageSetting.create','homepageSetting.edit') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>

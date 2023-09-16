@@ -71,6 +71,44 @@
         </div>
     </section>
 
+    {{-- popular Food  --}}
+    <section class="section section-xl bg-default">
+        <div class="container">
+            <div class="heading-panel">
+                <div class="heading-panel-left heading-panel-left-1">
+                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft"></span></h1>
+                    <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Food Gallery</span></h4>
+                </div>
+                <div class="heading-panel-decor wow fadeIn"></div>
+                <div class="oh-desktop">
+                    <div class="owl-custom-nav wow slideInUp" id="owl-custom-nav-1"></div>
+                </div>
+            </div>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel owl-services-2" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-margin="30" data-animation-in="fadeIn" data-animation-out="fadeOut" data-autoplay="false" data-navigation-class="#owl-custom-nav-1">
+                <!-- Services Modern-->
+                @foreach ($foods as $food)
+
+                <article class="services-modern">
+                    <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
+                        @if($food->image != null)
+                        @if(file_exists(public_path('uploads/food/'.$food->image)))
+                        <img src="{{ asset('public/uploads/food/'.$food->image) }}" alt="{{ $food->name }}" width="270" height="415"/>
+                        @endif
+                        @endif
+                    </a>
+                    <div class="services-modern-content">
+                        <h5 class="services-modern-title"><a href="single-room.html">{{ $food->name }}</a></h5>
+                        {{-- <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">US$ {{ $room->price }}</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div> --}}
+                    </div>
+                </article>
+                @endforeach
+                <!-- Services Modern-->
+
+            </div>
+        </div>
+    </section>
+
     <!-- Why choose us?-->
     <section class="section section-xl bg-gray-4">
         <div class="container">
@@ -103,19 +141,20 @@
 
     <!-- Get a Free Quote-->
     <section class="section bg-default text-center">
-        <div class="parallax-container" data-parallax-img="images/bg-forms-3.jpg">
+        <div class="parallax-container" data-parallax-img="{{ asset('public/frontend/images/bg-forms-3.jpg') }}">
             <div class="parallax-content section-xl section-lg-0">
                 <div class="container">
                     <div class="row justify-content-center justify-content-md-end justify-content-lg-between align-items-lg-end">
                         <div class="col-lg-5 col-xl-6">
                             <div class="d-none d-lg-block wow fadeInRight"></div>
                         </div>
-                        <div class="col-sm-8 col-md-6 col-lg-5">
+                        <div class="col-sm-8 col-md-8 col-lg-8">
                             <div class="section-inset-custom-6">
                                 <div class="oh-desktop">
                                     <div class="box-form wow slideInLeft">
                                         <h4 class="box-form-title">Book a room</h4>
-                                        <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                                        <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="{{ route('inquery.store') }}">
+                                            @csrf
                                             <div class="form-wrap">
                                                 <input class="form-input" id="contact-name-8" type="text" name="name" data-constraints="@Required">
                                                 <label class="form-label" for="contact-name-8">Name</label>
@@ -125,38 +164,55 @@
                                                 <label class="form-label" for="contact-phone-8">Phone</label>
                                             </div>
                                             <div class="form-wrap">
-                                                <select class="form-input" id="arrival-date" name="arrival-date" data-constraints="@Required" data-placeholder="Arrival date">
-                          <option label="placeholder"></option>
-                          <option>January 15, 2019</option>
-                          <option>February 10, 2019</option>
-                          <option>March 13, 2019</option>
-                        </select>
+                                                <input class="form-input" id="contact-phone-8" type="email" name="email" data-constraints="@Required">
+                                                <label class="form-label" for="contact-phone-8">Email</label>
                                             </div>
                                             <div class="form-wrap">
-                                                <select class="form-input" id="departure-date" name="departure-date" data-constraints="@Required" data-placeholder="Departure date">
-                          <option label="placeholder"></option>
-                          <option>February 25, 2019</option>
-                          <option>March 2, 2019</option>
-                          <option>April 21, 2019</option>
-                        </select>
+                                                <input class="form-input" id="Arrival_date" type="date" name="arrival_date" data-constraints="@Required" placeholder="">
+                                                <label class="form-label" for="Arrival_date">Arrival Date</label>
+                                                <script>
+                                                    // Get the date input element by its ID
+                                                    var dateInput = document.getElementById('Arrival_date');
+
+                                                    // Remove the placeholder attribute
+                                                    dateInput.removeAttribute('placeholder');
+                                                </script>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <select class="form-input" id="country" name="country" data-constraints="@Required" data-placeholder="Country">
+                                                    <option label="Select Country" value=""></option>
+                                                    <option>January 15, 2019</option>
+                                                    <option>February 10, 2019</option>
+                                                    <option>March 13, 2019</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-wrap">
+                                                <select class="form-input" id="departure-date" name="room" data-constraints="@Required" data-placeholder="Departure date">
+                                                    <option label="Select Room"></option>
+                                                    @foreach ($rooms as $room)
+                                                    <option value="{{ $room->id }}">{{ $room->type }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-wrap">
                                                 <div class="row row-10 row-gutter-10">
                                                     <div class="col-md-6">
                                                         <select class="form-input" id="adults" name="adults" data-constraints="@Required" data-placeholder="Adults">
-                              <option label="placeholder"></option>
-                              <option>2 Adults</option>
-                              <option>3 Adults</option>
-                              <option>4 Adults</option>
-                            </select>
+                                                            <option label="Adults"></option>
+                                                            <option value="1">1 Adults</option>
+                                                            <option value="2">2 Adults</option>
+                                                            <option value="3">3 Adults</option>
+                                                            <option value="4">More Than 3</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-input" id="children" name="children" data-constraints="@Required" data-placeholder="Children">
-                              <option label="placeholder"></option>
-                              <option>1 Child</option>
-                              <option>2 Children</option>
-                              <option>3 Children</option>
-                            </select>
+                                                            <option label="Child"></option>
+                                                            <option value="1">1 Child</option>
+                                                            <option value="2">2 Children</option>
+                                                            <option value="3">3 Children</option>
+                                                            <option value="4">More than 3 Children</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,15 +234,17 @@
             <div class="heading-panel">
                 <div class="heading-panel-left">
                     <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Gallery</span></h1>
-                    <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Hotel Gallery</span></h4>
+                    <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Nepal Bed Gallery</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
             </div>
             <div class="row row-sm row-30" data-lightgallery="group">
+                @foreach ($medias as $media)
                 <div class="col-sm-6 col-lg-4">
                     <div class="oh-desktop">
                         <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInRight"><a class="thumbnail-creative-figure" href="images/home-gallery-1-1200x800-original.jpg" data-lightgallery="item"><img src="images/home-gallery-1-370x303.jpg" alt="" width="370" height="303"/></a>
+                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInRight"><a class="thumbnail-creative-figure" href="images/home-gallery-1-1200x800-original.jpg" data-lightgallery="item">
+                            <img src="{{ asset('public/uploads/featured_img/'.$media->image) }}" alt="" width="370" height="303"/></a>
                             <div class="thumbnail-creative-caption">
                                 <h5 class="thumbnail-creative-title"><a href="#">Affordable Room Rates</a></h5>
                                 <div class="thumbnail-creative-button"><a class="button button-md button-white" href="#">Read more</a></div>
@@ -194,61 +252,9 @@
                         </article>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInUp"><a class="thumbnail-creative-figure" href="images/home-gallery-2-1200x800-original.jpg" data-lightgallery="item"><img src="images/home-gallery-2-370x303.jpg" alt="" width="370" height="303"/></a>
-                            <div class="thumbnail-creative-caption">
-                                <h5 class="thumbnail-creative-title"><a href="#">Best Room Service</a></h5>
-                                <div class="thumbnail-creative-button"><a class="button button-md button-white" href="#">Read more</a></div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInDown"><a class="thumbnail-creative-figure" href="images/home-gallery-3-1200x800-original.jpg" data-lightgallery="item"><img src="images/home-gallery-3-370x303.jpg" alt="" width="370" height="303"/></a>
-                            <div class="thumbnail-creative-caption">
-                                <h5 class="thumbnail-creative-title"><a href="#">Spectacular Interior</a></h5>
-                                <div class="thumbnail-creative-button"><a class="button button-md button-white" href="#">Read more</a></div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInUp"><a class="thumbnail-creative-figure" href="images/fullwidth-masonry-gallery-5-1200x800-original.jpg" data-lightgallery="item"><img src="images/home-gallery-4-370x303.jpg" alt="" width="370" height="303"/></a>
-                            <div class="thumbnail-creative-caption">
-                                <h5 class="thumbnail-creative-title"><a href="#">Diverse Amenities</a></h5>
-                                <div class="thumbnail-creative-button"><a class="button button-md button-white" href="#">Read more</a></div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInDown"><a class="thumbnail-creative-figure" href="images/home-gallery-5-1200x800-original.jpg" data-lightgallery="item"><img src="images/home-gallery-5-370x303.jpg" alt="" width="370" height="303"/></a>
-                            <div class="thumbnail-creative-caption">
-                                <h5 class="thumbnail-creative-title"><a href="#">Comfortable Rooms</a></h5>
-                                <div class="thumbnail-creative-button"><a class="button button-md button-white" href="#">Read more</a></div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-creative thumbnail-sm wow slideInLeft"><a class="thumbnail-creative-figure" href="images/home-gallery-6-1200x800-original.jpg" data-lightgallery="item"><img src="images/home-gallery-6-370x303.jpg" alt="" width="370" height="303"/></a>
-                            <div class="thumbnail-creative-caption">
-                                <h5 class="thumbnail-creative-title"><a href="#">Friendly Atmosphere</a></h5>
-                                <div class="thumbnail-creative-button"><a class="button button-md button-white" href="#">Read more</a></div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
+                @endforeach
+
+
             </div>
         </div>
     </section>
@@ -462,7 +468,7 @@
     </section>
 
     <!-- Popular questions-->
-    <section class="section section-xl bg-default">
+    {{-- <section class="section section-xl bg-default">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left heading-panel-left-1">
@@ -521,7 +527,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- What people say-->
     <section class="section section-xl bg-gray-4">

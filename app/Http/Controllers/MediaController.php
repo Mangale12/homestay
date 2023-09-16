@@ -6,6 +6,8 @@ use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Media;
+use App\Models\Room;
+use App\Models\Category;
 
 class MediaController extends Controller
 {
@@ -16,21 +18,23 @@ class MediaController extends Controller
             $medias=Post::whereBetween('updated_at', [$from, $to])->get();
         }else{
 
-            $medias=Post::get();
+            $medias=Media::get();
         }
         return view('admin.media.media',compact('medias','from','to'));
     }
     public function create(){
-        return view('admin.media.create');
+        $categories = Category::get();
+        return view('admin.media.create',compact('categories'));
+
     }
     public function store(Request $request){
         if ($request->hasFile('medias')) {
-            foreach($request->file('medias') as $key=>$image){
+            foreach ($request->file('medias') as $key=>$image){
                 $image_name = time().$key.'.'.$image->extension();
                 $image->move(public_path('uploads/featured_img/'),$image_name);
                 Media::create([
                     'image'=>$image_name,
-                    'media_type'=>null,
+                    'media_type'=>$request->category,
                 ]);
             }
         }

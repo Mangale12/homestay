@@ -16,12 +16,15 @@ use App\Models\Room;
 use App\Models\Service;
 use App\Models\Testimonial;
 use App\Models\SocialSetting;
+use App\Models\Media;
+use App\Models\Food;
 // $2y$10$DBw7tc6Gpynp80RYDZcdcOMnQoIgDNdGn9E09UC5E1kKPjEw91PUS
 class FrontendController extends Controller
 {
     public function index(){
         $homebanners = HomeBanner::get();
         // dd($homebanners);
+        $medias = Media::get();
         $rooms = Room::get();
         $services = Service::get();
         $testimonials = Testimonial::get();
@@ -30,13 +33,14 @@ class FrontendController extends Controller
         $headline_no=$setting->headline_no;
         $cat_sec=CategorySection::where('status',1)->orderBy('section_order', 'asc')->get();
         $partner=Ad::first();
+        $foods = Food::get();
         $headline_news=Post::where(function($q){
             $q->where('status', 'published')
               ->orWhere('status', 'drafts');
        })->latest()->take($headline_no)->get();
 
 
-        return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no','homebanners','rooms','services','testimonials','socialmedia'));
+        return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no','homebanners','rooms','services','testimonials','socialmedia','medias','foods'));
     }
     public function room(){
         $rooms = Room::get();

@@ -1,3 +1,4 @@
+
 @extends('admin.includes.main')
 @section('title')Post Settings - {{ config('app.name', 'Laravel') }} @endsection
 @section('content')
@@ -6,7 +7,7 @@
         display: none;
     }
 </style>
-<form action="{{route('medias.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('medias.videoStore')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-lg-12 col-md-12">
@@ -54,7 +55,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="featured_img">New Image</label>
+                                                <label for="featured_img">New Video</label>
                                                 <div id="featured_img" class="row">
                                                 </div>
                                             </div>

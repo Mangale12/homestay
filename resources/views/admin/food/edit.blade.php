@@ -6,19 +6,20 @@
         display: none;
     }
 </style>
-<form action="{{route('medias.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('food.update',$food->id)}}" method="post" enctype="multipart/form-data">
     @csrf
+    @method('put')
     <div class="row">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-lg-9 col-md-12">
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Add Home Banner</h3>
-                                    <a href="{{route('medias')}}" class="btn btn-success btn-sm float-right">View
-                                        Medias</a>
+                                    <h3 class="card-title">Update Food</h3>
+                                    <a href="{{route('homebanner.index')}}" class="btn btn-success btn-sm float-right">View
+                                        Food</a>
                                 </div>
                                 <div class="col-md-12 p-0">
                                     @include('admin.includes.message')
@@ -26,36 +27,41 @@
 
 
                                 <div class="card-body">
-                                    {{-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="headline"> Title</label> <span class="text-danger"> *
-                                                </span>
-                                                <input type="text" class="form-control" name="title"
-                                                    value="{{old('title')}}">
-                                            </div>
-                                        </div>
-                                    </div>--}}
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="kicker">Image Category</label>
-                                                <select name="category" id="category" class="form-control">
-                                                    <option value="" selected disabled>Select Category</option>
-                                                    @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="headline"> Food Name</label> <span class="text-danger"> *
+                                                </span>
+                                                <input type="text" class="form-control" name="name"
+                                                    value="{{old($food->name,'name')}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="kicker">Price</label>
+                                                <input type="text" class="form-control" name="price"
+                                                    value="{{old($food->price, 'price')}}">
                                             </div>
                                         </div>
                                     </div>
 
 
                                     <div class="row">
-                                        <div class="col-md-12">
+
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="featured_img">New Image</label>
+                                                <label for="head_img">Food</label>
                                                 <div id="featured_img" class="row">
+                                                    <div class="col-md-6 remove">
+                                                        <div class="img-upload-preview">
+                                                            <img loading="lazy"  src="{{ asset('public/uploads/food/'.$food->image) }}" class="img-responsive" style="max-height:150px;">
+
+                                                            <button type="button" class="btn btn-danger close-btn remove-files"><i class="fa fa-times"></i></button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,11 +188,11 @@
 
         $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#featured_img").spartanMultiImagePicker({
-            fieldName: 'medias[]',
-            maxCount: 10,
+            fieldName: 'image',
+            maxCount: 1,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
-            groupClassName: 'col-md-4 col-lg-4',
+            groupClassName: 'col-md-12 col-lg-12',
             maxFileSize: '',
             dropFileLabel: "Drop Here",
             onExtensionErr: function (index, file) {
@@ -326,3 +332,6 @@
 
 </script>
 @endsection
+
+
+

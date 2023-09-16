@@ -25,6 +25,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FoodController;
 
 
 // use Analytics;
@@ -132,7 +133,10 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::resource('testimonial', TestimonialController::class);
         Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
 
-        Route::get('inquiries', [HomeController::class, 'inquiry'])->name('inquiries');
+        Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquery.index');
+        Route::post('inquiry/store', [HomeController::class, 'inquiryStore'])->name('inquery.store');
+
+        Route::resource('food',FoodController::class);
 
     });
 

@@ -13,23 +13,28 @@ class HomeController extends Controller
         return view('admin.inquiry.index', compact('inquiries'));
     }
 
-    public function storeInquiry(Request $request){
+    public function inquiryStore(Request $request){
         $request->validate([
             'name'=>'required',
             'email'=>'required|email',
+            'phone'=>'required|numeric',
+            'arrival_date'=>'required',
             'email'=>'required|numeric',
             'coutry'=>'required',
             'room_type'=>'required',
         ]);
 
-        Enquiry::create([
+        Inquiry::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'phone'=>$request->phone,
             'country'=>$request->country,
-            'room_type'=>$request->room_type,
+            'room'=>$request->room_type,
+            'adults'=>$request->adults,
+            'children'=>$request->children,
             'message'=>$request->message,
         ]);
+        return redirect()->route('home');
 
         try {
             $details = [

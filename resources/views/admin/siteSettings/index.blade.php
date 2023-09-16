@@ -26,14 +26,15 @@
                                         <textarea name="address" id="address" class="form-control">{!! $setting->address !!}</textarea>
                                     </div>
                                 </div>
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="Contact">Contact</label>
-                                        <input type="tel" class="form-control" name="contact" value="{{old('Contact',$setting->contact)}}">
+                                        <input type="tel" class="form-control" name="contact[]" value="{{old('Contact',$setting->contact)}}" data-role="tagsinput">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="Email">Email</label>
-                                        <input type="email" class="form-control" name="email" value="{{old('Email',$setting->email)}}">
+                                        <input type="email" class="form-control" name="email[]" value="{{old('Email',$setting->email)}}" data-role="tagsinput">
                                     </div>
                                 </div>
 
@@ -106,6 +107,9 @@
 </div>
 @endsection
 @section('scripts')
+
+<!-- Bootstrap Tags Input CSS and JavaScript -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
@@ -122,7 +126,7 @@
         reader.readAsDataURL(this.files[0]);
 
     });
-
+    $('#email').tagsinput();
     });
 
 </script>
