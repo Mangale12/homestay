@@ -97,7 +97,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('inquiries')}}" class="nav-link">
+            <a href="{{route('inquiry.index')}}" class="nav-link">
               <i class="nav-icon fas fa-file-image"></i>
               <p>
                 Inquiry

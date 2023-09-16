@@ -133,7 +133,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::resource('testimonial', TestimonialController::class);
         Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
 
-        Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquery.index');
+        Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquiry.index');
         Route::post('inquiry/store', [HomeController::class, 'inquiryStore'])->name('inquery.store');
 
         Route::resource('food',FoodController::class);
