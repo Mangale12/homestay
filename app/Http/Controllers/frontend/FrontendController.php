@@ -118,4 +118,29 @@ class FrontendController extends Controller
        })->where('title', 'Like', '%' . $keyword . '%')->latest()->paginate(2);
         return view('frontend.search',compact('news','partner'));
     }
+
+    public function book(){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        $rooms = Room::get();
+        return view('frontend.booking-form',compact('socialmedia','setting','rooms'));
+    }
+    public function food(){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        $food = Food::get();
+        return view('frontend.food',compact('socialmedia','setting','food'));
+    }
+    public function gallery(Request $request){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+
+        $categories = Category::get();
+        $gallery = Media::get();
+        if($request->category){
+            $category = Category::where('slug',$request->slug)->first();
+            $gallery = Media::where('media_type',$category->id)->get();
+        }
+        return view('frontend.gallery',compact('socialmedia','setting','categories','gallery'));
+    }
 }

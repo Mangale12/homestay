@@ -20,7 +20,7 @@ class HomeController extends Controller
             'phone'=>'required|numeric',
             'arrival_date'=>'required',
             'email'=>'required|numeric',
-            'coutry'=>'required',
+            'country'=>'required',
             'room_type'=>'required',
         ]);
 

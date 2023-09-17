@@ -15,30 +15,42 @@
     </div>
 </section>
 <!-- Why choose us-->
-{{-- <section class="section section-sm section-first bg-default text-left">
+<section class="section section-sm section-first bg-default text-left">
     <div class="container">
         <div class="row row-50 justify-content-center align-items-xl-center">
             <div class="col-md-10 col-lg-5 col-xl-6"><img src="{{ asset('public/images/about-1-519x564.jpg') }}" alt="" width="519" height="564" />
             </div>
             <div class="col-md-10 col-lg-7 col-xl-6">
                 <h1 class="text-spacing-25 font-weight-normal title-opacity-9">Who We Are</h1>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                <h5>Welcome to Nepal Bed and Breakfast Home Stay with Tamang family.</h5>
+                <p>Chandra, Pabitra and family welcome you to our warm and friendly family homestay located in Rani Ban (Queens Forest), 4.6 kms from Thamel.  Beautiful and peaceful, with plenty of fresh air, our home is very close to the forest, with scenic views of the surrounding hills.  Nepal’s most famous, historical Swayambhunath (Monkey)Temple is just 1.5 km walk from our home.
+                </p>
+                <p>Collectively we have 40+ years of experience in Nepali tourism and would be honoured to  provide information and organise treks to all the main trekking areas in the country. We can also organise visits to famous national parks such as Chitwan to see Elephants and the one-horned rhinoceros.</p>
+                <p>We have all modern amenities in our multi-bedroom home, including Air conditioning, western bathrooms, comfortable beds, 24 hour free Wi-Fi, and multichannel colour television.</p>
+                <p>Our small courtyard garden offers you different types of seasonal fruits and vegetables, grown in the roof top garden, and hygienically prepared, home cooked, delicious, organic breakfasts, lunches, and dinners.
+                </p>
+                <p>You will experience what is like to live with a real Nepali family, and we will do our best to make your stay a truly memorable, once in a life-time experience.
+                    We have Airport pickup and drop off service at very reasonable cost on request.</p>
+                    <br>
+                    <h5>Our Facilities :</h5>
                 <ul class="row-16 list-0 list-marked list-marked-md list-marked-primary list-custom-3">
-                    <li>Accommodation</li>
-                    <li>Conference Center</li>
-                    <li>Restaurant</li>
-                    <li>Room Service</li>
-                    <li>Spa Salon</li>
-                    <li>Fitness Center</li>
+                    <li>Comfortable beds and western style bathrooms</li>
+                    <li>24 hours hot showers</li>
+                    <li>24 hours Wi-Fi</li>
+                    <li>Multichanel colour television</li>
+                    <li>Laundry </li>
+                    <li>Breakfast </li>
+                    <li>Organic, homegrown food</li>
+                    <li>Lunch and dinner on request </li>
+                    <li>Welcome drink</li>
+                    <li>Free hot Water/Tea/ Coffee </li>
                 </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lacus aliquet, tempor justo sit amet, egestas dolor. Fusce viverra, nisl tristique interdum rutrum, risus massa aliquet sapien, a facilisis neque lorem et lectus.
-                    Vestibulum at orci rhoncus, vehicula purus nec.</p>
                 <div class="image-wrap text-right"><img src="images/sign-1-183x93.png" alt="" width="183" height="93" />
                 </div>
             </div>
         </div>
     </div>
-</section> --}}
+</section>
 
 <!-- Why choose us?-->
 <section class="section section-xl bg-gray-4">

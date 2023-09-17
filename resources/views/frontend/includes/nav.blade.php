@@ -57,7 +57,7 @@
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-room.html">Single Room</a></li>
                                 </ul> --}}
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="#">Gallery</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.gallery') }}">Gallery</a>
                                 <!-- RD Navbar Dropdown-->
                                 {{-- <ul class="rd-menu rd-navbar-dropdown">
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="grid-gallery.html">Grid Gallery</a></li>
@@ -78,7 +78,7 @@
                             </li> --}}
                             <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Contact Us</a>
                                 <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Trecks & Tours</a>
-                                    <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Food Menu</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.food') }}">Food Gallery</a>
                             </li>
 
                         </ul>

@@ -42,7 +42,7 @@
                                             <div class="form-group">
                                                 <label for="kicker">Price</label>
                                                 <input type="text" class="form-control" name="price"
-                                                    value="{{old($food->price, 'price')}}">
+                                                    value="{{$food->price}}">
                                             </div>
                                         </div>
                                     </div>

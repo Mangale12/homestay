@@ -120,7 +120,14 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="{{ route('categories.index') }}" class="nav-link {{Route::is('categories.index','categories.create','categories.edit') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Category
+              </p>
+            </a>
+          </li>
 
 
           <li class="nav-item">

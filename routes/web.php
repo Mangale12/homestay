@@ -134,7 +134,6 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
 
         Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquiry.index');
-        Route::post('inquiry/store', [HomeController::class, 'inquiryStore'])->name('inquery.store');
 
         Route::resource('food',FoodController::class);
 
@@ -246,7 +245,11 @@ Route::post('/layout5', [FrontendController::class,'layout'])->name('layout5');
 Route::get('/news/single-news/{slug}',[FrontendController::class,'single_news'])->name('single_news');
 Route::get('/category/{id}',[FrontendController::class,'news_category'])->name('news_category');
 Route::get('/category/{category}/{id}',[CustomPageController::class,'sub_category'])->name('sub_category');
+Route::get('/book',[FrontendController::class,'book'])->name('frontend.book');
+Route::get('/food',[FrontendController::class,'food'])->name('frontend.food');
+Route::get('/gallery',[FrontendController::class,'gallery'])->name('frontend.gallery');
 
+Route::post('inquiry/store', [HomeController::class, 'inquiryStore'])->name('inquery.store');
 
 Route::get('/search', [FrontendController::class,'search'])->name('search');
 
