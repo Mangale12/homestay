@@ -151,12 +151,8 @@
                   <p>General Settings</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('homepageSetting.index')}}" class="nav-link {{ Route::is('homepageSetting.index','homepageSetting.create','homepageSetting.edit') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Homepage Settings</p>
-                </a>
-              </li>
+
+              {{--
               <li class="nav-item">
                 <a href="{{route('homepageAd')}}" class="nav-link {{ Route::is('homepageAd') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -184,6 +180,12 @@
                 </a>
               </li> --}}
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.subscriber')}}" class="nav-link {{ Route::is('admin.subscriber') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Subscribers</p>
+            </a>
           </li>
 
           {{-- @hasanyrole('Super Admin')

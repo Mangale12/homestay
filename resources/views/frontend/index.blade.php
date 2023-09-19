@@ -140,7 +140,7 @@
     </section>
 
     <!-- book a Room-->
-    <section class="section bg-default text-center">
+    {{-- <section class="section bg-default text-center">
         <div class="parallax-container" data-parallax-img="{{ asset('public/frontend/images/bg-forms-3.jpg') }}">
             <div class="parallax-content section-xl section-lg-0">
                 <div class="container">
@@ -226,7 +226,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Latest projects-->
     <section class="section section-lg bg-default">
@@ -314,7 +314,8 @@
                     <h3 class="oh font-weight-normal"><span class="d-inline-block wow slideInDown">Subcribe to Our Newsletter</span></h3>
                     <p class="text-width-medium text-spacing-75 wow fadeInLeft" data-wow-delay=".1s">Leave your e-mail in the form below to sign up to our newsletter and receive regular news, updates, and special offers.</p>
                     <!-- RD Mailform-->
-                    <form class="rd-form rd-mailform rd-form-inline oh-desktop" data-form-output="form-output-global" data-form-type="subscribe" method="post" action="bat/rd-mailform.php">
+                    <form class="rd-form-inline oh-desktop" data-form-output="form-output-global" data-form-type="subscribe" method="post" action="{{ route('frontend.subscriber') }}">
+                        @csrf
                         <div class="form-wrap wow slideInUp">
                             <input class="form-input" id="subscribe-form-1-email" type="email" name="email" data-constraints="@Email @Required" />
                             <label class="form-label" for="subscribe-form-1-email">Enter Your E-mail</label>
@@ -412,7 +413,7 @@
     </section> --}}
 
     <!-- Years of experience-->
-    <section class="section section-xl context-dark bg-secondary-custom">
+    {{-- <section class="section section-xl context-dark bg-secondary-custom">
         <div class="container">
             <div class="row row-50 row-xl-24 justify-content-center align-items-center align-items-lg-start text-left">
                 <!-- Counter Amy-->
@@ -465,7 +466,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Popular questions-->
     {{-- <section class="section section-xl bg-default">

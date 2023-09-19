@@ -42,15 +42,15 @@
                             <li><span>Room Rate:</span><span>from $380/night</span></li>
                         </ul> --}}
                         <div class="divider divider-30"></div>
-                        <div class="group-md group-middle justify-content-sm-start"><span class="social-title">Share</span>
-                            <div>
+                        <div class="group-md group-middle justify-content-sm-start"><a href="{{ route('frontend.book') }}" class="btn btn-primary">Book Now</a> </span>
+                            {{-- <div>
                                 <ul class="list-inline list-inline-sm social-list">
                                     <li><a class="icon fa fa-facebook" href="#"></a></li>
                                     <li><a class="icon fa fa-twitter" href="#"></a></li>
                                     <li><a class="icon fa fa-google-plus" href="#"></a></li>
                                     <li><a class="icon fa fa-instagram" href="#"></a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

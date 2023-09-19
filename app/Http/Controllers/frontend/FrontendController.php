@@ -18,6 +18,9 @@ use App\Models\Testimonial;
 use App\Models\SocialSetting;
 use App\Models\Media;
 use App\Models\Food;
+use App\Models\Subscriber;
+use App\Models\Country;
+use App\Models\Video;
 // $2y$10$DBw7tc6Gpynp80RYDZcdcOMnQoIgDNdGn9E09UC5E1kKPjEw91PUS
 class FrontendController extends Controller
 {
@@ -120,10 +123,11 @@ class FrontendController extends Controller
     }
 
     public function book(){
+        $countries = Country::get();
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
         $rooms = Room::get();
-        return view('frontend.booking-form',compact('socialmedia','setting','rooms'));
+        return view('frontend.booking-form',compact('socialmedia','setting','rooms','countries'));
     }
     public function food(){
         $setting=SiteSetting::first();
@@ -138,9 +142,27 @@ class FrontendController extends Controller
         $categories = Category::get();
         $gallery = Media::get();
         if($request->category){
-            $category = Category::where('slug',$request->slug)->first();
+            $category = Category::where('slug',$request->category)->first();
+            // dd($category);
             $gallery = Media::where('media_type',$category->id)->get();
         }
         return view('frontend.gallery',compact('socialmedia','setting','categories','gallery'));
+    }
+
+    public function subscriber(Request $request){
+        $request->validate([
+            'email'=>'required|email',
+        ]);
+        Subscriber::create([
+            'email'=>$request->email,
+        ]);
+        return redirect()->route('home');
+    }
+
+    public function videoGallery(){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        $videos = Video::get();
+        return view('frontend.video',compact('setting','socialmedia','videos'));
     }
 }

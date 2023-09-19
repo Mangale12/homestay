@@ -12,9 +12,13 @@
    @include('frontend.includes.nav')
     <!-- Swiper-->
 
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
     <!-- book a Room-->
-    <section class="section bg-default text-center">
+    <section class="section bg-default text-center" >
         <div class="parallax-container" data-parallax-img="{{ asset('public/frontend/images/bg-forms-3.jpg') }}">
             <div class="parallax-content section-xl section-lg-0">
                 <div class="container">
@@ -78,11 +82,17 @@
 
                                                 </div>
                                             </div>
+                                            <style>
+                                                .dropdown{
+                                                    width: 100% !important;
+                                                    margin-top: 1%;
+                                                }
+                                            </style>
                                             <div class="form-wrap">
-                                                <select class="form-input" id="departure-date" name="country" data-constraints="@Required" data-placeholder="Select Country">
+                                                <select class="form-input selectpicker" id="departure-date" name="country" data-constraints="@Required" data-placeholder="Select Country" data-live-search="true" data-live-search-style="startsWith">
                                                     <option value="" selected disabled>Select Country</option>
-                                                    @foreach ($rooms as $room)
-                                                    <option value="{{ $room->id }}">{{ $room->type }}</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -109,4 +119,9 @@
 
 </div>
 
+    <script>
+        $(document).ready(function(){
+            $('.selectpicker').selectpicker();
+        })
+    </script>
     @endsection

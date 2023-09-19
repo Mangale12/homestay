@@ -100,6 +100,7 @@
 <!-- Javascript-->
 <script src="{{ asset('public/frontend/js/core.min.js') }}"></script>
 <script src="{{ asset('public/frontend/js/script.js') }}"></script>
+<script src="{{ asset('public/frontend/js/bootstrap-select.min.js') }}"></script>
 
 <!--LIVEDEMO_00 -->
 

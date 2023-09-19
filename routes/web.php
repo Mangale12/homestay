@@ -137,6 +137,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::post('inquiry/view', [HomeController::class, 'inquiryView'])->name('inquiry.view');
 
         Route::resource('food',FoodController::class);
+        Route::get('subscribers',[HomeController::class,'subscriber'])->name('admin.subscriber');
 
     });
 
@@ -249,6 +250,9 @@ Route::get('/category/{category}/{id}',[CustomPageController::class,'sub_categor
 Route::get('/book',[FrontendController::class,'book'])->name('frontend.book');
 Route::get('/food',[FrontendController::class,'food'])->name('frontend.food');
 Route::get('/gallery',[FrontendController::class,'gallery'])->name('frontend.gallery');
+Route::get('/gallery/video',[FrontendController::class,'videoGallery'])->name('frontend.video');
+Route::post('/subscribers',[FrontendController::class,'subscriber'])->name('frontend.subscriber');
+
 
 Route::post('inquiry/store', [HomeController::class, 'inquiryStore'])->name('inquery.store');
 

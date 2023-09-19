@@ -29,7 +29,11 @@
                             <li>
                                 <div class="unit unit-spacing-xs">
                                     <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                                    <div class="unit-body"><a class="link-phone" href="tel:#">{{ $setting->contact }}</a></div>
+                                    @php
+                                        $contact = explode(',',$setting->contact) ;
+
+                                    @endphp
+                                    <div class="unit-body"><a class="link-phone" href="tel:#">{{ $contact[0] }}</a></div>
                                 </div>
                             </li>
                         {{-- </ul><a class="button button-md button-ujarak button-default-outline" href="#">Get in touch</a> --}}
@@ -57,14 +61,14 @@
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-room.html">Single Room</a></li>
                                 </ul> --}}
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.gallery') }}">Gallery</a>
+                            <li class="rd-nav-item"><a class="rd-nav-link" >Gallery</a>
                                 <!-- RD Navbar Dropdown-->
-                                {{-- <ul class="rd-menu rd-navbar-dropdown">
-                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="grid-gallery.html">Grid Gallery</a></li>
-                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="full-width-gallery.html">Full width Gallery</a></li>
-                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="masonry-gallery.html">Masonry Gallery</a></li>
-                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="full-width-masonry-gallery.html">Full Width Masonry Gallery</a></li>
-                                </ul> --}}
+                                <ul class="rd-menu rd-navbar-dropdown">
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ route('frontend.gallery') }}">Image Gallery</a></li>
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ route('frontend.video') }}">Video Gallery</a></li>
+                                    {{-- <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="masonry-gallery.html">Masonry Gallery</a></li>
+                                    <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="full-width-masonry-gallery.html">Full Width Masonry Gallery</a></li> --}}
+                                </ul>
                             </li>
                             {{-- <li class="rd-nav-item"><a class="rd-nav-link" href="classic-blog.html">Blog</a>
                                 <!-- RD Navbar Dropdown-->
@@ -77,7 +81,7 @@
                                 </ul>
                             </li> --}}
                             <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Contact Us</a>
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Trecks & Tours</a>
+                                <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Trekks & Tours</a>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.food') }}">Food Gallery</a>
                             </li>
 

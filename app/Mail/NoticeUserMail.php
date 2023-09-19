@@ -31,8 +31,8 @@ class NoticeUserMail extends Mailable
         $subject = 'New Inquiry For Room';
         return $this->from('mangaletamang65@gmail.com', 'Nepal Bed & Breakfast')
         ->subject($subject)
-        ->markdown('mails.noticeuser')
+        ->markdown('email.noticeuser')
         ->with([
-            'details' => $details ]);
+            'details' => $this->details ]);
     }
 }

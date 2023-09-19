@@ -53,4 +53,20 @@ class MediaController extends Controller
         }
         return back()->with('message',"Image Deleted successfully.");
     }
+
+    public function createVideo(){
+        return view('admin.video.create');
+    }
+    public function storeVideo(Request $request){
+        $request->validate([
+            'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            'name'=>'required',
+
+        ]);
+        if($request->hasFile('video')){
+            $video = $request->file('video');
+            $videoName = time().'.'.$video->extension();
+            $video->move(public_path('video'),$videoName);
+        }
+    }
 }

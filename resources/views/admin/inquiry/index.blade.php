@@ -87,7 +87,7 @@
                     <p><b>Full Name</b> : <span id="full_name"></span></p>
                     <p><b>Phone</b> : <span id="phone"></span></p>
                     <p><b>E-mail</b> : <span id="email"></span></p>
-                    <p><b>Room Type</b> : <span id="room-typel"></span></p>
+                    <p><b>Room Type</b> : <span id="room-type"></span></p>
                     <p><b>Airport Pickup</b> : <span id="pickup"></span></p>
                     <p><b>Arrival Date</b> : <span id="arrival-date"></span></p>
                     <p><b>No of Member : </b> : <span id="adults"></span></p>
@@ -150,10 +150,13 @@
                 $('#full_name').html(data.data.name);
                 $('#phone').html(data.data.phone);
                 $('#email').html(data.data.email);
-                $('#room-type').html(data.data.room-type);
+                $('#room-type').html(data.data.room_type);
                 $('#pickup').html(data.data.pickup);
                 $('#arrival-date').html(data.data.arrival_date);
                 $('#country').html(data.data.country);
+                $('#adults').html(data.data.adults);
+                $('#children').html(data.data.children);
+                $('#message').html(data.data.message);
                 console.log(data);
             });
         });

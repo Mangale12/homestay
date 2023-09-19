@@ -5,12 +5,12 @@
 <section class="breadcrumbs-custom-inset">
     <div class="breadcrumbs-custom context-dark bg-overlay-60">
         <div class="container">
-            <h2 class="breadcrumbs-custom-title">Full-width gallery</h2>
+            <h2 class="breadcrumbs-custom-title">Our Gallery</h2>
             <ul class="breadcrumbs-custom-path">
-                <li><a href="{{ route('frontend.gallery') }}">All</a></li>
-                @foreach ($categories as $category)
-                <li><a href="{{ url('gallery') }} ? category={{ $category->slug }}">{{ $category->name }}</a></li>
-                @endforeach
+                <li><a>Home</a></li>
+
+                <li><a href="">Gallery</a></li>
+
 
                 <li class="active">Full-width gallery</li>
             </ul>
@@ -26,7 +26,7 @@
             <ul class="isotope-filters-list" id="isotope-3">
                 <li><a class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery">All</a></li>
                 @foreach ($categories as $category)
-                <li><a href="{{ url('gallery') }} ? category={{ $category->slug }}" data-isotope-filter="Type 1" data-isotope-group="gallery">{{ $category->name }}</a></li>
+                <li class="category" data-id="{{ $category->slug }}"><a href="{{ url('gallery') }} ? category={{ $category->slug }}" data-isotope-filter="Type 1" data-isotope-group="gallery">{{ $category->name }}</a></li>
                 @endforeach
 
             </ul>
@@ -54,4 +54,13 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        $(".category").click(function(){
+            location.href = "{{ url('gallery') }}?category="+$(this).data('id');
+        });
+    });
+</script>
 @endsection
