@@ -9,6 +9,6 @@ class Inquiry extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','country','email','phone','message','room_type','arrival_date','adults','children',
+        'name','country','email','phone','message','room_type','arrival_date','adults','children','pickup','status'
     ];
 }

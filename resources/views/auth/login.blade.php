@@ -1,76 +1,143 @@
-@include('admin.includes.head')
-@php
+<!DOCTYPE html>
+<html lang="en" >
+<head>
 
-$setting=App\Models\SiteSetting::first();
-@endphp
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <!-- <img src="{{asset('admin/image/'.$setting->logo)}}" alt="{{$setting->title}}" class="w-20 h-20 fill-current text-gray-500"> -->
-                {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                News Portal Login
-            </a>
-        </x-slot>
+  <meta charset="UTF-8">
+  @include('admin.includes.authhead')
+  <title>Login</title>
+  <style>
+    * { box-sizing:border-box; }
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+body {
+  background: #eee;
+  -webkit-font-smoothing: antialiased;
+}
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+hgroup {
+  text-align:center;
+  margin-top: 4em;
+}
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+span {
+    font-size: 0.95em;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    line-height: 24px;
+    text-transform: uppercase;
+}
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
+/*------------------------------------------------------------------
+[ Login Form ]*/
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
+.log-form {
+  width: 500px;
+  margin: 4em auto;
+  padding: 3em 2em 2em 2em;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+.group {
+  position: relative;
+  margin-bottom: 45px;
+}
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
+.log-input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  -webkit-appearance: none;
+  display: block;
+  background: #fafafa;
+  color: #636363;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #757575;
+}
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
+.log-input:focus { outline: none; }
 
-            <div class="flex items-center justify-content-between mt-4">
-                {{-- <div>
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                    {{ __('Register') }}
-                </a>
-                </div> --}}
-                <div>
-                <!--@if (Route::has('password.request'))-->
-                <!--    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">-->
-                <!--        {{ __('Forgot your password?') }}-->
-                <!--    </a>-->
-                <!--@endif-->
+.log-form a {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #aaaaaa;
+}
 
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-                </div>
-            </div>
-            {{-- <label>Login With :</label>
-            <a href="{{ route('githubLogin') }}" class="btn btn-social-icon btn-facebook pr-0"><i class="fab fa-github fa-2x"></i></a>
-            <a href="{{ url('auth/facebook') }}" class="btn btn-social-icon btn-facebook pr-0"><i class="fab fa-facebook-square fa-2x"></i></a>
-            <a href="" class="btn btn-social-icon btn-gmail"><i class="fas fa-envelope-square fa-2x"></i></a> --}}
+.left-align {
+    float: left;
+    text-align: left;
+}
 
-        </form>
-    </x-auth-card>
+.right-align {
+    float: right;
+    text-align: right;
+}
 
-</x-guest-layout>
+
+/*------------------------------------------------------------------
+[ Button same code as contact form ]*/
+
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    background: transparent;
+    border: none;
+    font-family: "Montserrat";
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    line-height: 24px;
+    height: 42px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-transform: none;
+    width: 100%;
+}
+
+input[type="checkbox"]:not(:checked) + label, input[type="checkbox"]:checked + label {
+    color: #aaaaaa;
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    padding-left: 10px;
+    padding-top: 6px;
+    position: relative;
+    text-transform: uppercase;
+}
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<section>
+
+	<hgroup>
+	    <h2>Welcome back!</h2>
+		<p>Please enter your details to sign into your account</p>
+	</hgroup>
+
+	<form method="post" class="log-form" action="{{ route('login') }}">
+        @include('admin.includes.message')
+        @csrf
+	    <div class="group log-input">
+	    	<input type="text" id = "username" name = "email" placeholder = "Username">
+	    </div>
+
+	    <div class="group log-input">
+	        <input type="password" id = "password" name = "password"  placeholder = "Password">
+	    </div>
+        <div class="group log-input">
+	        <input type="submit" value="Login">
+	    </div>
+	</form>
+
+
+
+</section>
+<!-- partial -->
+
+</body>
+</html>

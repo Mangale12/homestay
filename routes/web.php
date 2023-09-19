@@ -134,6 +134,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
 
         Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquiry.index');
+        Route::post('inquiry/view', [HomeController::class, 'inquiryView'])->name('inquiry.view');
 
         Route::resource('food',FoodController::class);
 

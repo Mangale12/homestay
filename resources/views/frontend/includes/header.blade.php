@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <script src="https://cdn-cgi/apps/head/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script>
-    <link rel="icon" href="{{ asset('public/frontend/images/favicon.ico') }}" type="image/x-icon">
+    {{-- <link rel="icon" href="{{ asset('public/frontend/images/favicon.ico') }}" type="image/x-icon"> --}}
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins:400,500%7CTeko:300,400,500%7CMaven+Pro:500">
     <link rel="stylesheet" href="{{ asset('public/frontend/css/bootstrap.css') }}">

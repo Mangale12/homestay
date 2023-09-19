@@ -56,8 +56,9 @@
                                         <td>{{ $inquiry->phone }}</td>
                                         <td>{{ $inquiry->country }}</td>
                                         <td>{{ $inquiry->arrival_date }}</td>
-                                        <td><a href="{{ route('homebanner.edit', $homebanner->id) }}"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ route('homebanners.delete', $homebanner->id) }}"><i class="fas fa-trash-alt"></i></a></td>
+                                        <td><a class="inquiry-view" data-id="{{ $inquiry->id }}"><i class="fas fa-eye"></i></a>
+                                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                                    </td>
 
                                     </tr>
 
@@ -72,7 +73,35 @@
                 {{-- {{ $posts->links() }} --}}
             </div>
         </div>
-
+        {{-- view modal --}}
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Inquiry Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <p><b>Full Name</b> : <span id="full_name"></span></p>
+                    <p><b>Phone</b> : <span id="phone"></span></p>
+                    <p><b>E-mail</b> : <span id="email"></span></p>
+                    <p><b>Room Type</b> : <span id="room-typel"></span></p>
+                    <p><b>Airport Pickup</b> : <span id="pickup"></span></p>
+                    <p><b>Arrival Date</b> : <span id="arrival-date"></span></p>
+                    <p><b>No of Member : </b> : <span id="adults"></span></p>
+                    <p><b>No of Children : </b> : <span id="children"></span></p>
+                    <p><b>Country : </b> : <span id="country"></span></p>
+                    <p><b>Message : </b> : <span id="message"></span></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </section>
 </div>
 <script>
@@ -111,93 +140,95 @@
     // function del(el){
     //     $('#del').submit();
     // }
-    // $(document).ready(function (e) {
-    //     $('#myTable').DataTable();
-    //     $('#category_id').on('change', function() {
-    //         var category_id = $('#category_id').val();
-    //         $.post('{{ route('subcat.get_subcat_by_category') }}',{_token:'{{ csrf_token() }}', category_id:category_id}, function(data){
-    //         $('#sub_cat').html(null);
-    //             for (var i = 0; i < data.length; i++) {
-    //                 $('#sub_cat').append($('<option>', {
-    //                     value: data[i].id,
-    //                     text: data[i].name
-    //                 }));
-    //             $('.demo-select2').select2();
-    //             }
-    //         });
-    //     });
+    $(document).ready(function (e) {
+        $('#myTable').DataTable();
+        $('.inquiry-view').on('click', function() {
+            var user_id = $(this).data('id');
+            // alert(user_id);
+            $.post('{{ route('inquiry.view') }}',{_token:'{{ csrf_token() }}', user_id:user_id}, function(data){
+                $('#exampleModalCenter').modal('show');
+                $('#full_name').html(data.data.name);
+                $('#phone').html(data.data.phone);
+                $('#email').html(data.data.email);
+                $('#room-type').html(data.data.room-type);
+                $('#pickup').html(data.data.pickup);
+                $('#arrival-date').html(data.data.arrival_date);
+                $('#country').html(data.data.country);
+                console.log(data);
+            });
+        });
 
-    //     $('#master').on('click', function(e) {
-    //      if($(this).is(':checked',true))
-    //      {
-    //         $(".sub_chk").prop('checked', true);
-    //      } else {
-    //         $(".sub_chk").prop('checked',false);
-    //      }
-    //     });
+        $('#master').on('click', function(e) {
+         if($(this).is(':checked',true))
+         {
+            $(".sub_chk").prop('checked', true);
+         } else {
+            $(".sub_chk").prop('checked',false);
+         }
+        });
 
 
 
-    //     $('.js-feature').change(function () {
-    //         let featured = $(this).prop('checked') === true ? 1 : 0;
-    //         // console.log(status);
-    //         let category_id = $(this).data('id');
-    //         //   console.log(category_id);
+        $('.js-feature').change(function () {
+            let featured = $(this).prop('checked') === true ? 1 : 0;
+            // console.log(status);
+            let category_id = $(this).data('id');
+            //   console.log(category_id);
 
-    //         $.ajax({
-    //             type: "GET",
-    //             dataType: "json",
-    //             url: '{{ route('post.update_feature') }}',
-    //             data: {'featured': featured, 'cat_id': category_id},
-    //             success: function (data) {
-    //                 toastr.options.closeButton = true;
-    //                 toastr.options.closeMethod = 'fadeOut';
-    //                 toastr.options.closeDuration = 20;
-    //                 toastr.success(data.message);
-    //             }
-    //         });
-    //     });
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{ route('post.update_feature') }}',
+                data: {'featured': featured, 'cat_id': category_id},
+                success: function (data) {
+                    toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 20;
+                    toastr.success(data.message);
+                }
+            });
+        });
 
-    //     $('.js-trending').change(function () {
-    //         let trending = $(this).prop('checked') === true ? '1' : '0';
-    //         // console.log(status);
-    //         let post_id = $(this).data('id');
-    //         //   console.log(category_id);
+        $('.js-trending').change(function () {
+            let trending = $(this).prop('checked') === true ? '1' : '0';
+            // console.log(status);
+            let post_id = $(this).data('id');
+            //   console.log(category_id);
 
-    //         $.ajax({
-    //             type: "GET",
-    //             dataType: "json",
-    //             url: '{{ route('post.update_trending') }}',
-    //             data: {'trending': trending, 'post_id': post_id},
-    //             success: function (data) {
-    //                 toastr.options.closeButton = true;
-    //                 toastr.options.closeMethod = 'fadeOut';
-    //                 toastr.options.closeDuration = 20;
-    //                 toastr.success(data.message);
-    //             }
-    //         });
-    //     });
-    //     $('.js-banner_news').change(function () {
-    //         let banner = $(this).prop('checked') === true ? 1 : 0;
-    //         // console.log(status);
-    //         let post_id = $(this).data('id');
-    //         //   console.log(category_id);
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{ route('post.update_trending') }}',
+                data: {'trending': trending, 'post_id': post_id},
+                success: function (data) {
+                    toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 20;
+                    toastr.success(data.message);
+                }
+            });
+        });
+        $('.js-banner_news').change(function () {
+            let banner = $(this).prop('checked') === true ? 1 : 0;
+            // console.log(status);
+            let post_id = $(this).data('id');
+            //   console.log(category_id);
 
-    //         $.ajax({
-    //             type: "GET",
-    //             dataType: "json",
-    //             url: '{{ route('post.update_banner_news') }}',
-    //             data: {'banner_news': banner, 'post_id': post_id},
-    //             success: function (data) {
-    //                 toastr.options.closeButton = true;
-    //                 toastr.options.closeMethod = 'fadeOut';
-    //                 toastr.options.closeDuration = 20;
-    //                 toastr.success(data.message);
-    //             }
-    //         });
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{ route('post.update_banner_news') }}',
+                data: {'banner_news': banner, 'post_id': post_id},
+                success: function (data) {
+                    toastr.options.closeButton = true;
+                    toastr.options.closeMethod = 'fadeOut';
+                    toastr.options.closeDuration = 20;
+                    toastr.success(data.message);
+                }
+            });
 
-    //     });
+        });
 
-    // });
+    });
 </script>
 @endsection

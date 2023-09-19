@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class NoticeUserMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    protected $details;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-        //
+        $this->details = $details;
     }
 
     /**
@@ -28,6 +28,11 @@ class NoticeUserMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $subject = 'New Inquiry For Room';
+        return $this->from('mangaletamang65@gmail.com', 'Nepal Bed & Breakfast')
+        ->subject($subject)
+        ->markdown('mails.noticeuser')
+        ->with([
+            'details' => $details ]);
     }
 }

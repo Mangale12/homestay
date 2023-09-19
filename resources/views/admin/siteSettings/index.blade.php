@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="Email">Email</label>
-                                        <input type="email" class="form-control" name="email[]" value="{{old('Email',$setting->email)}}" data-role="tagsinput">
+                                        <input type="text" class="form-control" name="email[]" value="{{old('email',$setting->email)}}" data-role="tagsinput">
                                     </div>
                                 </div>
 
@@ -126,7 +126,6 @@
         reader.readAsDataURL(this.files[0]);
 
     });
-    $('#email').tagsinput();
     });
 
 </script>

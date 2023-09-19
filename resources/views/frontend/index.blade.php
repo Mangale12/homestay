@@ -139,7 +139,7 @@
         </div>
     </section>
 
-    <!-- Get a Free Quote-->
+    <!-- book a Room-->
     <section class="section bg-default text-center">
         <div class="parallax-container" data-parallax-img="{{ asset('public/frontend/images/bg-forms-3.jpg') }}">
             <div class="parallax-content section-xl section-lg-0">
