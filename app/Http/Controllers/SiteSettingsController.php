@@ -110,7 +110,7 @@ class SiteSettingsController extends Controller
             $reqFav->move($this->destination, $favName);
             $setting['favicon'] = "$favName";
         }
-        // $setting->title = $request['title'];
+        $setting->title = $request['title'];
         $setting->address = $request['address'];
         $setting->contact = ($request->contact[0] != null)?$request->contact[0]:null;
         $setting->email = ($request->email[0] != null)?$request->email[0]:null;

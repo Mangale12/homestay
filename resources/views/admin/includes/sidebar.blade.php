@@ -188,32 +188,32 @@
             </a>
           </li>
 
-          {{-- @hasanyrole('Super Admin')
+
           <li class="nav-item">
-            <a href="#" class="nav-link {{Route::is('roles.index','roles.create','roles.edit','permissions.index','permissions.create','permissions.edit') ? 'active' : ''}}">
+            <a href="#" class="nav-link {{Route::is('video.index','video.create','video.edit','medias.index','medias.create') ? 'active' : ''}}">
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
-                Roles & Permissions
+                Media
                 <i class="fas fa-angle-right right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('roles.index')}}" class="nav-link {{Route::is('roles.index','roles.create','roles.edit') ? 'active' : ''}}">
+                <a href="{{route('video.index')}}" class="nav-link {{Route::is('video.index','video.create','video.edit') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Roles</p>
+                  <p>Video</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{route('permissions.index')}}" class="nav-link {{Route::is('permissions.index','permissions.create','permissions.edit') ? 'active' : ''}}">
+                <a href="{{route('medias.index')}}" class="nav-link {{Route::is('medias.index','medias.create','medias.edit') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Permissions</p>
+                  <p>Image</p>
                 </a>
               </li>
             </ul>
           </li>
-          @endhasanyrole --}}
+
 
 
 

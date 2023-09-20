@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NoticeUserMail;
 use App\Mail\NoticeAdminMail;
 use App\Models\Subscriber;
+use App\Models\SiteSetting;
 class HomeController extends Controller
 {
 
@@ -27,8 +28,7 @@ class HomeController extends Controller
             'adults'=>'required',
             'pickup'=>'required',
         ]);
-
-        Inquiry::create([
+        $data = [
             'name'=>$request->name,
             'email'=>$request->email,
             'phone'=>$request->phone,
@@ -40,27 +40,31 @@ class HomeController extends Controller
             'arrival_date'=>$request->arrival_date,
             'message'=>$request->message,
             'status'=>0,
-        ]);
+        ];
+        $new_contact = Inquiry::insertGetId($data);
 
-
+        $user_details = Inquiry::find($new_contact);
 
         try {
+            $contact = SiteSetting::first('contact')->toArray();
             $details = [
                 'name'=>$request->name,
                 'room_type'=>$request->room_type,
+                'phone'=>$contact,
+                'user_details'=>$user_details,
             ];
-            $to_name = "hahh";
-            $to_email = "mangalewiba@gmail.com";
-            $data = $details;
+            // $to_name = "hahh";
+            // $to_email = "mangalewiba12@gmail.com";
+            // $data = $details;
 
-            Mail::send("email.noticeuser", $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
-            ->subject("test");
-            $message->from("mangaletamang65@gmail.com","tetet");
-});
-            Mail::to("mangalewiba@gmail.com")->send(new NoticeUserMail(json_encode($details)));
-            // Mail::to($request->email)->send(new NoticeAdminMail(json_encode($details)));
-            dd("mail send");
+            // Mail::send("email.noticeuser", $details, function($message) use ($to_name, $to_email) {
+            //     $message->to($to_email, $to_name)
+            //     ->subject("Booking Confirmation");
+            //     $message->from("mangaletamang65@gmail.com","tetet");
+            // });
+            Mail::to($request->email)->send(new NoticeUserMail(json_encode($details)));
+            Mail::to('chandradong@gmail.com')->send(new NoticeAdminMail(json_encode($details)));
+
         } catch (Exception $e) {
             dd($e);
         }

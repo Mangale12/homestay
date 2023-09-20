@@ -53,7 +53,10 @@ class MediaController extends Controller
         }
         return back()->with('message',"Image Deleted successfully.");
     }
-
+    public function videoIndex(){
+        $videoes = Video::get();
+        return view('admin.video.index',compact('video'));
+    }
     public function createVideo(){
         return view('admin.video.create');
     }
@@ -63,10 +66,47 @@ class MediaController extends Controller
             'name'=>'required',
 
         ]);
+        $videoName = 'no video';
         if($request->hasFile('video')){
             $video = $request->file('video');
             $videoName = time().'.'.$video->extension();
             $video->move(public_path('video'),$videoName);
         }
+        Video::create([
+            'video'=>$videoName,
+            'name'=>$request->name,
+            'description'=>$request->description,
+        ]);
+        return redirect()->route('video.index');
+    }
+    public function videoEdit(Video $video){
+        return view('admin.video.edit',compact('video'));
+    }
+    public function videoUpdate(Request $request, Video $video){
+        $request->validate([
+            'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            'name'=>'required',
+
+        ]);
+        $videoName = $video->video;
+        if($request->hasFile('video')){
+            $video = $request->file('video');
+            $videoName = time().'.'.$video->extension();
+            $video->move(public_path('video'),$videoName);
+        }
+        $video->name = $request->video;
+        $video->description = $request->description;
+        $video->video = $videoName;
+        $video->update();
+        return redirect()->route('video.index')->with(['message'=>'Video Update Success fully']);
+    }
+    public function videoDelete(Video $video){
+        if($video->video != null){
+            if(file_exists(public_path('video/'.$video->video))){
+                File::delete(public_path('video/'.$video->video));
+            }
+        }
+        $video->delete();
+        return redirect()->route('video.index')->with(['message'=>"Video deleted"]);
     }
 }

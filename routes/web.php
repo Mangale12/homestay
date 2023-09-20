@@ -138,6 +138,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
         Route::resource('food',FoodController::class);
         Route::get('subscribers',[HomeController::class,'subscriber'])->name('admin.subscriber');
+        Route::get('video/create',[MediaController::class, 'videoCreate'])->name('video.create');
+        Route::get('video',[MediaController::class, 'videoIndex'])->name('video.index');
+        Route::get('video/store',[MediaController::class, 'videoStore'])->name('video.store');
+        Route::get('video/edit/{id}',[MediaController::class, 'videoEdit'])->name('video.edit');
+        Route::get('video/update/{id}',[MediaController::class, 'videoUpdate'])->name('video.update');
+        Route::get('video/delete/{id}',[MediaController::class, 'videoDelete'])->name('video.delete');
+
 
     });
 
