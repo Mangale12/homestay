@@ -206,7 +206,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{route('medias.index')}}" class="nav-link {{Route::is('medias.index','medias.create','medias.edit') ? 'active' : ''}}">
+                <a href="{{route('medias')}}" class="nav-link {{Route::is('medias','medias.create','medias.edit') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Image</p>
                 </a>

@@ -165,4 +165,9 @@ class FrontendController extends Controller
         $videos = Video::get();
         return view('frontend.video',compact('setting','socialmedia','videos'));
     }
+    public function trekks(){
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        return view('frontend.tour-and-treks',compact('setting','socialmedia'));
+    }
 }

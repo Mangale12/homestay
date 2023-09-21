@@ -6,9 +6,9 @@
         display: none;
     }
 </style>
-<form action="{{route('homebanner.update',$homebanner->id)}}" method="post" enctype="multipart/form-data">
+{{-- {{ dd($video) }} --}}
+<form action="{{route('video.update',$video->id)}}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('put')
     <div class="row">
         <div class="col-lg-9 col-md-12">
             <section class="content">
@@ -17,9 +17,9 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Add Home Banner</h3>
-                                    <a href="{{route('homebanner.index')}}" class="btn btn-success btn-sm float-right">View
-                                        Home Banner</a>
+                                    <h3 class="card-title">Update Video</h3>
+                                    <a href="{{route('video.index')}}" class="btn btn-success btn-sm float-right">View
+                                        Video</a>
                                 </div>
                                 <div class="col-md-12 p-0">
                                     @include('admin.includes.message')
@@ -33,7 +33,7 @@
                                                 <label for="headline"> Title</label> <span class="text-danger"> *
                                                 </span>
                                                 <input type="text" class="form-control" name="title"
-                                                    value="{{old($homebanner->title,'title')}}">
+                                                    value="{{old($video->name,'title')}}">
                                             </div>
                                         </div>
                                     </div>
@@ -42,27 +42,23 @@
                                             <div class="form-group">
                                                 <label for="kicker">Description</label>
                                                 <input type="text" class="form-control" name="description"
-                                                    value="{{old($homebanner->description, 'description')}}">
+                                                    value="{{old($video->description, 'description')}}">
                                             </div>
                                         </div>
                                     </div>
 
 
                                     <div class="row">
-
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="head_img">New Image</label>
-                                                <div id="featured_img" class="row">
-                                                    <div class="col-md-6 remove">
-                                                        <div class="img-upload-preview">
-                                                            <img loading="lazy"  src="{{ asset('public/uploads/homebanner/'.$homebanner->banner_img) }}" class="img-responsive" style="max-height:150px;">
+                                                <label for="kicker">Video</label>
+                                                {{-- <textarea name="description" class="form-control"></textarea> --}}
+                                                <input type="file" name="video" class="form-control file_multi_video">
+                                                <video width="500" height="240" controls autoplay id="video-tag">
+                                                    <source src="{{ asset('public/video/'.$video->video) }}" type="video/mp4" id="video_here">
 
-                                                            <button type="button" class="btn btn-danger close-btn remove-files"><i class="fa fa-times"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    Your browser does not support the video tag.
+                                                  </video>
                                             </div>
                                         </div>
                                     </div>
@@ -329,7 +325,12 @@
         }
 
     });
-
+    $(document).on("change", ".file_multi_video", function(evt) {
+    $('#video-tag').css("display", "block");
+  var $source = $('#video_here');
+  $source[0].src = URL.createObjectURL(this.files[0]);
+  $source.parent()[0].load();
+});
 </script>
 @endsection
 

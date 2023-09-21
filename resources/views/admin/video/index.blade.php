@@ -53,7 +53,11 @@
                                             @if(empty($video->video))
                                                 <img src="{{asset('public/category/no-image.png')}}" alt="no-image" width="80px" height="80px" class="img-fluid">
                                             @else
-                                                <img src="{{asset('public/uploads/homebanner/'.$homebanner->banner_img)}}" alt="{{$homebanner->title}}" width="80px" height="80px" class="img-fluid">
+                                            <video width="150" height="150" controls autoplay id="video-tag">
+                                                <source src="{{ asset('public/video/'.$video->video) }}" type="video/mp4" id="video_here">
+
+                                                Your browser does not support the video tag.
+                                              </video>
                                             @endif
                                         </td>
                                         <td>

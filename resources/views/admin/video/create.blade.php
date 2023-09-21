@@ -135,16 +135,27 @@
                                         </div>
                                     </div>
 
-
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="head_img">New Image</label>
-                                                <div id="featured_img" class="row">
-                                                </div>
+                                                <label for="kicker">Video</label>
+                                                {{-- <textarea name="description" class="form-control"></textarea> --}}
+                                                <input type="file" name="video" class="form-control file_multi_video">
+                                                <video width="500" height="240" controls autoplay style="display: none" id="video-tag">
+                                                    <source src="movie.mp4" type="video/mp4" id="video_here">
+
+                                                    Your browser does not support the video tag.
+                                                  </video>
                                             </div>
                                         </div>
                                     </div>
+{{-- <style>
+    .video_input_container{
+        position: relative !important;
+        right: -17rem !important;
+        top: -56rem !important;
+    }
+</style> --}}
 
 
                                     <hr>
@@ -230,6 +241,7 @@
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function (e) {
+
         let featured_img;
         $('.featured_img').on('change', function() {
             featured_image  = $(this).val();
@@ -408,149 +420,13 @@
         }
 
     });
-
+$(document).on("change", ".file_multi_video", function(evt) {
+    $('#video-tag').css("display", "block");
+  var $source = $('#video_here');
+  $source[0].src = URL.createObjectURL(this.files[0]);
+  $source.parent()[0].load();
+});
 </script>
 
-{{-- video Script Start  --}}
-<script>
-    var appNode = document.createElement('div');
-appNode.id = 'app';
-document.body.appendChild(appNode);
 
-function genId(len)
-{
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < len; i++)
-  text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
-}
-
-class VideoInput extends React.Component {
-  constructor(props) {super(props);
-    this.state = { inputId: genId(20), inputKey: 0 };
-    this.onChange = this.onChange.bind(this);
-    this.reader = new FileReader();
-    this.reader.onloadend = e => {
-      console.log(e.target.result);
-      const arrayBuffer = e.target.result;
-      const blob = new Blob([arrayBuffer], { type: "video/mp4" });
-      console.log(blob);
-      var x;
-      this.setState({ videoUrl: (console.log(x = URL.createObjectURL(blob)), x), isLoading: false });
-    };
-  }
-
-  componentWillUpdate(newProps, newState) {
-    const hasNewFile = newState.file !== this.state.file;
-    const hasNewThumb = newState.thumbnail !== this.state.thumbnail;
-    if (hasNewThumb && this.state.thumbnail)
-    URL.revokeObjectURL(this.state.thumbnail);
-    if (hasNewFile || hasNewThumb)
-    this.props.onUpdate && this.props.onUpdate(newState.file, newState.thumbnail);
-  }
-
-  onChange(e) {
-    console.log('e.target:', e.target);
-    console.log('e.target.data.key:', e.target.getAttribute('data-key'));
-    const file = e.target.files[0];
-    this.setState({ file: file });
-    if (file) {
-      this.setState({ isLoading: true, inputKey: this.state.inputKey + 1, thumbnail: null });
-      this.reader.readAsArrayBuffer(file);
-    }
-  }
-
-  canGrabThumbnail() {
-    return !!this.state.videoUrl && !this.state.isLoading && this.refs.video && this.refs.video.videoHeight && this.refs.video.videoWidth;
-  }
-
-  grabThumb() {
-    console.log(this.canGrabThumbnail());
-    if (this.canGrabThumbnail()) {
-      const canvas = document.createElement('canvas');
-      canvas.height = this.refs.video.videoHeight;
-      canvas.width = this.refs.video.videoWidth;
-
-      const context = canvas.getContext('2d');
-      context.drawImage(this.refs.video, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob(blob => {
-        this.setState({ thumbnail: URL.createObjectURL(blob) });
-      }, 'image/png', 1);
-    }
-  }
-
-  render() {
-    const thumbnailButtonClassList = ['thumbnail_button'];
-    if (!this.canGrabThumbnail()) thumbnailButtonClassList.push('disabled');
-
-    return /*#__PURE__*/React.createElement("div", { className: "video_input_container" }, /*#__PURE__*/
-    React.createElement("div", { className: "video_input" },
-
-    // A little hack I've just come up with to preserve a file input's selection when the file select dialog is cancelled without managing inputs manually – taking advantage of react keys to avoid doing so.
-    // The latter input is the only one I need in this case, but keeping the former around leaves me the convenient method of inspecting the file through selection of the input in the inspector (`$0.files[0]`).
-    [/*#__PURE__*/
-    React.createElement("input", { key: this.state.inputKey, type: "file" }), /*#__PURE__*/
-    React.createElement("input", { key: this.state.inputKey + 1, id: this.state.inputId, type: "file", accept: "video/mp4", onChange: this.onChange })],
-
-
-
-    this.state.videoUrl && /*#__PURE__*/
-
-    React.createElement("video", { ref: "video", src: this.state.videoUrl, controls: true, autoplay: true }),
-
-
-    this.state.isLoading ? /*#__PURE__*/
-
-    React.createElement("div", { class: "loading" }, "Loading video") : /*#__PURE__*/
-
-    React.createElement("label", { htmlFor: this.state.inputId, className: "input_label" },
-    this.props.children),
-
-
-
-    this.state.thumbnail && /*#__PURE__*/
-    React.createElement("img", { className: "thumbnail", src: this.state.thumbnail })), /*#__PURE__*/
-
-
-    React.createElement("div", { className: thumbnailButtonClassList.join(' '), onClick: this.grabThumb.bind(this) }, "Grab Thumb"));
-
-  }}
-
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  onUpdate(file, thumbnail) {
-    this.setState({ file, thumbnail });
-  }
-
-  render() {
-    return /*#__PURE__*/(
-      React.createElement(VideoInput, { onUpdate: this.onUpdate.bind(this) },
-
-      this.state.file ? /*#__PURE__*/
-
-      React.createElement("div", { className: "label_container reselect" }, /*#__PURE__*/
-      React.createElement("div", { className: "label" }, "Change Video")) : /*#__PURE__*/
-
-
-      React.createElement("div", { className: "label_container" }, /*#__PURE__*/
-      React.createElement("div", { className: "label" }, "Select a Video"))));
-
-
-
-
-  }}
-
-
-ReactDOM.render( /*#__PURE__*/
-React.createElement(App, null),
-appNode);
-</script>
 @endsection

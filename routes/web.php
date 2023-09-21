@@ -138,9 +138,9 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
         Route::resource('food',FoodController::class);
         Route::get('subscribers',[HomeController::class,'subscriber'])->name('admin.subscriber');
-        Route::get('video/create',[MediaController::class, 'videoCreate'])->name('video.create');
+        Route::get('video/create',[MediaController::class, 'createVideo'])->name('video.create');
         Route::get('video',[MediaController::class, 'videoIndex'])->name('video.index');
-        Route::get('video/store',[MediaController::class, 'videoStore'])->name('video.store');
+        Route::post('video/store',[MediaController::class, 'storeVideo'])->name('video.store');
         Route::get('video/edit/{id}',[MediaController::class, 'videoEdit'])->name('video.edit');
         Route::get('video/update/{id}',[MediaController::class, 'videoUpdate'])->name('video.update');
         Route::get('video/delete/{id}',[MediaController::class, 'videoDelete'])->name('video.delete');
@@ -259,6 +259,7 @@ Route::get('/food',[FrontendController::class,'food'])->name('frontend.food');
 Route::get('/gallery',[FrontendController::class,'gallery'])->name('frontend.gallery');
 Route::get('/gallery/video',[FrontendController::class,'videoGallery'])->name('frontend.video');
 Route::post('/subscribers',[FrontendController::class,'subscriber'])->name('frontend.subscriber');
+Route::get('/trekks',[FrontendController::class,'trekks'])->name('frontend.terkks');
 
 
 Route::post('inquiry/store', [HomeController::class, 'inquiryStore'])->name('inquery.store');

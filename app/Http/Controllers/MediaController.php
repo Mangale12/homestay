@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Media;
 use App\Models\Room;
 use App\Models\Category;
+use App\Models\Video;
 
 class MediaController extends Controller
 {
@@ -55,12 +56,13 @@ class MediaController extends Controller
     }
     public function videoIndex(){
         $videoes = Video::get();
-        return view('admin.video.index',compact('video'));
+        return view('admin.video.index',compact('videoes'));
     }
     public function createVideo(){
         return view('admin.video.create');
     }
     public function storeVideo(Request $request){
+        // dd($request->all());
         $request->validate([
             'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
             'name'=>'required',
@@ -70,7 +72,7 @@ class MediaController extends Controller
         if($request->hasFile('video')){
             $video = $request->file('video');
             $videoName = time().'.'.$video->extension();
-            $video->move(public_path('video'),$videoName);
+            $video->move(public_path('video/'),$videoName);
         }
         Video::create([
             'video'=>$videoName,
@@ -79,7 +81,8 @@ class MediaController extends Controller
         ]);
         return redirect()->route('video.index');
     }
-    public function videoEdit(Video $video){
+    public function videoEdit($id){
+        $video = Video::find($id)->first();
         return view('admin.video.edit',compact('video'));
     }
     public function videoUpdate(Request $request, Video $video){

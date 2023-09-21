@@ -9,6 +9,7 @@ use App\Mail\NoticeUserMail;
 use App\Mail\NoticeAdminMail;
 use App\Models\Subscriber;
 use App\Models\SiteSetting;
+use App\Models\Video;
 class HomeController extends Controller
 {
 
