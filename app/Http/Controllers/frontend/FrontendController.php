@@ -27,7 +27,7 @@ class FrontendController extends Controller
     public function index(){
         $homebanners = HomeBanner::get();
         // dd($homebanners);
-        $medias = Media::get();
+        $medias = Media::take(4);
         $rooms = Room::get();
         $services = Service::get();
         $testimonials = Testimonial::get();
@@ -36,7 +36,7 @@ class FrontendController extends Controller
         $headline_no=$setting->headline_no;
         $cat_sec=CategorySection::where('status',1)->orderBy('section_order', 'asc')->get();
         $partner=Ad::first();
-        $foods = Food::get();
+        $foods = Food::take(4);
         $headline_news=Post::where(function($q){
             $q->where('status', 'published')
               ->orWhere('status', 'drafts');

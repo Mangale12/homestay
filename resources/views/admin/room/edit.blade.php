@@ -65,13 +65,16 @@
                                             <div class="form-group">
                                                 <label for="head_img">New Image</label>
                                                 <div id="featured_img" class="row">
+
+                                                    @foreach ($room->image as $image)
                                                     <div class="col-md-6 remove">
                                                         <div class="img-upload-preview">
-                                                            <img loading="lazy"  src="{{ asset('public/uploads/room/'.$room->image) }}" class="img-responsive" style="max-height:150px;">
+                                                            <img loading="lazy"  src="{{ asset('public/uploads/room/'.$image->image) }}" class="img-responsive" style="max-height:150px;">
 
-                                                            <button type="button" class="btn btn-danger close-btn remove-files"><i class="fa fa-times"></i></button>
+                                                            <button type="button" class="btn btn-danger close-btn remove-files" data-id="{{ $image->id }}"><i class="fa fa-times"></i></button>
                                                         </div>
                                                     </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -161,6 +164,17 @@
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function (e) {
+        $('.remove-files').on('click',function(){
+            if(confirm("Image Will be Remove permanently")){
+                $(this).parents(".remove").remove();
+                var image_id = $(this).data('id');
+                $.post('{{ route('roomimage.remove') }}',{_token:'{{ csrf_token() }}',image_id:image_id}, function(data){
+                alert("image deleted");
+                });
+            }
+
+
+        });
         let featured_img;
         $('.featured_img').on('change', function() {
             featured_image  = $(this).val();
@@ -198,8 +212,8 @@
 
         $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#featured_img").spartanMultiImagePicker({
-            fieldName: 'image',
-            maxCount: 1,
+            fieldName: 'image[]',
+            maxCount: 4,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
             groupClassName: 'col-md-12 col-lg-12',

@@ -23,9 +23,11 @@
                     <div class="offset-right-xl-15">
                         <!-- Owl Carousel-->
                         <div class="owl-carousel owl-dots-white" data-items="1" data-dots="true" data-autoplay="true" data-animation-in="fadeIn" data-animation-out="fadeOut">
-                            <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="655" height="496" />
-                            <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="655" height="496" />
-                            <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="655" height="496"/>
+                            @foreach ($room->image as $image)
+                            <img src="{{ asset('public/uploads/room/'.$image->image) }}" alt="" width="655" height="496" />
+                            @endforeach
+                            {{-- <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="655" height="496" />
+                            <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="655" height="496"/> --}}
                         </div>
                     </div>
                 </div>

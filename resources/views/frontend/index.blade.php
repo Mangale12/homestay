@@ -114,11 +114,11 @@
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
                 <div class="oh-desktop">
-                    <div class="owl-custom-nav wow slideInUp" id="owl-custom-nav-1"></div>
+                    <div class="owl-custom-nav wow slideInUp" id="owl-custom-nav-3"></div>
                 </div>
             </div>
             <!-- Owl Carousel-->
-            <div class="owl-carousel owl-services-2" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-margin="30" data-animation-in="fadeIn" data-animation-out="fadeOut" data-autoplay="false" data-navigation-class="#owl-custom-nav-1">
+            <div class="owl-carousel owl-services-2" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-margin="30" data-animation-in="fadeIn" data-animation-out="fadeOut" data-autoplay="false" data-navigation-class="#owl-custom-nav-3">
                 <!-- Services Modern-->
                 @foreach ($foods as $food)
 

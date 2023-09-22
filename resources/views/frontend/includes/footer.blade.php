@@ -1,4 +1,8 @@
  <!-- Page Footer-->
+ @php
+    $mails = explode(',',$setting->email);
+    $contacts = explode(',',$setting->contact);
+@endphp
  <footer class="section footer-corporate footer-corporate-2 context-dark">
     <div class="footer-corporate-inset">
         <div class="container">
@@ -11,13 +15,23 @@
                                 <li>
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                                        <div class="unit-body"><a class="link-phone" href="tel:#">+977 {{ $setting->contact }}</a></div>
+                                        <div class="unit-body">
+                                            @foreach ($contacts as $contact)
+                                            <a class="link-phone" href="tel:{{ $contact }}">{{ $contact }} , </a>
+                                            @endforeach
+
+                                        </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-envelope"></span></div>
-                                        <div class="unit-body"><a class="link-aemail" href="mailto:#">{{ $setting->email }}</a></div>
+
+                                        <div class="unit-body">
+                                            @foreach ($mails as $mail)
+                                            <a class="link-aemail" href="mailto:{{ $mail }}">{{ $mail }} , </a>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </li>
                                 <li>

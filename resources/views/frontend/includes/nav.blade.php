@@ -33,7 +33,7 @@
                                         $contact = explode(',',$setting->contact) ;
 
                                     @endphp
-                                    <div class="unit-body"><a class="link-phone" href="tel:#">{{ $contact[0] }}</a></div>
+                                    <div class="unit-body"><a class="link-phone" href="tel:{{ $contact[0] }}">{{ $contact[0] }}</a></div>
                                 </div>
                             </li>
                         {{-- </ul><a class="button button-md button-ujarak button-default-outline" href="#">Get in touch</a> --}}

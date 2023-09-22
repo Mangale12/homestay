@@ -126,6 +126,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
         Route::resource('room', RoomController::class);
         Route::get('room/delete/{id}',[RoomController::class,'delete'])->name('rooms.delete');
+        Route::post('room/image',[RoomController::class, 'removeImage'])->name('roomimage.remove');
 
         Route::resource('service', ServiceController::class);
         Route::get('service/delete/{id}',[ServiceController::class, 'delete'])->name('services.delete');

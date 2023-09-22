@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\RoomImage;
 
 class RoomController extends Controller
 {
@@ -18,20 +19,25 @@ class RoomController extends Controller
         $request->validate([
             'type'=>"required",
             'image'=>'required',
-            'price'=>'required|numeric|digits:4',
+            'price'=>'required|numeric',
         ]);
-        $image_name = null;
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $image_name = time().'.'.$image->extension();
-            $image->move(public_path('uploads/room/'),$image_name);
-        }
-        Room::create([
+        $room = Room::create([
             'type'=>$request->type,
             'price'=>$request->price,
             'description'=>$request->description,
-            'image'=>$image_name,
         ]);
+        if($request->hasFile('image')){
+            foreach($request->file('image') as $key=>$image){
+                $image_name = time().$key.'.'.$image->extension();
+                $image->move(public_path('uploads/room/'),$image_name);
+                RoomImage::create([
+                    'room'=>$room->id,
+                    'image'=>$image_name,
+                ]);
+            }
+
+        }
+
         return redirect()->route('room.index')->with(['message'=>"new Room added Succefully !!"]);
     }
     public function edit(Room $room){
@@ -42,20 +48,32 @@ class RoomController extends Controller
             'type'=>"required",
             'price'=>'required|numeric',
         ]);
-
         if($request->hasFile('image')){
-            $image = $request->file('image');
-            $image_name = time().'.'.$image->extension();
-            $image->move(public_path('uploads/room/'),$image_name);
-            $room->image = $image_name;
-        }
-        else{
-            $room->image = $room->image;
+            foreach($request->file('image') as $key=>$image){
+                $image_name = time().$key.'.'.$image->extension();
+                $image->move(public_path('uploads/room/'),$image_name);
+                RoomImage::create([
+                    'image'=>$image_name,
+                    'room_id'=>$room->id,
+                ]);
+            }
+
         }
         $room->type = $request->type;
         $room->description = $request->description;
         $room->price = $request->price;
         $room->update();
         return redirect()->route('room.index')->with(['message'=>'Room Updated ']);
+    }
+
+    public function removeImage(Request $request){
+        $image = RoomImage::find($request->image_id);
+        if($image->image != null){
+            if(file_exists(public_path('uploads/room/'.$image->image))){
+                unlink(public_path('uploads/room/'.$image->image));
+            }
+        }
+        $image->delete();
+        return response(['message'=>'Image Deleted']);
     }
 }

@@ -11,4 +11,8 @@ class Room extends Model
     protected $fillable = [
         'type','price','image','description',
     ];
+
+    public function image(){
+        return $this->hasMany(RoomImage::class);
+    }
 }

@@ -187,8 +187,8 @@
 
         $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#featured_img").spartanMultiImagePicker({
-            fieldName: 'image',
-            maxCount: 1,
+            fieldName: 'image[]',
+            maxCount: 5,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
             groupClassName: 'col-md-12 col-lg-12',
