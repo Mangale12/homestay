@@ -92,7 +92,7 @@
                         @endif
                     </a>
                     <div class="services-modern-content">
-                        <h5 class="services-modern-title"><a href="single-room.html">{{ $room->type }}</a></h5>
+                        <h5 class="services-modern-title"><a href="{{ route('frontend.room_details',$room->id) }}">{{ $room->type }}</a></h5>
                         <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">US$ {{ $room->price }}</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
                     </div>
                 </article>
