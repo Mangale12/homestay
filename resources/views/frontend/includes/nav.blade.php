@@ -81,7 +81,7 @@
                                 </ul>
                             </li> --}}
                             <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Contact Us</a>
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Trekks & Tours</a>
+                                <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.terkks') }}">Treks & Tours</a>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.food') }}">Food Gallery</a>
                             </li>
 

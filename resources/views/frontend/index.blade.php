@@ -1,5 +1,32 @@
 @extends('frontend.layouts.app')
 @section('content')
+<style>
+    #background-video {
+  width: 100vw;
+  height: 60vh;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -10000;
+}
+@media(max-width: 420px) {
+    .video-container{
+        height: 30vh;
+    }
+    #background-video{
+        height: 40vh;
+    }
+}
+@media(min-width: 420px) {
+    .video-container{
+        height: 60vh;
+    }
+}
+
+</style>
 <div class="ie-panel"><a href="https://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
 {{-- <div class="preloader">
     <div class="preloader-body">
@@ -11,23 +38,28 @@
     <!-- Page Header-->
    @include('frontend.includes.nav')
     <!-- Swiper-->
-    <section class="section swiper-container swiper-slider swiper-slider-tara" data-loop="true" data-autoplay="5000" data-simulate-touch="true" data-nav="false" data-slide-effect="fade">
+    <section class="section swiper-container video-container" data-loop="true" data-simulate-touch="true" data-nav="false" data-slide-effect="fade">
+        <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg" height="800">
+            <source src="{{ asset('public/video/1695312305.mp4') }}" type="video/mp4">
+            </video>
         <div class="swiper-wrapper text-center context-dark">
-            @foreach($homebanners as $key => $homebanner)
-            <div class="swiper-slide" data-slide-bg="{{ asset('public/uploads/homebanner/'.$homebanner->banner_img) }}">
+            {{-- @foreach($homebanners as $key => $homebanner) --}}
+            <div class="swiper-slide" data-slide-bg="">
                 <div class="swiper-slide-caption section-md">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-sm-8 col-xxl-7">
-                                <h6 class="swiper-subtitle" data-caption-animate="fadeInRight" data-caption-delay="300">{{ $homebanner->title }}</h6>
-                                <h2 class="oh swiper-title"><span class="d-block" data-caption-animate="slideInLeft" data-caption-delay="0">{{ $homebanner->description }}</span></h2><a class="button button-primary button-ujarak" href="#" data-caption-animate="fadeInRight"
-                                    data-caption-delay="300">Book now</a>
+                                <h6 class="swiper-subtitle" data-caption-animate="fadeInRight" data-caption-delay="300">Welcome to</h6>
+                                <h2 class="oh swiper-title"><span class="d-block" data-caption-animate="slideInLeft" data-caption-delay="0">Nepal Bed & Breakfast</span>
+                                </h2>
+                                <h4 class="oh swiper-title"><span class="d-block" data-caption-animate="slideInLeft" data-caption-delay="0" style="color: orange">Where Every Guest is Family</span>
+                                </h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
+            {{-- @endforeach --}}
         </div>
         <!-- Swiper Pagination-->
         <div class="swiper-pagination"></div>
@@ -72,11 +104,12 @@
     </section>
 
     {{-- popular Food  --}}
+
     <section class="section section-xl bg-default">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left heading-panel-left-1">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft"></span></h1>
+                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft"></span>Our Popular Food</h1>
                     <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Food Gallery</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>

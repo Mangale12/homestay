@@ -25,9 +25,9 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{count(\App\Models\SubCategory::all())}}</h3>
+                <h3>{{count(\App\Models\Room::all())}}</h3>
 
-                <p>Sub Category</p>
+                <p>Rooms</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -40,9 +40,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{count(\App\Models\User::all())}}</h3>
+                <h3>{{count(\App\Models\Video::all())}}</h3>
 
-                <p>Users</p>
+                <p>Video</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -55,9 +55,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{count(\App\Models\Post::all())}}</h3>
+                <h3>{{count(\App\Models\Inquiry::all())}}</h3>
 
-                <p>Posts</p>
+                <p>Inquiry</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -74,4 +74,3 @@
     <!-- /.content -->
   </div>
 @endsection
-    
