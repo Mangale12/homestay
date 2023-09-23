@@ -36,15 +36,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="row">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="kicker">Description</label>
-                                                <input type="text" class="form-control" name="description"
-                                                    value="{{old('description')}}">
+                                                <select name="category" id="category" class="form-control">
+                                                    <option value="" selected disabled>Select Food Category</option>
+                                                    @foreach($categories as $key => $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
 
                                     <div class="row">

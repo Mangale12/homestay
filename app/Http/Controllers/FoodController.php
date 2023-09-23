@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Models\FoodCategory;
 
 class FoodController extends Controller
 {
@@ -12,7 +13,8 @@ class FoodController extends Controller
         return view('admin.food.index',compact('foods'));
     }
     public function create(){
-        return view('admin.food.create');
+        $categories = FoodCategory::get();
+        return view('admin.food.create', compact('categories'));
     }
 
     public function store(Request $request){
@@ -28,17 +30,18 @@ class FoodController extends Controller
                 'name'=>$request->name,
                 'image'=>$image_name,
                 'price'=>$request->price,
+                'food_category_id'=>$request->category,
             ]);
         }
         return redirect()->route('food.index')->with(['message'=>'Food Added']);
     }
     public function edit(Food $food){
-        return view('admin.food.edit',compact('food'));
+        $categories = FoodCategory::get();
+        return view('admin.food.edit',compact('food','categories'));
     }
     public function update(Request $request, $id){
         $request->validate([
             'name'=>'required',
-
             'price'=>'numeric',
         ]);
         $food = Food::findOrFail($id);
@@ -51,11 +54,14 @@ class FoodController extends Controller
         $food->name = $request->name;
         $food->image = $image_name;
         $food->price = $request->price;
+        $food->category = $request->category;
         $food->update();
         return redirect()->route('food.index')->with(['message'=>'Food Updated']);
 
     }
-    public function destroy(Food $food){
+    public function destroy($id){
+        dd("44");
+        $food = Food::find($id)->first();
         if($food->image != null){
             if(file_exists(public_path('uploads/food/'.$food->image))){
                 unlink(public_path('uploads/food/'.$food->image));

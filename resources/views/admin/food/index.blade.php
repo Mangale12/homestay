@@ -30,7 +30,7 @@
                                     <th> # </th>
                                     <th>Image</th>
                                     <th>Food Name </th>
-                                    <th>Price</th>
+                                    <th>Category</th>
                                     <th>Action</th>
                                     {{-- <th>Pdf File</th>
                                     <th>Sub Category</th>
@@ -62,7 +62,8 @@
 
 
                                         <td>
-                                            {{$food->price}}
+                                            {{-- {{ dd($food->category->name) }} --}}
+                                            {{$food->category->name}}
                                         </td>
                                         <form action="{{route('food.destroy',$food->id)}}" method="post">
                                             @csrf
