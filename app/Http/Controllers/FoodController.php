@@ -54,7 +54,7 @@ class FoodController extends Controller
         $food->name = $request->name;
         $food->image = $image_name;
         $food->price = $request->price;
-        $food->category = $request->category;
+        $food->food_category_id = $request->category;
         $food->update();
         return redirect()->route('food.index')->with(['message'=>'Food Updated']);
 
