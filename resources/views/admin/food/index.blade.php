@@ -63,7 +63,10 @@
 
                                         <td>
                                             {{-- {{ dd($food->category->name) }} --}}
+                                            @if($food->food_category_id != null)
                                             {{$food->category->name}}
+                                            @endif
+
                                         </td>
                                         <form action="{{route('food.destroy',$food->id)}}" method="post">
                                             @csrf
