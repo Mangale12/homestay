@@ -33,7 +33,7 @@
                                                 <label for="headline"> Type</label> <span class="text-danger"> *
                                                 </span>
                                                 <input type="text" class="form-control" name="type"
-                                                    value="{{old($room->type,'type')}}">
+                                                    value="{{old('type',$room->type)}}">
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                                 <label for="headline"> Price</label> <span class="text-danger"> *
                                                 </span>
                                                 <input type="text" class="form-control" name="price"
-                                                    value="{{$room->price}}">
+                                                    value="{{old('price',$room->price)}}">
                                             </div>
                                         </div>
                                     </div>
