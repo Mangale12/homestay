@@ -21,7 +21,7 @@
             <div class="col-md-10 col-lg-5 col-xl-6"><img src="{{ asset('public/images/about-1-519x564.jpg') }}" alt="" width="519" height="564" />
             </div>
             <div class="col-md-10 col-lg-7 col-xl-6">
-                <h1 class="text-spacing-25 font-weight-normal title-opacity-9">Who We Are</h1>
+                {{-- <h1 class="text-spacing-25 font-weight-normal title-opacity-9">Who We Are</h1> --}}
                 <h5>Welcome to Nepal Bed and Breakfast Home Stay with Tamang family.</h5>
                 <p>Chandra, Pabitra and family welcome you to our warm and friendly family homestay located in Rani Ban (Queens Forest), 4.6 kms from Thamel.  Beautiful and peaceful, with plenty of fresh air, our home is very close to the forest, with scenic views of the surrounding hills.  Nepal’s most famous, historical Swayambhunath (Monkey)Temple is just 1.5 km walk from our home.
                 </p>

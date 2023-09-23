@@ -102,6 +102,12 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('/sub-categories/update-status',[SubCategoryController::class,'update_status'])->name('sub-category.update_status');
 
         Route::resource('/categories', CategoryController::class);
+        Route::get('category/food/create',[CategoryController::class, 'food_create'])->name('foodcategories.create');
+        Route::get('category/food',[CategoryController::class, 'food_index'])->name('foodcategories.index');
+        Route::post('category/create',[CategoryController::class, 'food_store'])->name('foodcategories.store');
+        Route::get('category/edit/{id}',[CategoryController::class, 'food_edit'])->name('foodcategories.edit');
+        Route::post('category/update/{id}',[CategoryController::class, 'food_update'])->name('foodcategories.update');
+        Route::delete('category/delete/{id}',[CategoryController::class, 'food_destroy'])->name('foodcategories.delete');
         Route::resource('/sub-categories', SubCategoryController::class);
         Route::resource('/pages', PageController::class);
 
@@ -120,7 +126,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::post('/medias/store',[MediaController::class, 'store'])->name('medias.store');
 
 
-        //home stay start
+        //home stay yogi bolta haistart
         Route::resource('homebanner', HomebannerController::class);
         Route::get('homebanner/delete/{id}',[HomebannerController::class, 'delete'])->name('homebanners.delete');
 

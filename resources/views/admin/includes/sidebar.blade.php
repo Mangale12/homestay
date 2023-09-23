@@ -120,14 +120,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('categories.index') }}" class="nav-link {{Route::is('categories.index','categories.create','categories.edit') ? 'active' : ''}}">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Category
               </p>
             </a>
-          </li>
+          </li> --}}
 
 
           <li class="nav-item">
@@ -149,6 +149,32 @@
                 <a href="{{route('settings.index')}}" class="nav-link {{ Route::is('settings.index') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>General Settings</p>
+                </a>
+              </li>
+
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ Route::is('foodcategories.index','foodcategories.create','foodcategories.edit','categories.index','categories.edit','categories.create') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Category
+                <i class="fas fa-angle-right right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('categories.index')}}" class="nav-link {{ Route::is('categories.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Room Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('foodcategories.index')}}" class="nav-link {{ Route::is('foodcategories.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Food Category</p>
                 </a>
               </li>
 
@@ -181,6 +207,7 @@
               </li> --}}
             </ul>
           </li>
+
           <li class="nav-item">
             <a href="{{route('admin.subscriber')}}" class="nav-link {{ Route::is('admin.subscriber') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
