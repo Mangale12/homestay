@@ -44,12 +44,17 @@
                             </thead>
                             <tbody>
                                 @if(count($rooms)>0)
-                                    @foreach ($rooms as $room)
+                                {{-- @php
+                                    dd(count($rooms[1]->image))
+                                @endphp --}}
+                                    @foreach ($rooms as $key =>$room)
                                     <tr>
                                         {{-- <td><input type="checkbox" class="sub_chk" name="posts_id[{{$post->id}}]" value="{{$post->id}}"></td> --}}
                                         <td> {{$loop->iteration}} </td>
                                         <td>
-                                            @if(empty($room->image))
+
+                                            {{-- {{ dd(count($room->image)) }} --}}
+                                            @if(count($room->image)<1)
                                                 <img src="{{asset('public/category/no-image.png')}}" alt="no-image" width="80px" height="80px" class="img-fluid">
                                             @else
                                                 <img src="{{asset('public/uploads/room/'.$room->image[0]->image)}}" alt="{{$room->type}}" width="80px" height="80px" class="img-fluid">

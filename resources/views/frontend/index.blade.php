@@ -85,7 +85,7 @@
 
                 <article class="services-modern">
                     <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
-                        @if(!empty($room->image))
+                        @if(count($room->image)>0)
                         @if(file_exists(public_path('uploads/room/'.$room->image[0]->image)))
                         <img src="{{ asset('public/uploads/room/'.$room->image[0]->image) }}" alt="" width="270" height="415"/>
                         @endif
