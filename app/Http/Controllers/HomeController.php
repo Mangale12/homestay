@@ -39,6 +39,7 @@ class HomeController extends Controller
             'children'=>$request->children,
             'pickup'=>$request->pickup,
             'arrival_date'=>$request->arrival_date,
+            'departure_date'=>$request->departure_date,
             'message'=>$request->message,
             'status'=>0,
         ];

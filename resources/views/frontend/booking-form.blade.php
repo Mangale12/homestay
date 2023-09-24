@@ -53,6 +53,12 @@
                                                 <label class="form-label" for="Arrival_date">Arrival Date</label>
 
                                             </div>
+                                            <div class="form-wrap">
+                                                <input class="form-input" id="departure_date" type="text" name="departure_date" value="{{ old('departure_date') }}" data-constraints="@Required" onfocus="this.type = 'date'" onblur="this.type='text'">
+
+                                                <label class="form-label" for="departure_date">Departure Date</label>
+
+                                            </div>
 
                                             <div class="form-wrap">
                                                 <select class="form-input" id="Pick-up" name="pickup" data-constraints="@Required" data-placeholder="Airport Pickup">
