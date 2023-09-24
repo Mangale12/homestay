@@ -24,9 +24,9 @@
         <div class="isotope-filters isotope-filters-horizontal">
             <button class="isotope-filters-toggle button button-md button-icon button-icon-right button-default-outline button-wapasha" data-custom-toggle="#isotope-3" data-custom-toggle-hide-on-blur="true" data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter</button>
             <ul class="isotope-filters-list" id="isotope-3">
-                <li><a class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery">All</a></li>
+                <li class="category-all"><a class="{{ request('category') ? '' : 'active' }}" href="{{ route('frontend.gallery') }}" data-isotope-filter="*" data-isotope-group="gallery">All</a></li>
                 @foreach ($categories as $category)
-                <li class="category" data-id="{{ $category->slug }}"><a href="{{ url('gallery') }} ? category={{ $category->slug }}" data-isotope-filter="Type 1" data-isotope-group="gallery">{{ $category->name }}</a></li>
+                <li class="category" data-id="{{ $category->slug }}"><a class="{{ request('category') == $category->slug ? 'active' : '' }}" href="{{ url('gallery') }} ? category={{ $category->slug }}" data-isotope-filter="Type 1" data-isotope-group="gallery">{{ $category->name }}</a></li>
                 @endforeach
 
             </ul>
@@ -61,6 +61,9 @@
         $(".category").click(function(){
             location.href = "{{ url('gallery') }}?category="+$(this).data('id');
         });
+        $('.category-all').click(function(){
+            location.href = "{{ route('frontend.gallery') }}";
+        })
     });
 </script>
 @endsection

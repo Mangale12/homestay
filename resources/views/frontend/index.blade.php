@@ -85,9 +85,9 @@
 
                 <article class="services-modern">
                     <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
-                        @if($room->image != null)
-                        @if(file_exists(public_path('uploads/room/'.$room->image)))
-                        <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="270" height="415"/>
+                        @if(!empty($room->image))
+                        @if(file_exists(public_path('uploads/room/'.$room->image[0]->image)))
+                        <img src="{{ asset('public/uploads/room/'.$room->image[0]->image) }}" alt="" width="270" height="415"/>
                         @endif
                         @endif
                     </a>
@@ -100,6 +100,7 @@
                 <!-- Services Modern-->
 
             </div>
+
         </div>
     </section>
 
@@ -120,11 +121,15 @@
             <!-- Owl Carousel-->
             <div class="owl-carousel owl-services-2" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-margin="30" data-animation-in="fadeIn" data-animation-out="fadeOut" data-autoplay="false" data-navigation-class="#owl-custom-nav-3">
                 <!-- Services Modern-->
+
                 @foreach ($foods as $food)
 
+
                 <article class="services-modern">
+
                     <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
                         @if($food->image != null)
+
                         @if(file_exists(public_path('uploads/food/'.$food->image)))
                         <img src="{{ asset('public/uploads/food/'.$food->image) }}" alt="{{ $food->name }}" width="270" height="415"/>
                         @endif
@@ -136,8 +141,12 @@
                     </div>
                 </article>
                 @endforeach
+
                 <!-- Services Modern-->
 
+            </div>
+            <div class="button-wrap">
+                <a href="{{ route('frontend.food') }}" class="button button-md button-default-outline button-wapasha">Load More</a>
             </div>
         </div>
     </section>
@@ -288,6 +297,9 @@
                 @endforeach
 
 
+            </div>
+            <div class="button-wrap">
+                <a href="{{ route('frontend.gallery') }}" class="button button-md button-default-outline button-wapasha">Load More</a>
             </div>
         </div>
     </section>

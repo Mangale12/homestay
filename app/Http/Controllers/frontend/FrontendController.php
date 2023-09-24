@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\FoodCategory;
 use App\Models\CategorySection;
 use App\Models\Post;
 use App\Models\SiteSetting;
@@ -27,7 +28,7 @@ class FrontendController extends Controller
     public function index(){
         $homebanners = HomeBanner::get();
         // dd($homebanners);
-        $medias = Media::take(4);
+        $medias = Media::take(4)->get();
         $rooms = Room::get();
         $services = Service::get();
         $testimonials = Testimonial::get();
@@ -36,7 +37,7 @@ class FrontendController extends Controller
         $headline_no=$setting->headline_no;
         $cat_sec=CategorySection::where('status',1)->orderBy('section_order', 'asc')->get();
         $partner=Ad::first();
-        $foods = Food::take(4);
+        $foods = Food::take(4)->get();
         $headline_news=Post::where(function($q){
             $q->where('status', 'published')
               ->orWhere('status', 'drafts');
@@ -129,11 +130,18 @@ class FrontendController extends Controller
         $rooms = Room::get();
         return view('frontend.booking-form',compact('socialmedia','setting','rooms','countries'));
     }
-    public function food(){
+    public function food(Request $request){
+        $categories = FoodCategory::get();
+        $food = Food::get();
+        if($request->category){
+            $category = FoodCategory::where('slug',$request->category)->first();
+            // dd($category);
+            $food = Food::where('food_category_id',$category->id)->get();
+        }
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
-        $food = Food::get();
-        return view('frontend.food',compact('socialmedia','setting','food'));
+
+        return view('frontend.food',compact('socialmedia','setting','food','categories'));
     }
     public function gallery(Request $request){
         $setting=SiteSetting::first();

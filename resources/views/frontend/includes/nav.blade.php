@@ -51,17 +51,17 @@
                         </ul>
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
-                            <li class="rd-nav-item active"><a class="rd-nav-link" href="{{ route('home') }}">Home</a>
+                            <li class="rd-nav-item {{ Route::is('home') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route('home') }}">Home</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.about_us') }}">About Us</a>
+                            <li class="rd-nav-item {{ Route::is('frontend.about_us') ? 'active' : '' }}"><a class="rd-nav-link " href="{{ route('frontend.about_us') }}">About Us</a>
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.room') }}">Rooms</a>
+                            <li class="rd-nav-item {{ Route::is('frontend.room') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route('frontend.room') }}">Rooms</a>
                                 <!-- RD Navbar Dropdown-->
                                 {{-- <ul class="rd-menu rd-navbar-dropdown">
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-room.html">Single Room</a></li>
                                 </ul> --}}
                             </li>
-                            <li class="rd-nav-item"><a class="rd-nav-link" >Gallery</a>
+                            <li class="rd-nav-item {{ Route::is('frontend.gallery','frontend.video') ? 'active' : '' }}"><a class="rd-nav-link" >Gallery</a>
                                 <!-- RD Navbar Dropdown-->
                                 <ul class="rd-menu rd-navbar-dropdown">
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ route('frontend.gallery') }}">Image Gallery</a></li>
@@ -80,9 +80,9 @@
                                     <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog-post.html">Blog Post</a></li>
                                 </ul>
                             </li> --}}
-                            <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Contact Us</a>
-                                <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.terkks') }}">Treks & Tours</a>
-                                    <li class="rd-nav-item"><a class="rd-nav-link" href="{{ route('frontend.food') }}">Food Gallery</a>
+                            <li class="rd-nav-item {{ Route::is('frontend.contact_us') ? 'active' : '' }}"><a class="rd-nav-link" href="{{ route('frontend.contact_us') }}">Contact Us</a>
+                                <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.terkks') ? 'active' : '' }}" href="{{ route('frontend.terkks') }}">Treks & Tours</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.food') }}">Food Gallery</a>
                             </li>
 
                         </ul>

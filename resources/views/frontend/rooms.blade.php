@@ -21,8 +21,12 @@
             @foreach($rooms as $key => $room)
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <!-- Services Modern-->
-                <article class="services-modern"><a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
-                    <img src="{{ asset('public/uploads/room/'.$room->image) }}" alt="" width="270" height="415"/></a>
+                <article class="services-modern">
+                    @if(!empty($room->image()->image))
+                    <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
+                        <img src="{{ asset('public/uploads/room/'.$room->image->image) }}" alt="" width="270" height="415"/>
+                    </a>
+                    @endif
                     <div class="services-modern-content">
                         <h5 class="services-modern-title"><a href="{{ route('frontend.room_details',$room->id) }}">{{ $room->type }}</a></h5>
                         <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">{{ $room->price }}</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
