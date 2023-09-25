@@ -142,6 +142,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
         Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquiry.index');
         Route::post('inquiry/view', [HomeController::class, 'inquiryView'])->name('inquiry.view');
+        Route::get('inquiry/delete/{id}', [HomeController::class, 'inquiryDelete'])->name('inquiry.delete');
 
         Route::resource('food',FoodController::class);
         Route::get('subscribers',[HomeController::class,'subscriber'])->name('admin.subscriber');

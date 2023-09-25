@@ -22,10 +22,12 @@
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <!-- Services Modern-->
                 <article class="services-modern">
-                    @if(!empty($room->image()->image))
+                    @if(count($room->image)>0)
+                    @if(file_exists(public_path('uploads/room/'.$room->image[0]->image)))
                     <a class="services-modern-figure" href="{{ route('frontend.room_details',$room->id) }}">
-                        <img src="{{ asset('public/uploads/room/'.$room->image->image) }}" alt="" width="270" height="415"/>
+                        <img src="{{ asset('public/uploads/room/'.$room->image[0]->image) }}" alt="" width="270" height="415"/>
                     </a>
+                    @endif
                     @endif
                     <div class="services-modern-content">
                         <h5 class="services-modern-title"><a href="{{ route('frontend.room_details',$room->id) }}">{{ $room->type }}</a></h5>

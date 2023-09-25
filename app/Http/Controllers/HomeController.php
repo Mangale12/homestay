@@ -74,9 +74,15 @@ class HomeController extends Controller
     }
     public function inquiryView(Request $request){
         $inquiry = Inquiry::where('id',$request->user_id)->first();
+        $inquiry->status = 1;
+        $inquiry->save();
         return response()->json(['data'=>$inquiry]);
     }
-
+public function inquiryDelete($id){
+    $inquiry = Inquiry::find($id)->first();
+    $inquiry->delete();
+    return back()->with(['message'=>'inquiry deleted']);
+}
     public function subscriber(){
         $subscribers = Subscriber::get();
         return view('admin.subscriber.index',compact('subscribers'));

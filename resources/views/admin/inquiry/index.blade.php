@@ -33,6 +33,7 @@
                                     <th>Phone</th>
                                     <th>Country</th>
                                     <th>Arrival Date</th>
+                                    <th>Departure Date</th>
                                     <th>Action</th>
                                     {{-- <th>Pdf File</th>
                                     <th>Sub Category</th>
@@ -56,8 +57,9 @@
                                         <td>{{ $inquiry->phone }}</td>
                                         <td>{{ $inquiry->country }}</td>
                                         <td>{{ $inquiry->arrival_date }}</td>
-                                        <td><a class="inquiry-view" data-id="{{ $inquiry->id }}"><i class="fas fa-eye"></i></a>
-                                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                                        <td>{{ $inquiry->departure_date }}</td>
+                                        <td><a class="inquiry-view btn btn-primary" data-id="{{ $inquiry->id }}"> <i class="fas {{ $inquiry->status == 0 ? 'fa-eye-slash' : 'fa-eye' }}"></i> view</a>
+                                        <a href="{{ route('inquiry.delete',$inquiry->id) }}" class="btn btn-danger"><i class="fas fa-trash-alt">delete</i></a>
                                     </td>
 
                                     </tr>
@@ -90,6 +92,7 @@
                     <p><b>Room Type</b> : <span id="room-type"></span></p>
                     <p><b>Airport Pickup</b> : <span id="pickup"></span></p>
                     <p><b>Arrival Date</b> : <span id="arrival-date"></span></p>
+                    <p><b>Departure Date</b> : <span id="departure-date"></span></p>
                     <p><b>No of Member : </b> : <span id="adults"></span></p>
                     <p><b>No of Children : </b> : <span id="children"></span></p>
                     <p><b>Country : </b> : <span id="country"></span></p>
@@ -97,7 +100,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                 </div>
               </div>
             </div>
@@ -153,10 +156,12 @@
                 $('#room-type').html(data.data.room_type);
                 $('#pickup').html(data.data.pickup);
                 $('#arrival-date').html(data.data.arrival_date);
+                $('#departure-date').html(data.data.departure_date);
                 $('#country').html(data.data.country);
                 $('#adults').html(data.data.adults);
                 $('#children').html(data.data.children);
                 $('#message').html(data.data.message);
+                $('.fa-eye-slash').replaceClass('fa-eye-slash','fa-eye');
                 console.log(data);
             });
         });
