@@ -91,7 +91,7 @@
                         <ul class="list-inline list-inline-sm footer-social-list-2">
                             <li><a class="icon fa fa-facebook" href="{{ $socialmedia->facebook }}"></a></li>
                             <li><a class="icon fa fa-twitter" href="{{ $socialmedia->twitter }}"></a></li>
-                            <li><a class="icon fa fa-google-plus" href="#"></a></li>
+                            {{-- <li><a class="icon fa fa-google-plus" href="#"></a></li> --}}
                             <li><a class="icon fa fa-instagram" href="{{ $socialmedia->instagram }}"></a></li>
                         </ul>
                     </div>

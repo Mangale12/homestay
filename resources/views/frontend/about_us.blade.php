@@ -20,16 +20,16 @@
         <div class="row row-50 justify-content-center align-items-xl-center">
             <div class="col-md-10 col-lg-5 col-xl-6"><img src="{{ asset('public/images/about-1-519x564.jpg') }}" alt="" width="519" height="564" />
             </div>
-            <div class="col-md-10 col-lg-7 col-xl-6">
+            <div class="col-md-10 col-lg-7 col-xl-6" style="text-align: justify">
                 {{-- <h1 class="text-spacing-25 font-weight-normal title-opacity-9">Who We Are</h1> --}}
                 <h5>Welcome to Nepal Bed and Breakfast Home Stay with Tamang family.</h5>
-                <p>Chandra, Pabitra and family welcome you to our warm and friendly family homestay located in Rani Ban (Queens Forest), 4.6 kms from Thamel.  Beautiful and peaceful, with plenty of fresh air, our home is very close to the forest, with scenic views of the surrounding hills.  Nepal’s most famous, historical Swayambhunath (Monkey)Temple is just 1.5 km walk from our home.
+                <p style="text-align: justify">Chandra, Pabitra and family welcome you to our warm and friendly family homestay located in Rani Ban (Queens Forest), 4.6 kms from Thamel.  Beautiful and peaceful, with plenty of fresh air, our home is very close to the forest, with scenic views of the surrounding hills.  Nepal’s most famous, historical Swayambhunath (Monkey)Temple is just 1.5 km walk from our home.
                 </p>
-                <p>Collectively we have 40+ years of experience in Nepali tourism and would be honoured to  provide information and organise treks to all the main trekking areas in the country. We can also organise visits to famous national parks such as Chitwan to see Elephants and the one-horned rhinoceros.</p>
+                <p style="text-align: justify">Collectively we have 40+ years of experience in Nepali tourism and would be honoured to  provide information and organise treks to all the main trekking areas in the country. We can also organise visits to famous national parks such as Chitwan to see Elephants and the one-horned rhinoceros.</p>
                 <p>We have all modern amenities in our multi-bedroom home, including Air conditioning, western bathrooms, comfortable beds, 24 hour free Wi-Fi, and multichannel colour television.</p>
-                <p>Our small courtyard garden offers you different types of seasonal fruits and vegetables, grown in the roof top garden, and hygienically prepared, home cooked, delicious, organic breakfasts, lunches, and dinners.
+                <p style="text-align: justify">Our small courtyard garden offers you different types of seasonal fruits and vegetables, grown in the roof top garden, and hygienically prepared, home cooked, delicious, organic breakfasts, lunches, and dinners.
                 </p>
-                <p>You will experience what is like to live with a real Nepali family, and we will do our best to make your stay a truly memorable, once in a life-time experience.
+                <p style="text-align: justify">You will experience what is like to live with a real Nepali family, and we will do our best to make your stay a truly memorable, once in a life-time experience.
                     We have Airport pickup and drop off service at very reasonable cost on request.</p>
                     <br>
                     <h5>Our Facilities :</h5>
