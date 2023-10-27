@@ -76,4 +76,10 @@ class RoomController extends Controller
         $image->delete();
         return response(['message'=>'Image Deleted']);
     }
+
+    public function delete($id){
+        $room = Room::where('id',$id)->first();
+        $room->delete();
+        return redirect()->route('room.index')->with(['message'=>"Room Deleted"]);
+    }
 }
