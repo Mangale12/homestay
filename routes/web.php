@@ -145,6 +145,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('inquiry/delete/{id}', [HomeController::class, 'inquiryDelete'])->name('inquiry.delete');
 
         Route::resource('food',FoodController::class);
+        Route::get('food/delete/{id}',[FoodController::class,'delete'])->name("food.delete");
         Route::get('subscribers',[HomeController::class,'subscriber'])->name('admin.subscriber');
         Route::get('video/create',[MediaController::class, 'createVideo'])->name('video.create');
         Route::get('video',[MediaController::class, 'videoIndex'])->name('video.index');

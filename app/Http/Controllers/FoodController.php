@@ -59,8 +59,8 @@ class FoodController extends Controller
         return redirect()->route('food.index')->with(['message'=>'Food Updated']);
 
     }
-    public function destroy($id){
-        dd("44");
+    public function delete($id){
+        // dd("44");
         $food = Food::find($id)->first();
         if($food->image != null){
             if(file_exists(public_path('uploads/food/'.$food->image))){
