@@ -18,11 +18,12 @@
 <section class="section section-sm section-first bg-default text-left">
     <div class="container">
         <div class="row row-50 justify-content-center align-items-xl-center">
-            <div class="col-md-10 col-lg-5 col-xl-6"><img src="{{ asset('public/images/about-1-519x564.jpg') }}" alt="" width="519" height="564" />
+            <div class="col-md-10 col-lg-5 col-xl-6"><img src="{{ asset('public/uploads/'.$about_us->image) }}" alt="" width="519" height="564" />
             </div>
             <div class="col-md-10 col-lg-7 col-xl-6" style="text-align: justify">
+                {!! $about_us->description !!}
                 {{-- <h1 class="text-spacing-25 font-weight-normal title-opacity-9">Who We Are</h1> --}}
-                <h5>Welcome to Nepal Bed and Breakfast Home Stay with Tamang family.</h5>
+                {{-- <h5>Welcome to Nepal Bed and Breakfast Home Stay with Tamang family.</h5>
                 <p style="text-align: justify">Chandra, Pabitra and family welcome you to our warm and friendly family homestay located in Rani Ban (Queens Forest), 4.6 kms from Thamel.  Beautiful and peaceful, with plenty of fresh air, our home is very close to the forest, with scenic views of the surrounding hills.  Nepal’s most famous, historical Swayambhunath (Monkey)Temple is just 1.5 km walk from our home.
                 </p>
                 <p style="text-align: justify">Collectively we have 40+ years of experience in Nepali tourism and would be honoured to  provide information and organise treks to all the main trekking areas in the country. We can also organise visits to famous national parks such as Chitwan to see Elephants and the one-horned rhinoceros.</p>
@@ -46,7 +47,7 @@
                     <li>Free hot Water/Tea/ Coffee </li>
                 </ul>
                 <div class="image-wrap text-right"><img src="images/sign-1-183x93.png" alt="" width="183" height="93" />
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -22,6 +22,7 @@ use App\Models\Food;
 use App\Models\Subscriber;
 use App\Models\Country;
 use App\Models\Video;
+use App\Models\AboutUs;
 // $2y$10$DBw7tc6Gpynp80RYDZcdcOMnQoIgDNdGn9E09UC5E1kKPjEw91PUS
 class FrontendController extends Controller
 {
@@ -61,11 +62,12 @@ class FrontendController extends Controller
     }
 
     public function about_us(){
+        $about_us = AboutUs::first();
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
         $testimonials = Testimonial::get();
         $services = Service::get();
-        return view('frontend.about_us',compact('setting','socialmedia','testimonials','services'));
+        return view('frontend.about_us',compact('setting','socialmedia','testimonials','services','about_us'));
     }
     public function contact_us(){
         $setting=SiteSetting::first();

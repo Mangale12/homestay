@@ -69,19 +69,17 @@
                     <div class="oh-desktop">
                         <div class="wow slideInLeft" data-wow-delay="0s">
                             <h5 class="text-spacing-100">Navigation</h5>
-                            <ul class="row-6 list-0 list-marked list-marked-md list-marked-primary list-custom-2">
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="our-team.html">Our Team</a></li>
-                                <li><a href="rooms.html">Rooms</a></li>
-                                <li><a href="classic-blog.html">Blog</a></li>
-                                <li><a href="grid-gallery.html">Gallery</a></li>
-                            </ul>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0713872152924!2d85.30944427589426!3d27.715082076178202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fd18df80c1%3A0xeefb7fd38e6465e5!2sNepal%20Experienced%20Adventure%20Treks%20(P)%20Ltd.!5e0!3m2!1sen!2snp!4v1698388891196!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                             {{-- <div class="group-md group-middle justify-content-sm-start"><a class="button button-lg button-primary button-ujarak" href="#">Get in touch</a></div> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div style="">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0713872152924!2d85.30944427589426!3d27.715082076178202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fd18df80c1%3A0xeefb7fd38e6465e5!2sNepal%20Experienced%20Adventure%20Treks%20(P)%20Ltd.!5e0!3m2!1sen!2snp!4v1698388891196!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="footer-corporate-bottom-panel">
         <div class="container">

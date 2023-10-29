@@ -26,6 +26,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\AboutUsController;
 
 
 // use Analytics;
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('/homepageSettings/{id}/edit',[HomePageSettingController::class,'edit'])->name('homepageSetting.edit');
         Route::post('/homepageSettings/{id}/edit',[HomePageSettingController::class,'update'])->name('homepageSetting.update');
         Route::delete('/homepageSettings/{id}/delete',[HomePageSettingController::class,'destroy'])->name('homepageSetting.destroy');
-
+        Route::resource('about-us', AboutUsController::class);
 
         Route::get('/homepageSettings/update-status',[HomePageSettingController::class,'update_status'])->name('cat_section.update_status');
 
