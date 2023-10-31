@@ -68,7 +68,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="headline"> Food Price</label> <span class="text-danger">
+                                                <label for="headline"> Food Price (optional)</label> <span class="text-danger">
                                                 </span>
                                                 <input type="text" class="form-control" name="price"
                                                     value="{{old('price')}}">
@@ -78,7 +78,7 @@
 
                                     <ul class="post-buttons d-flex">
                                         <li><button type="submit"
-                                                class="btn btn-success btn-sm float-right">Create Post</button></li>
+                                                class="btn btn-success btn-sm float-right">Submit</button></li>
                                     </ul>
                                 </div>
 

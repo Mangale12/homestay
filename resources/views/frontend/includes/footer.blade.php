@@ -7,79 +7,56 @@
     <div class="footer-corporate-inset">
         <div class="container">
             <div class="row row-40 justify-content-lg-between">
-                <div class="col-sm-6 col-md-12 col-lg-3 col-xl-4">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
                     <div class="oh-desktop">
                         <div class="wow slideInRight" data-wow-delay="0s">
                             <h5 class="text-spacing-100">Our Contacts</h5>
                             <ul class="footer-contacts d-inline-block d-sm-block">
-                                <li>
+                                <li style="margin-bottom: -1.77rem;">
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-phone"></span></div>
                                         <div class="unit-body">
                                             @foreach ($contacts as $contact)
-                                            <a class="link-phone" href="tel:{{ $contact }}">{{ $contact }} , </a>
+                                            <a style="font-size: 1.3rem;" class="link-phone" href="tel:{{ $contact }}">{{ $contact }} , </a>
                                             @endforeach
 
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <li style="margin-bottom: -1.77rem;">
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-envelope"></span></div>
 
                                         <div class="unit-body">
                                             @foreach ($mails as $mail)
-                                            <a class="link-aemail" href="mailto:{{ $mail }}">{{ $mail }} , </a>
+                                            <a style="font-size: 1.3rem;" class="link-aemail" href="mailto:{{ $mail }}">{{ $mail }} , </a>
                                             @endforeach
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <li style="">
                                     <div class="unit">
                                         <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
-                                        <div class="unit-body"><a class="link-location" href="#">{{ $setting->address }}</a></div>
+                                        <div class="unit-body"><a style="font-size: 1.3rem;" class="link-location" href="#">{{ $setting->address }}</a></div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-sm-6 col-md-5 col-lg-3 col-xl-4">
-                    <div class="oh-desktop">
-                        <div class="wow slideInDown" data-wow-delay="0s">
-                            <h5 class="text-spacing-100">Popular news</h5>
-                            <!-- Post Minimal 2-->
-                            <article class="post post-minimal-2">
-                                <p class="post-minimal-2-title"><a href="blog-post.html">5 Facilities Every Hotel Should Have</a></p>
-                                <div class="post-minimal-2-time">
-                                    <time datetime="2019-05-04">May 04, 2019</time>
-                                </div>
-                            </article>
-                            <!-- Post Minimal 2-->
-                            <article class="post post-minimal-2">
-                                <p class="post-minimal-2-title"><a href="blog-post.html">Making the Most of Your Stay at Resort Hotel</a></p>
-                                <div class="post-minimal-2-time">
-                                    <time datetime="2019-05-04">May 04, 2019</time>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div> --}}
-                <div class="col-sm-11 col-md-7 col-lg-5 col-xl-4">
-                    <div class="oh-desktop">
+
+                <div class="col-sm-11 col-md-6 col-lg-6 col-xl-6">
+                    <div class="oh-desktop" style="width:200%;position:relative">
                         <div class="wow slideInLeft" data-wow-delay="0s">
                             <h5 class="text-spacing-100">Navigation</h5>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0713872152924!2d85.30944427589426!3d27.715082076178202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fd18df80c1%3A0xeefb7fd38e6465e5!2sNepal%20Experienced%20Adventure%20Treks%20(P)%20Ltd.!5e0!3m2!1sen!2snp!4v1698388891196!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            {!! $socialmedia->map !!}
 
-                            {{-- <div class="group-md group-middle justify-content-sm-start"><a class="button button-lg button-primary button-ujarak" href="#">Get in touch</a></div> --}}
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div style="">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0713872152924!2d85.30944427589426!3d27.715082076178202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fd18df80c1%3A0xeefb7fd38e6465e5!2sNepal%20Experienced%20Adventure%20Treks%20(P)%20Ltd.!5e0!3m2!1sen!2snp!4v1698388891196!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="footer-corporate-bottom-panel">
         <div class="container">

@@ -31,7 +31,7 @@ class FrontendController extends Controller
         // dd($homebanners);
         $medias = Media::take(4)->get();
         $rooms = Room::get();
-        $services = Service::get();
+        $service = Service::first();
         $testimonials = Testimonial::get();
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
@@ -45,7 +45,7 @@ class FrontendController extends Controller
        })->latest()->take($headline_no)->get();
 
 
-        return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no','homebanners','rooms','services','testimonials','socialmedia','medias','foods'));
+        return view('frontend.index',compact('setting','cat_sec','partner','headline_news','headline_no','homebanners','rooms','service','testimonials','socialmedia','medias','foods'));
     }
     public function room(){
         $rooms = Room::get();
@@ -57,8 +57,17 @@ class FrontendController extends Controller
         $room = Room::findOrFail($id);
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
-
-        return view('frontend.room-details',compact('room','setting','socialmedia'));
+        $data = [
+            'id'=> 1,
+            'title'=>"test",
+            'description'=>'description',
+            'image'=>'cat.jpg',
+        ];
+        $shareButtons = \Share::page(
+            route('frontend.room_details',$id),"text here")
+            ->facebook()
+            ->whatsapp();
+        return view('frontend.room-details',compact('room','setting','socialmedia','shareButtons'));
     }
 
     public function about_us(){

@@ -10,11 +10,19 @@ use App\Mail\NoticeAdminMail;
 use App\Models\Subscriber;
 use App\Models\SiteSetting;
 use App\Models\Video;
+use Illuminate\Support\Facades\Route;
 class HomeController extends Controller
 {
 
     public function inquiry(){
-        $inquiries = Inquiry::get();
+        if(Route::is('inquiry.new')){
+            $inquiries = Inquiry::where('status',0)->get();
+        }
+        elseif(Route::is('inquiry.old')){
+            $inquiries = Inquiry::where('status',1)->get();
+        }else{
+            $inquiries = Inquiry::get();
+        }
         return view('admin.inquiry.index', compact('inquiries'));
     }
 

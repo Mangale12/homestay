@@ -84,6 +84,13 @@
                                 <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.terkks') ? 'active' : '' }}" href="{{ route('frontend.terkks') }}">Treks & Tours</a>
                                     <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.food') }}">Food Gallery</a>
                             </li>
+                            <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.book') }}">Book Now</a>
+
+                            </li>
+
+                            <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.book') }}">Reviews</a>
+
+                            </li>
 
                         </ul>
                     </div>

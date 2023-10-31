@@ -8,8 +8,8 @@ use App\Models\Service;
 class ServiceController extends Controller
 {
     public function index(){
-        $services = Service::get();
-        return view('admin.service.index',compact('services'));
+        $service = Service::first();
+        return view('admin.service.edit', compact('service'));
     }
 
     public function create(){
@@ -32,10 +32,10 @@ class ServiceController extends Controller
     }
     public function update(Request $request, Service $service){
         $request->validate([
-            'title'=>'required|max:50',
+            'description'=>'required',
         ]);
         $service->icon = $request->icon;
-        $service->title= $request->title;
+        // $service->title= $request->title;
         $service->description = $request->description;
         $service->update();
         return redirect()->route('service.index')->with(['message'=>'Service Updated !!']);

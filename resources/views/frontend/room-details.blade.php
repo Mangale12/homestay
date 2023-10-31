@@ -1,6 +1,19 @@
 @extends('frontend.layouts.app')
 @section('content')
 @include('frontend.includes.nav')
+<style>
+    #social-links ul li{
+        display: inline-block;
+
+    }
+    #social-links ul li a{
+        padding: 20px;
+        margin: 2px;
+        font-size: 30px;
+        color: rgb(46, 41, 114);
+        background-color: #ccc;
+    }
+</style>
        <!-- Breadcrumbs -->
        <section class="breadcrumbs-custom-inset">
         <div class="breadcrumbs-custom context-dark bg-overlay-60">
@@ -57,6 +70,7 @@
                     </div>
                 </div>
             </div>
+            {!! $shareButtons !!}
         </div>
     </section>
 

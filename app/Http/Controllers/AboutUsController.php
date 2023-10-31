@@ -29,6 +29,6 @@ class AboutUsController extends Controller
         }
         $about_us->description = $request->description;
         $about_us->update();
-        return redirect()->route('about_us.index')->with(['message'=>'About us ubdated']);
+        return redirect()->route('about-us.index')->with(['message'=>'About us ubdated']);
     }
 }

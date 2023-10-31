@@ -27,6 +27,7 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\SocialShareController;
 
 
 // use Analytics;
@@ -139,13 +140,16 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('service/delete/{id}',[ServiceController::class, 'delete'])->name('services.delete');
 
         Route::resource('testimonial', TestimonialController::class);
-        Route::get('testimonials/delete/{id}',['TestimonialController@delete'])->name('testimonials.delete');
+        Route::get('testimonials/delete/{id}',[TestimonialController::class,'delete'])->name('testimonials.delete');
 
         Route::get('inquiry', [HomeController::class, 'inquiry'])->name('inquiry.index');
+        Route::get('new_inquiry', [HomeController::class, 'inquiry'])->name('inquiry.new');
+        Route::get('old_inquiry', [HomeController::class, 'inquiry'])->name('inquiry.old');
         Route::post('inquiry/view', [HomeController::class, 'inquiryView'])->name('inquiry.view');
         Route::get('inquiry/delete/{id}', [HomeController::class, 'inquiryDelete'])->name('inquiry.delete');
 
         Route::resource('food',FoodController::class);
+        Route::get('food/delete/{id}',[FoodController::class,'delete'])->name("food.delete");
         Route::get('subscribers',[HomeController::class,'subscriber'])->name('admin.subscriber');
         Route::get('video/create',[MediaController::class, 'createVideo'])->name('video.create');
         Route::get('video',[MediaController::class, 'videoIndex'])->name('video.index');
@@ -301,3 +305,6 @@ Route::get('/{slug}',[CustomPageController::class,'index'])->name('custom_page')
 
 // Route::get('/media-coverages',[FrontendController::class,'mediaCoverages'])->name('media-coverages');
 // Route::get('/media-coverages/{id}',[FrontendController::class,'mediaCoveragesDetail'])->name('media-coverage.detail');
+
+
+Route::get('social/share', [SocialController::class, 'index'])->name('socialshare');

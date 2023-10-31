@@ -73,7 +73,7 @@
 
                                     <ul class="post-buttons d-flex">
                                         <li><button type="submit"
-                                                class="btn btn-success btn-sm float-right">Create Post</button></li>
+                                                class="btn btn-success btn-sm float-right">Submit</button></li>
                                     </ul>
                                 </div>
 

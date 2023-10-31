@@ -12,6 +12,9 @@
   bottom: 0;
   z-index: -10000;
 }
+.margin-index{
+    margin-top:-10%;
+}
 @media(max-width: 420px) {
     .video-container{
         height: 30vh;
@@ -70,7 +73,7 @@
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left heading-panel-left-1">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Our rooms</span></h1>
+                    <!--<h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Our rooms</span></h1>-->
                     <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Comfortable Accommodation</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
@@ -93,7 +96,7 @@
                     </a>
                     <div class="services-modern-content">
                         <h5 class="services-modern-title"><a href="{{ route('frontend.room_details',$room->id) }}">{{ $room->type }}</a></h5>
-                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">US$ {{ $room->price }}</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
+                        <div class="services-modern-price-wrap"><span class="services-modern-price heading-5">Rs {{ $room->price }}</span><span class="services-modern-price-divider heading-5">/</span><span class="services-modern-date heading-6">night</span></div>
                     </div>
                 </article>
                 @endforeach
@@ -106,11 +109,11 @@
 
     {{-- popular Food  --}}
 
-    <section class="section section-xl bg-default">
+    <section class="section section-xl bg-default margin-index">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left heading-panel-left-1">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft"></span>Our Popular Food</h1>
+                    <!--<h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft"></span>Our Popular Food</h1>-->
                     <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Food Gallery</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
@@ -152,31 +155,31 @@
     </section>
 
     <!-- Why choose us?-->
-    <section class="section section-xl bg-gray-4">
+    <section class="section section-xl bg-gray-4 margin-index">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Amenities</span></h1>
+                    <!--<h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Amenities</span></h1>-->
                     <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">What We offer</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
             </div>
             <div class="row row-30">
-                @foreach ($services as $service)
-                <div class="col-sm-6 col-lg-4">
+
+                <div class="col-sm-12 col-lg-12">
                     <article class="box-icon-classic box-icon-classic-3 wow fadeInDown" data-wow-delay=".2s">
                         <div class="unit box-icon-classic-body flex-column flex-md-row text-md-left flex-lg-column text-lg-center flex-xl-row text-xl-left">
                             <div class="unit-left">
                                 <div class="box-icon-classic-icon linearicons-apartment"></div>
                             </div>
                             <div class="unit-body">
-                                <h5 class="box-icon-classic-title"><a href="#">{{ $service->title }}</a></h5>
+                                {{-- <h5 class="box-icon-classic-title"><a href="#">{{ $service->title }}</a></h5> --}}
                                 <p class="box-icon-classic-text">{!! $service->description !!}</p>
                             </div>
                         </div>
                     </article>
                 </div>
-                @endforeach
+
             </div>
         </div>
     </section>
@@ -271,12 +274,12 @@
     </section> --}}
 
     <!-- Latest projects-->
-    <section class="section section-lg bg-default">
+    <section class="section section-lg bg-default margin-index">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Gallery</span></h1>
-                    <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Nepal Bed Gallery</span></h4>
+                    <!--<h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Gallery</span></h1>-->
+                    <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Nepal Bed & Breakfast Gallery</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
             </div>
@@ -305,11 +308,11 @@
     </section>
 
     <!-- How we work for you-->
-    <section class="section section-xl bg-gray-4">
+    <section class="section section-xl bg-gray-4 margin-index">
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">4 easy steps</span></h1>
+                    <!--<h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">4 easy steps</span></h1>-->
                     <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">How to Book a Room</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>
@@ -580,7 +583,7 @@
         <div class="container">
             <div class="heading-panel">
                 <div class="heading-panel-left">
-                    <h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Testimonials</span></h1>
+                    <!--<h1 class="oh-desktop heading-panel-title"><span class="d-inline-block wow slideInLeft">Testimonials</span></h1>-->
                     <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">What our clients say</span></h4>
                 </div>
                 <div class="heading-panel-decor wow fadeIn"></div>

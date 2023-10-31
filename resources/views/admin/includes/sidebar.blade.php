@@ -240,7 +240,12 @@
               </li>
             </ul>
           </li>
-
+          <li class="nav-item">
+            <a href="{{route('about-us.index')}}" class="nav-link {{ Route::is('about-us.index') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>About Us</p>
+            </a>
+          </li>
 
 
 

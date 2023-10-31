@@ -40,7 +40,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="kicker">Price</label>
+                                                <label for="kicker">Food Price(optional)</label>
                                                 <input type="text" class="form-control" name="price"
                                                     value="{{$food->price}}">
                                             </div>
@@ -87,7 +87,7 @@
 
                                     <ul class="post-buttons d-flex">
                                         <li><button type="submit"
-                                                class="btn btn-success btn-sm float-right">Create Post</button></li>
+                                                class="btn btn-success btn-sm float-right">Submit</button></li>
                                     </ul>
                                 </div>
 

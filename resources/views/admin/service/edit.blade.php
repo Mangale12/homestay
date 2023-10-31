@@ -18,8 +18,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Update Service</h3>
-                                    <a href="{{route('service.index')}}" class="btn btn-success btn-sm float-right">View
-                                        Service</a>
+                                    {{-- <a href="{{route('service.index')}}" class="btn btn-success btn-sm float-right"></a> --}}
                                 </div>
                                 <div class="col-md-12 p-0">
                                     @include('admin.includes.message')
@@ -37,7 +36,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="headline"> Title</label> <span class="text-danger"> *
@@ -46,7 +45,7 @@
                                                     value="{{old($service->title,'title')}}">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -84,7 +83,7 @@
 
                                     <ul class="post-buttons d-flex">
                                         <li><button type="submit"
-                                                class="btn btn-success btn-sm float-right">Create Post</button></li>
+                                                class="btn btn-success btn-sm float-right">Submit</button></li>
                                     </ul>
                                 </div>
 

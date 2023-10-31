@@ -66,6 +66,7 @@ return array(
     'Laravel\\Breeze\\' => array($vendorDir . '/laravel/breeze/src'),
     'Krishnahimself\\DateConverter\\Database\\Factories\\' => array($vendorDir . '/krishnahimself/laravel-ad-to-bs-converter/database/factories'),
     'Krishnahimself\\DateConverter\\' => array($vendorDir . '/krishnahimself/laravel-ad-to-bs-converter/src'),
+    'Jorenvh\\Share\\' => array($vendorDir . '/jorenvanhocht/laravel-share/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/laravel/framework/src/Illuminate/Macroable', $vendorDir . '/laravel/framework/src/Illuminate/Collections'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),

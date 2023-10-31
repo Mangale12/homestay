@@ -46,6 +46,11 @@ class TestimonialController extends Controller
         ]);
         $image_name = $testimonial->profile;
         if($request->hasFile('profile')){
+            if($testimonial->profile != null){
+                if(file_exists(public_path('uploads/testimonial/'.$testimonial->profile))){
+                    unlink(public_path('uploads/testimonial/'.$testimonial->profile));
+                }
+            }
             $image = $request->file('profile');
             $image_name = time().'.'.$image->extension();
             $image->move(public_path('uploads/testimonial/'),$image_name);
@@ -57,7 +62,13 @@ class TestimonialController extends Controller
         $testimonial->save();
         return redirect()->route('testimonial.index')->with(['message'=>"Testimonial Updated"]);
     }
-    public function delete(Testimoial $testimonial){
+    public function delete($id){
+        $testimonial = Testimonial::where('id',$id)->first();
+        if($testimonial->profile != null){
+            if(file_exists(public_path('uploads/testimonial/'.$testimonial->profile))){
+                unlink(public_path('uploads/testimonial/'.$testimonial->profile));
+            }
+        }
         $testimonial->delete();
         return redirect()->route('testimonial.index')->with(['message'=>"Testimonial Deleted"]);
     }

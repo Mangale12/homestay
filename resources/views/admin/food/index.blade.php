@@ -9,7 +9,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-2">
                             @can('create-post')
-                                <a href="{{route('food.create')}}" class="btn btn-success btn-sm">Add Post</a>
+                                <a href="{{route('food.create')}}" class="btn btn-success btn-sm">Add New Item</a>
                             @endcan
 
                         </div>
@@ -68,9 +68,9 @@
                                             @endif
 
                                         </td>
-                                        <form action="{{route('food.destroy',$food->id)}}" method="post">
+                                        <form action="{{route('food.delete',$food->id)}}" method="POST">
                                             @csrf
-                                            @method('delete')
+                                            {{-- @method('delete') --}}
                                             <td class="project-actions">
 
                                             <a class="btn btn-info btn-sm" href="{{route('food.edit',$food->id)}}">
@@ -78,9 +78,14 @@
                                                 </i>
 
                                             </a>
-                                                <button class="btn btn-danger btn-sm" type="submit">
+                                            <a class="btn btn-info btn-sm" href="{{route('food.delete',$food->id)}}">
+                                                <i class="fas fa-trash-alt"></i>
+                                                </i>
+
+                                            </a>
+                                                {{-- <button class="btn btn-danger btn-sm" type="submit">
                                                     <i class="fas fa-trash-alt"></i>
-                                                </button>
+                                                </button> --}}
                                             </td>
                                         </form>
                                         {{-- <td><a href="{{ route('homebanner.edit', $homebanner->id) }}"></a>

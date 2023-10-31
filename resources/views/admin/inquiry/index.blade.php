@@ -9,8 +9,8 @@
                     <div class="row align-items-center">
                         <div class="col-6">
 
-                            <a href="{{route('homebanner.create')}}" class="btn btn-success d-inline">New Inquiries</a>
-                            <a href="{{route('homebanner.create')}}" class="btn btn-success d-inline">Old Inquiries</a>
+                            <a href="{{route('inquiry.new')}}" class="btn btn-success d-inline">New Inquiries</a>
+                            <a href="{{route('inquiry.old')}}" class="btn btn-success d-inline">Old Inquiries</a>
 
                         </div>
                             {{-- <button class="btn btn-primary delete_all btn-danger" onclick="del()"><i class="fas fa-trash">

@@ -42,11 +42,16 @@ class FoodController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name'=>'required',
-            'price'=>'numeric',
+            // 'price'=>'numeric',
         ]);
         $food = Food::findOrFail($id);
         $image_name = $food->image;
         if($request->hasFile('image')){
+            if($food->image != null){
+                if(file_exists(public_path('uploads/food/'.$food->image))){
+                    unlink(public_path('uploads/food/'.$food->image));
+                }
+            }
             $image = $request->file('image');
             $image_name = time().'.'.$image->extension();
             $image->move(public_path('uploads/food/'),$image_name);
@@ -59,8 +64,7 @@ class FoodController extends Controller
         return redirect()->route('food.index')->with(['message'=>'Food Updated']);
 
     }
-    public function destroy($id){
-        dd("44");
+    public function delete($id){
         $food = Food::find($id)->first();
         if($food->image != null){
             if(file_exists(public_path('uploads/food/'.$food->image))){

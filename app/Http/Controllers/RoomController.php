@@ -26,12 +26,13 @@ class RoomController extends Controller
             'price'=>$request->price,
             'description'=>$request->description,
         ]);
+
         if($request->hasFile('image')){
             foreach($request->file('image') as $key=>$image){
                 $image_name = time().$key.'.'.$image->extension();
                 $image->move(public_path('uploads/room/'),$image_name);
                 RoomImage::create([
-                    'room'=>$room->id,
+                    'room_id'=>$room->id,
                     'image'=>$image_name,
                 ]);
             }
