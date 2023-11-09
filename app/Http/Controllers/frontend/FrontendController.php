@@ -23,6 +23,7 @@ use App\Models\Subscriber;
 use App\Models\Country;
 use App\Models\Video;
 use App\Models\AboutUs;
+use App\Models\Reviews;
 // $2y$10$DBw7tc6Gpynp80RYDZcdcOMnQoIgDNdGn9E09UC5E1kKPjEw91PUS
 class FrontendController extends Controller
 {
@@ -54,6 +55,7 @@ class FrontendController extends Controller
         return view('frontend.rooms',compact('rooms','setting','socialmedia'));
     }
     public function room_details($id){
+        $reviews = Reviews::get();
         $room = Room::findOrFail($id);
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
@@ -67,7 +69,7 @@ class FrontendController extends Controller
             route('frontend.room_details',$id),"text here")
             ->facebook()
             ->whatsapp();
-        return view('frontend.room-details',compact('room','setting','socialmedia','shareButtons'));
+        return view('frontend.room-details',compact('room','setting','socialmedia','shareButtons','reviews'));
     }
 
     public function about_us(){

@@ -19,8 +19,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::get();
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.login');
     }
 
     /**
@@ -30,8 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::get();
-        return view('admin.user.create', compact('roles'));
+        return view('admin.user.create');
     }
 
     /**
@@ -46,15 +44,13 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|same:confirmPassword',
-            'role' => 'required'
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $user->assignRole($request->input('role'));
+        //$user->assignRole($request->input('role'));
         // dd($user);
         return redirect()->route('users.index')->with('message', 'User Created Successfully');
     }

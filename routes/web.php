@@ -28,6 +28,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\SocialShareController;
+use App\Http\Controllers\ReviewsController;
 
 
 // use Analytics;
@@ -120,7 +121,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::post('/menu_settings/edit/{slug}', [MenuController::class,'update'])->name('menu_settings.update');
         Route::get('/menu_settings/delete/{slug}', [MenuController::class,'destroy'])->name('menu_settings.destroy');
         Route::post('/menu_settings/get_menu_items',[MenuController::class,'get_menu_items'])->name('get_menu_items');
-        Route::resource('/users', UserController::class);
+
 
         Route::get('/medias',[MediaController::class,'index'])->name('medias');
         Route::post('/delete',[MediaController::class,'delete'])->name('medias.delete');
@@ -160,6 +161,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
 
     });
+
 
 
 	Route::post('ckeditor/upload', [CkeditorController::class,'upload'])->name('ckeditor.upload');
@@ -245,7 +247,8 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
 });
 
-
+Route::resource('users', UserController::class);
+Route::post('reviews',[ReviewsController::class,'store'])->name('reviews.store');
 Route::get('/auth/github/redirect',[SocialController::class,'githubRedirect'])->name('githubLogin');
 Route::get('/auth/github/callback',[SocialController::class,'callback']);
 

@@ -1,5 +1,10 @@
 <header class="section page-header">
     <!-- RD Navbar-->
+    <style>
+        .rd-nav-item{
+            margin-right: -0.7rem;
+        }
+    </style>
     <div class="rd-navbar-wrap">
         <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed"
             data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px"
@@ -36,6 +41,26 @@
                                     <div class="unit-body"><a class="link-phone" href="tel:{{ $contact[0] }}">{{ $contact[0] }}</a></div>
                                 </div>
                             </li>
+                            @if(Auth::check())
+                            <li>
+                                <div class="unit unit-spacing-xs">
+                                    <div class="unit-body"><a class="link-phone" href="tel:{{ $contact[0] }}">{{ Auth::user()->name }}</a></div>
+                                </div>
+                            </li>
+                            @else
+                            <li>
+
+                                <ul class="list-inline list-inline-md rd-navbar-corporate-list-social">
+                                    <li><a class="icon fa " href="{{ route('users.index') }}">Login</a></li>
+                                    <li><a class="icon fa " href="{{ route('users.create') }}">Sign up</a></li>
+                                    {{-- <li><a class="icon fa fa-google-plus" href="#"></a></li> --}}
+                                    {{-- <li><a class="icon fa fa-instagram" href="{{ $socialmedia->instagram }}"></a></li><br> --}}
+
+                                </ul>
+                            </li>
+                            @endif
+
+
                         {{-- </ul><a class="button button-md button-ujarak button-default-outline" href="#">Get in touch</a> --}}
                     </div>
                 </div>
@@ -47,7 +72,8 @@
                             <li><a class="icon fa fa-facebook" href="{{ $socialmedia->facebook }}"></a></li>
                             <li><a class="icon fa fa-twitter" href="{{ $socialmedia->twitter }}"></a></li>
                             {{-- <li><a class="icon fa fa-google-plus" href="#"></a></li> --}}
-                            <li><a class="icon fa fa-instagram" href="{{ $socialmedia->instagram }}"></a></li>
+                            <li><a class="icon fa fa-instagram" href="{{ $socialmedia->instagram }}"></a></li><br>
+
                         </ul>
                         <!-- RD Navbar Nav-->
                         <ul class="rd-navbar-nav">
@@ -85,13 +111,6 @@
                                     <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.food') }}">Food Gallery</a>
                             </li>
                             <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.book') }}">Book Now</a>
-
-                            </li>
-
-                            <li class="rd-nav-item"><a class="rd-nav-link {{ Route::is('frontend.food') ? 'active' : '' }}" href="{{ route('frontend.book') }}">Reviews</a>
-
-                            </li>
-
                         </ul>
                     </div>
                 </div>
