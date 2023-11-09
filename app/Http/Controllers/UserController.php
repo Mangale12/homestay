@@ -125,4 +125,23 @@ class UserController extends Controller
         $user->delete();
         return back()->with('message', 'User has been deleted successfully');
     }
+
+    public function login(Request $request){
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required',
+        ]);
+        $user = User::where('email',$request->email)->first();
+        if($user != null){
+            if(Hash::check($request->password,$user->password)){
+                return redirect()->route('frontend.room');
+            }else{
+                return back()->with('login_error', 'These credentials do not match our records.');
+
+            }
+        }else{
+            // return redirect()->back()->with("message","These credentials do not match our records.");
+            return back()->with('login_error', 'These credentials do not match our records.');
+        }
+    }
 }

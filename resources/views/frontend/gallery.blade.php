@@ -38,12 +38,13 @@
                 <article class="thumbnail thumbnail-classic thumbnail-md">
                     <div class="thumbnail-classic-figure"><img src="{{ asset('public/uploads/featured_img/'.$gallery->image) }}" alt="" width="420" height="350" />
                     </div>
-                    {{-- <div class="thumbnail-classic-caption">
-                        <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60" href="images/fullwidth-gallery-1-1200x800-original.jpg" data-lightgallery="item"><img src="images/fullwidth-gallery-1-420x350.jpg" alt="" width="420" height="350"/></a>
-                            <h5 class="thumbnail-classic-title"><a href="#">Affordable Room Rates</a></h5>
+                    <div class="thumbnail-classic-caption">
+                        <div class="thumbnail-classic-title-wrap">
+                            <a class=" " href="{{ asset('public/uploads/featured_img/'.$gallery->image) }}" data-lightgallery="item">
+                                <img src="{{ asset('public/uploads/featured_img/'.$gallery->image) }}" alt="" width="420" height="350"/>
+                            </a>
                         </div>
-                        <p class="thumbnail-classic-text">We work hard on every project to deliver top-notch interior design concepts that satisfy your wishes.</p>
-                    </div> --}}
+                    </div>
                 </article>
             </div>
             @endforeach

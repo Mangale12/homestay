@@ -24,6 +24,7 @@ use App\Models\Country;
 use App\Models\Video;
 use App\Models\AboutUs;
 use App\Models\Reviews;
+use App\Models\Document;
 // $2y$10$DBw7tc6Gpynp80RYDZcdcOMnQoIgDNdGn9E09UC5E1kKPjEw91PUS
 class FrontendController extends Controller
 {
@@ -77,8 +78,9 @@ class FrontendController extends Controller
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
         $testimonials = Testimonial::get();
+        $documents = Document::get();
         $services = Service::get();
-        return view('frontend.about_us',compact('setting','socialmedia','testimonials','services','about_us'));
+        return view('frontend.about_us',compact('setting','socialmedia','testimonials','services','about_us','documents'));
     }
     public function contact_us(){
         $setting=SiteSetting::first();

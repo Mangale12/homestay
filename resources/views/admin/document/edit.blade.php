@@ -1,12 +1,12 @@
 @extends('admin.includes.main')
-@section('title')Post Settings - {{ config('app.name', 'Laravel') }} @endsection
+@section('title')Document edit - {{ config('app.name', 'Laravel') }} @endsection
 @section('content')
 <style>
     .card-footer, .progress {
         display: none;
     }
 </style>
-<form action="{{route('food.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{ route('document.update',$document->id) }}"  method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-lg-9 col-md-12">
@@ -16,9 +16,9 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Add Home Banner</h3>
-                                    <a href="{{route('food.index')}}" class="btn btn-success btn-sm float-right">View
-                                         Food</a>
+                                    <h3 class="card-title">Update Document</h3>
+                                    <a href="{{route('document.index')}}" class="btn btn-success btn-sm float-right">View
+                                        Documents</a>
                                 </div>
                                 <div class="col-md-12 p-0">
                                     @include('admin.includes.message')
@@ -29,29 +29,26 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="headline"> Food Name</label> <span class="text-danger"> *
+                                                <label for="headline"> Document Name</label> <span class="text-danger"> *
                                                 </span>
                                                 <input type="text" class="form-control" name="name"
-                                                    value="{{old('name')}}">
+                                                    value="{{old($document->name,'name')}}">
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="kicker">Description</label>
-                                                <input type="text" class="form-control" name="description"
-                                                    value="{{old('description')}}">
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="head_img">Food Image</label>
+                                                <label for="head_img">Food</label>
                                                 <div id="featured_img" class="row">
+                                                    <div class="col-md-6 remove">
+                                                        <div class="img-upload-preview">
+                                                            <img loading="lazy"  src="{{ asset('public/uploads/document/'.$document->document) }}" class="img-responsive" style="max-height:150px;">
+
+                                                            <button type="button" class="btn btn-danger close-btn remove-files"><i class="fa fa-times"></i></button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,20 +57,11 @@
 
                                     <hr>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="headline"> Food Price</label> <span class="text-danger">
-                                                </span>
-                                                <input type="text" class="form-control" name="price"
-                                                    value="{{old('price')}}">
-                                            </div>
-                                        </div>
-                                    </div>
+
 
                                     <ul class="post-buttons d-flex">
                                         <li><button type="submit"
-                                                class="btn btn-success btn-sm float-right">Create Post</button></li>
+                                                class="btn btn-success btn-sm float-right">Submit</button></li>
                                     </ul>
                                 </div>
 
@@ -187,7 +175,7 @@
 
         $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#featured_img").spartanMultiImagePicker({
-            fieldName: 'image',
+            fieldName: 'document',
             maxCount: 1,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
@@ -331,3 +319,6 @@
 
 </script>
 @endsection
+
+
+

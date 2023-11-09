@@ -100,12 +100,11 @@ body {
 <div class="login-box">
   <div class="login-header">
     <h5>Sign in</h5>
-    <span>Create Account instead?</span>
   </div>
   <div class="col-md-12 p-0">
-    @include('admin.includes.message')
+   <span>{{ session()->get('login_error') }}</span>
 </div>
-    <form action="{{ route('login') }}" method="POST">
+    <form action="{{ route('users.login') }}" method="POST">
         @csrf
         <div class="login-form">
             <div class="input-field">
@@ -119,9 +118,9 @@ body {
             <div class="box">
             <div class="check">
                 <input type="checkbox" id="rem">
-                <label for="rem">Stay signed in for 30 days</label>
+                <label for="rem">Don't you have account ?</label>
             </div>
-            <a href="#">Forgot Password</a>
+            <a href="{{ route('users.create') }}">Signup here</a>
             </div>
             <div class="btn-container">
             <button class="btn btn-primary">Sign in</button>

@@ -6,9 +6,8 @@
         display: none;
     }
 </style>
-<form action="{{route('food.update',$food->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{route('document.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('put')
     <div class="row">
         <div class="col-lg-9 col-md-12">
             <section class="content">
@@ -17,9 +16,9 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Update Food</h3>
-                                    <a href="{{route('homebanner.index')}}" class="btn btn-success btn-sm float-right">View
-                                        Food</a>
+                                    <h3 class="card-title">Add  Document</h3>
+                                    <a href="{{route('document.index')}}" class="btn btn-success btn-sm float-right">View
+                                         Documents</a>
                                 </div>
                                 <div class="col-md-12 p-0">
                                     @include('admin.includes.message')
@@ -30,51 +29,26 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="headline"> Food Name</label> <span class="text-danger"> *
+                                                <label for="headline"> Document Name</label> <span class="text-danger"> *
                                                 </span>
                                                 <input type="text" class="form-control" name="name"
-                                                    value="{{old($food->name,'name')}}">
+                                                    value="{{old('name')}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="kicker">Price</label>
-                                                <input type="text" class="form-control" name="price"
-                                                    value="{{old($food->price, 'price')}}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-
-
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="head_img">Food</label>
+                                                <label for="head_img">Document Image</label>
                                                 <div id="featured_img" class="row">
-                                                    <div class="col-md-6 remove">
-                                                        <div class="img-upload-preview">
-                                                            <img loading="lazy"  src="{{ asset('public/uploads/food/'.$food->image) }}" class="img-responsive" style="max-height:150px;">
-
-                                                            <button type="button" class="btn btn-danger close-btn remove-files"><i class="fa fa-times"></i></button>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <hr>
-
-
-
                                     <ul class="post-buttons d-flex">
                                         <li><button type="submit"
-                                                class="btn btn-success btn-sm float-right">Create Post</button></li>
+                                                class="btn btn-success btn-sm float-right">Submit</button></li>
                                     </ul>
                                 </div>
 
@@ -188,7 +162,7 @@
 
         $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         $("#featured_img").spartanMultiImagePicker({
-            fieldName: 'image',
+            fieldName: 'document',
             maxCount: 1,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
@@ -332,6 +306,3 @@
 
 </script>
 @endsection
-
-
-

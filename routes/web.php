@@ -159,6 +159,12 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('video/update/{id}',[MediaController::class, 'videoUpdate'])->name('video.update');
         Route::get('video/delete/{id}',[MediaController::class, 'videoDelete'])->name('video.delete');
 
+        Route::get('document',[HomeController::class, 'documentIndex'])->name('document.index');
+        Route::get('document/create',[HomeController::class, 'documentCreate'])->name('document.create');
+        Route::post('document/store',[HomeController::class, 'documentStore'])->name('document.store');
+        Route::get('document/edit/{id}',[HomeController::class, 'documentEdit'])->name('document.edit');
+        Route::post('document/update/{id}',[HomeController::class, 'documentUpdate'])->name('document.update');
+        Route::get('document/delete/{id}',[HomeController::class, 'documentDelete'])->name('document.delete');
 
     });
 
@@ -248,6 +254,7 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 });
 
 Route::resource('users', UserController::class);
+Route::post('users/login',[UserController::class,'login'])->name('users.login');
 Route::post('reviews',[ReviewsController::class,'store'])->name('reviews.store');
 Route::get('/auth/github/redirect',[SocialController::class,'githubRedirect'])->name('githubLogin');
 Route::get('/auth/github/callback',[SocialController::class,'callback']);

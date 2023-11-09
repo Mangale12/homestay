@@ -54,7 +54,7 @@
 </section>
 
 <!-- Why choose us?-->
-<section class="section section-xl bg-gray-4">
+{{-- <section class="section section-xl bg-gray-4">
     <div class="container">
         <div class="heading-panel">
             <div class="heading-panel-left">
@@ -83,8 +83,32 @@
 
         </div>
     </div>
-</section>
+</section> --}}
+<div class="row row-30 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery" data-lightgallery="group">
+    <div class="heading-panel">
+        <div class="heading-panel-left">
+            <h4 class="oh-desktop heading-panel-subtitle"><span class="d-inline-block wow slideInDown" data-wow-delay=".2s">Our Documents</span></h4>
+        </div>
+        <div class="heading-panel-decor wow fadeIn"></div>
+    </div>
+    @foreach($documents as $key => $document)
+    <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item" data-filter="Type 3">
+        <!-- Thumbnail Classic-->
+        <article class="thumbnail thumbnail-classic thumbnail-md">
+            <div class="thumbnail-classic-figure"><img src="{{ asset('public/uploads/document/'.$document->document) }}" alt="" width="420" height="350" />
+            </div>
+            <div class="thumbnail-classic-caption">
+                <div class="thumbnail-classic-title-wrap">
+                    <a class=" " href="{{ asset('public/uploads/document/'.$document->document) }}" data-lightgallery="item">
+                        <img src="{{ asset('public/uploads/document/'.$document->document) }}" alt="" width="420" height="350"/>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    @endforeach
 
+</div>
 <!-- What people Say-->
 <section class="section section-lg section-last bg-default">
     <div class="container">

@@ -11,6 +11,7 @@ use App\Models\Subscriber;
 use App\Models\SiteSetting;
 use App\Models\Video;
 use Illuminate\Support\Facades\Route;
+use App\Models\Document;
 class HomeController extends Controller
 {
 
@@ -86,13 +87,68 @@ class HomeController extends Controller
         $inquiry->save();
         return response()->json(['data'=>$inquiry]);
     }
-public function inquiryDelete($id){
-    $inquiry = Inquiry::find($id)->first();
-    $inquiry->delete();
-    return back()->with(['message'=>'inquiry deleted']);
-}
+    public function inquiryDelete($id){
+        $inquiry = Inquiry::find($id)->first();
+        $inquiry->delete();
+        return back()->with(['message'=>'inquiry deleted']);
+    }
     public function subscriber(){
         $subscribers = Subscriber::get();
         return view('admin.subscriber.index',compact('subscribers'));
+    }
+    public function documentIndex(){
+        $documents = Document::get();
+        return view('admin.document.index',compact('documents'));
+    }
+    public function documentCreate(){
+        return view('admin.document.create');
+    }
+    public function documentStore(Request $request){
+        $request->validate([
+            'document'=>'required',
+
+        ]);
+        if($request->hasFile('document')){
+            $document = $request->document;
+            $document_name = time().'.'.$document->extension();
+            $document->move(public_path('uploads/document/'),$document_name);
+            Document::create([
+                'document'=>$document_name,
+                'name'=>$request->name,
+            ]);
+        }
+        return redirect()->route('document.index');
+    }
+    public function documentEdit($id){
+        $document=Document::find($id);
+        return view('admin.document.edit',compact('document'));
+    }
+    public function documentUpdate(Request $request, $id){
+        $document = Document::find($id);
+        $document_name = $document->document;
+        if($request->hasFile('document')){
+            if($document->document != null){
+                if(file_exists(public_path('uploads/document/'.$document->document))){
+                    unlink(public_path('uploads/document/'.$document->document));
+                }
+            }
+            $document = $request->document;
+            $document_name = time().'.'.$document->extension();
+            $document->move(public_path('uploads/document/'),$document_name);
+        }
+        Document::where('id',$id)->update([
+            'document'=>$document_name,
+            'name'=>$request->name,
+        ]);
+        return redirect()->route('document.index')->with('message','Document updated successfully');
+    }
+
+    public function documentDelete(Document $document){
+        if($document->document != null){
+            if(file_exists(public_path('uploads/document/'.$document->document))){
+                unlink(public_path('uploads/document/'.$document->document));
+            }
+        }
+        return redirect()->route('document.index')->with('message','Document Deleted succefully');
     }
 }

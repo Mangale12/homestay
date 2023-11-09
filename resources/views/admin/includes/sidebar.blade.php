@@ -240,12 +240,32 @@
               </li>
             </ul>
           </li>
+
           <li class="nav-item">
-            <a href="{{route('about-us.index')}}" class="nav-link {{ Route::is('about-us.index') ? 'active' : '' }}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>About Us</p>
+            <a href="#" class="nav-link {{Route::is('document.index','document.create','document.edit','about-us.index') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                About Us
+                <i class="fas fa-angle-right right"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('about-us.index')}}" class="nav-link {{ Route::is('about-us.index') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>About Us</p>
+                    </a>
+                </li>
+
+              <li class="nav-item">
+                <a href="{{route('document.index')}}" class="nav-link {{Route::is('document.index','document.create','document.edit') ? 'active' : ''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Document</p>
+                </a>
+              </li>
+            </ul>
           </li>
+
 
 
 
