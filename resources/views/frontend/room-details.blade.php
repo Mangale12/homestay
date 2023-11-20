@@ -277,7 +277,7 @@ body {
 
 <!-- partial -->
     <!-- Project Links-->
-    <section class="section section-sm section-last bg-default">
+    {{-- <section class="section section-sm section-last bg-default">
         <div class="container">
             <div class="project-navigation">
                 <div class="row row-30">
@@ -306,5 +306,5 @@ body {
                 </div><a class="project-navigation-arrow-prev" href="#"></a><a class="project-navigation-arrow-next" href="#"></a>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection

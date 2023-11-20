@@ -63,12 +63,9 @@ Route::get('/test',function(){
 });
 Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
 
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
 
 
-    Route::group(['middleware' => ['role:Super Admin|Admin']],function(){
+    Route::group(['middleware' => ['role:Super Admin']],function(){
         Route::get('/social_settings', [SocialSettingsController::class, 'index'])->name('social');
         Route::patch('/social_settings/edit/{id}', [SocialSettingsController::class, 'update'])->name('socialUpdate');
         Route::resource('/settings', SiteSettingsController::class);
@@ -165,6 +162,9 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'], function () {
         Route::get('document/edit/{id}',[HomeController::class, 'documentEdit'])->name('document.edit');
         Route::post('document/update/{id}',[HomeController::class, 'documentUpdate'])->name('document.update');
         Route::get('document/delete/{id}',[HomeController::class, 'documentDelete'])->name('document.delete');
+        Route::get('/', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
     });
 
@@ -258,6 +258,7 @@ Route::post('users/login',[UserController::class,'login'])->name('users.login');
 Route::post('reviews',[ReviewsController::class,'store'])->name('reviews.store');
 Route::get('/auth/github/redirect',[SocialController::class,'githubRedirect'])->name('githubLogin');
 Route::get('/auth/github/callback',[SocialController::class,'callback']);
+Route::get('/email-verification/{id}',[UserController::class,'email_verified'])->name("user.email_verification");
 
 // Route::get('auth/facebook', [FacebookSocialiteController::class, 'redirectToFB']);
 // Route::get('callback/facebook', [FacebookSocialiteController::class, 'handleCallback']);

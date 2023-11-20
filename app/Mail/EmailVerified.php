@@ -7,19 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NoticeAdminMail extends Mailable
+class EmailVerified extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $details;
-
+    public $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($user)
     {
-        $this->details = $details;
+        $this->user = $user;
+        //
     }
 
     /**
@@ -29,11 +29,9 @@ class NoticeAdminMail extends Mailable
      */
     public function build()
     {
-        // dd($this->details);
-        $subject = 'New Inquiry For Room';
         return $this->from('filesend@handy777.net', 'Nepal Bed & Breakfast')
-        ->subject($subject)
-        ->markdown('email.noticeadmin')
-        ->with(['details' => $this->details ]);
+        ->subject("Register Verification")
+        ->markdown('email.email_verified')
+        ->with(['user' => $this->user ]);
     }
 }

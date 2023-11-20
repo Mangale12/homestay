@@ -63,7 +63,7 @@
             </a>
 
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{route('homebanner.index')}}" class="nav-link {{ Route::is('homebanner.index','homebanner.create','homebanner.edit') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -71,7 +71,7 @@
               </p>
             </a>
 
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{route('room.index')}}" class="nav-link {{ Route::is('room.index','room.create','room.edit') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>

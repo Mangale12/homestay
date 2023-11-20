@@ -33,9 +33,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         if(Auth::user()->is_superadmin == 0){
+            if(Auth::user()->is_verified == 0){
+                Auth::logout();
+                // dd("not");
+                return redirect()->route('users.index')->with('message','Email is not verified yet');
+            }else{
+                // dd("verified");
             return redirect()->route('frontend.room');
-        }else{
-            return redirect()->intended(RouteServiceProvider::HOME);
+
+                // return redirect()->intended(RouteServiceProvider::HOME);
+            }
         }
     }
 

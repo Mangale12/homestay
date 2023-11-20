@@ -357,11 +357,11 @@
                         <p>Name: <b>{{ $details['name'] }}</b>,</p>
                         <p>Email: <b>{{ $details['user_details']['email'] }}</b>,</p>
                         <p>Phone: <a href="tel"><b>{{ $details['user_details']['phone'] }}</b></a>,</p>
-                        <p>Country: <b>{{ $details['user_details']['country'] }}</b>,</p>
-                        <p>Room Type: <b>{{ $details['user_details']['room_type'] }}</b>,</p>
+                        <p>Country: <b>{{ $details['country'] }}</b>,</p>
+                        <p>Room Type: <b>{{ $details['room_type'] }}</b>,</p>
                         <p>Adults: <b>{{ $details['user_details']['adults'] }}</b>,</p>
                         <p>Children: <b>{{ $details['user_details']['children'] }}</b>,</p>
-                        <p>Pick Up : <b>{{ $details['user_details']['pickup'] }}</b>,</p>
+                        <p>Pick Up : <b>{{ $details['user_details']['pickup'] == 1 ? 'Yes' : 'No' }}</b>,</p>
                         <p>Arrival at : <b>{{ $details['user_details']['arrival_date'] }}</b>,</p>
                         <p>Arrival at : <b>{{ $details['user_details']['arrival_date'] }}</b>,</p>
                         <p>Message : <b>{{ $details['user_details']['message'] }}</b>,</p>

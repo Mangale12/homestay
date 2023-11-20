@@ -12,6 +12,8 @@ use App\Models\SiteSetting;
 use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 use App\Models\Document;
+use App\Models\Country;
+use App\Models\Room;
 class HomeController extends Controller
 {
 
@@ -55,14 +57,17 @@ class HomeController extends Controller
         $new_contact = Inquiry::insertGetId($data);
 
         $user_details = Inquiry::find($new_contact);
-
+        $country = Country::find($request->country);
+        $room_type = Room::find($request->room_type);
         try {
             $contact = SiteSetting::first('contact')->toArray();
+
             $details = [
                 'name'=>$request->name,
-                'room_type'=>$request->room_type,
+                'room_type'=> $room_type->type,
                 'phone'=>$contact,
                 'user_details'=>$user_details,
+                'country' => $country->name,
             ];
             // $to_name = "hahh";
             // $to_email = "mangalewiba12@gmail.com";
@@ -73,8 +78,8 @@ class HomeController extends Controller
             //     ->subject("Booking Confirmation");
             //     $message->from("mangaletamang65@gmail.com","tetet");
             // });
-            Mail::to($request->email)->send(new NoticeUserMail(json_encode($details)));
-            Mail::to('chandradong@gmail.com')->send(new NoticeAdminMail(json_encode($details)));
+            // Mail::to($request->email)->send(new NoticeUserMail(json_encode($details)));
+            Mail::to('mangaletamang65@gmail.com')->send(new NoticeAdminMail(json_encode($details)));
 
         } catch (Exception $e) {
             dd($e);

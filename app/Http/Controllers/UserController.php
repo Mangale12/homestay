@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Mail;
+use App\Mail\EmailVerified;
 
 class UserController extends Controller
 {
@@ -50,11 +52,18 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        Mail::to('mangaletamang65@gmail.com')->send(new EmailVerified($user));
         //$user->assignRole($request->input('role'));
         // dd($user);
         return redirect()->route('users.index')->with('message', 'User Created Successfully');
     }
+    public function email_verified($id){
+        $user = User::find($id);
 
+        $user->is_verified = 1;
+        $user->save();
+        return redirect()->route('users.index');
+    }
     /**
      * Display the specified resource.
      *
