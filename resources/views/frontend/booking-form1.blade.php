@@ -315,7 +315,7 @@ button:hover {
 }
 </style>
 <form action="">
-
+    @include('admin.includes.message')
     <!-- Booking Details Section -->
     <section class="form-group">
       <h2 class="heading">Booking Details</h2>

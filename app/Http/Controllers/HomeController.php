@@ -79,12 +79,16 @@ class HomeController extends Controller
             //     $message->from("mangaletamang65@gmail.com","tetet");
             // });
             // Mail::to($request->email)->send(new NoticeUserMail(json_encode($details)));
-            Mail::to('mangaletamang65@gmail.com')->send(new NoticeAdminMail(json_encode($details)));
-
+            $setting = SiteSetting::first();
+            $emails = explode(",",$setting->email);
+            foreach($emails as $email){
+                Mail::to($email)->send(new NoticeAdminMail(json_encode($details)));
+            }
+            return redirect()->back()->with('message',"thank you for inquery we will contact you soon !!");
         } catch (Exception $e) {
             dd($e);
         }
-        return redirect()->route('home');
+
     }
     public function inquiryView(Request $request){
         $inquiry = Inquiry::where('id',$request->user_id)->first();

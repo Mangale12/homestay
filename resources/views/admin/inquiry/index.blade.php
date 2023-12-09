@@ -11,6 +11,7 @@
 
                             <a href="{{route('inquiry.new')}}" class="btn btn-success d-inline">New Inquiries</a>
                             <a href="{{route('inquiry.old')}}" class="btn btn-success d-inline">Old Inquiries</a>
+                            <a href="{{route('inquiry.index')}}" class="btn btn-success d-inline">All Inquiries</a>
 
                         </div>
                             {{-- <button class="btn btn-primary delete_all btn-danger" onclick="del()"><i class="fas fa-trash">
@@ -55,7 +56,7 @@
                                         <td>{{ $inquiry->name }}</td>
                                         <td>{{ $inquiry->email }}</td>
                                         <td>{{ $inquiry->phone }}</td>
-                                        <td>{{ $inquiry->country }}</td>
+                                        <td>{{ $inquiry->countries->name }}</td>
                                         <td>{{ $inquiry->arrival_date }}</td>
                                         <td>{{ $inquiry->departure_date }}</td>
                                         <td><a class="inquiry-view btn btn-primary" data-id="{{ $inquiry->id }}"> <i class="fas {{ $inquiry->status == 0 ? 'fa-eye-slash' : 'fa-eye' }}"></i> view</a>
