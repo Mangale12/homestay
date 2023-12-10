@@ -17,6 +17,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- book a Room-->
     <section class="section bg-default text-center" >
         <div class="parallax-container" data-parallax-img="{{ asset('public/frontend/images/bg-forms-3.jpg') }}">
@@ -106,7 +108,8 @@
                                                 <textarea class="form-input" id="contact-address-8" name="message"></textarea>
                                                 <label class="form-label" for="contact-email-8">Leave Message</label>
                                             </div>
-                                            <button class="button button-block button-primary button-ujarak" type="submit">Check Availability</button>
+                                            <button class="button book-button button-block button-primary button-ujarak" type="submit">Submit</button>
+                                            <input type="hidden" value="{{ Session::get('book_message') ? '1' : '0' }}" id="book-status">
                                         </form>
                                     </div>
                                 </div>
@@ -120,14 +123,54 @@
 
     <!-- Latest projects-->
 
+<!-- Button trigger modal -->
+{{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button> --}}
 
+  <!-- Modal -->
+  {{-- <style>
+    .modal{
+        top:20%;
+    }
+  </style> --}}
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Thank You for Your Enquiry</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <h1>Thank You for Your Enquiry!</h1>
+                <p style="font-size: 2rem;">We appreciate your interest in our hotel. Our team will review your enquiry, and we will contact you soon.</p>
+                <div class="thank-you-message">Thank you</div>
+                {{-- <div><span></span></div> --}}
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 </div>
 
     <script>
+
         $(document).ready(function(){
             $('.selectpicker').selectpicker();
+            var book_status = $('#book-status').val();
+            if(book_status == 1){
+                $('#exampleModalCenter').modal('show');
+            }
         })
     </script>
     @endsection
