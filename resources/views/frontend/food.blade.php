@@ -28,7 +28,7 @@
             </ul>
         </div>
         <div class="row row-50 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery" data-lightgallery="group">
-            @foreach ($food as $food)
+            @foreach ($foods as $food)
             <div class="col-md-6 col-lg-4 isotope-item" data-filter="Type 2">
                 <!-- Thumbnail Modern-->
                 <article class="thumbnail thumbnail-modern thumbnail-sm">
@@ -45,8 +45,9 @@
 
         </div>
         <div class="button-wrap">
-            <button class="button button-md button-default-outline button-wapasha">Load More</button>
+            {{ $foods->links() }}
         </div>
+
     </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

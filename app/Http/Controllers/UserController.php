@@ -52,7 +52,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        Mail::to('mangaletamang65@gmail.com')->send(new EmailVerified($user));
+        Mail::to($request->email)->send(new EmailVerified($user));
         //$user->assignRole($request->input('role'));
         // dd($user);
         return redirect()->route('users.index')->with('message', 'User Created Successfully');

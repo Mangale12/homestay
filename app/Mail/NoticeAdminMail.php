@@ -31,7 +31,7 @@ class NoticeAdminMail extends Mailable
     {
         // dd($this->details);
         $subject = 'New Inquiry For Room';
-        return $this->from('filesend@handy777.net', 'Nepal Bed & Breakfast')
+        return $this->from('book@nepalbedandbreakfast.com', 'Nepal Bed & Breakfast')
         ->subject($subject)
         ->markdown('email.noticeadmin')
         ->with(['details' => $this->details ]);

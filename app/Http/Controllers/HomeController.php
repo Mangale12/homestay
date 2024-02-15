@@ -81,12 +81,12 @@ class HomeController extends Controller
             // Mail::to($request->email)->send(new NoticeUserMail(json_encode($details)));
             $setting = SiteSetting::first();
             $emails = explode(",",$setting->email);
-            // foreach($emails as $email){
-            //     Mail::to($email)->send(new NoticeAdminMail(json_encode($details)));
-            // }
+            foreach($emails as $email){
+                Mail::to($email)->send(new NoticeAdminMail(json_encode($details)));
+            }
             return redirect()->back()->with('book_message',"thank you for inquery we will contact you soon !!");
         } catch (Exception $e) {
-            dd($e);
+
         }
 
     }

@@ -147,29 +147,29 @@ class FrontendController extends Controller
     }
     public function food(Request $request){
         $categories = FoodCategory::get();
-        $food = Food::get();
+        $foods = Food::paginate(9);
         if($request->category){
             $category = FoodCategory::where('slug',$request->category)->first();
             // dd($category);
-            $food = Food::where('food_category_id',$category->id)->get();
+            $foods = Food::where('food_category_id',$category->id)->paginate(9);
         }
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
 
-        return view('frontend.food',compact('socialmedia','setting','food','categories'));
+        return view('frontend.food',compact('socialmedia','setting','foods','categories'));
     }
     public function gallery(Request $request){
         $setting=SiteSetting::first();
         $socialmedia = SocialSetting::first();
 
         $categories = Category::get();
-        $gallery = Media::get();
+        $galleries = Media::paginate(9);
         if($request->category){
             $category = Category::where('slug',$request->category)->first();
             // dd($category);
-            $gallery = Media::where('media_type',$category->id)->get();
+            $galleries = Media::where('media_type',$category->id)->paginate(9);
         }
-        return view('frontend.gallery',compact('socialmedia','setting','categories','gallery'));
+        return view('frontend.gallery',compact('socialmedia','setting','categories','galleries'));
     }
 
     public function subscriber(Request $request){

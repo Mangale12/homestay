@@ -32,7 +32,7 @@
             </ul>
         </div>
         <div class="row row-30 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery" data-lightgallery="group">
-            @foreach($gallery as $key => $gallery)
+            @foreach($galleries as $key => $gallery)
             <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item" data-filter="Type 3">
                 <!-- Thumbnail Classic-->
                 <article class="thumbnail thumbnail-classic thumbnail-md">
@@ -51,7 +51,7 @@
 
         </div>
         <div class="button-wrap">
-            <button class="button button-md button-default-outline button-wapasha">Load More</button>
+            {{ $galleries->links() }}
         </div>
     </div>
 </section>
