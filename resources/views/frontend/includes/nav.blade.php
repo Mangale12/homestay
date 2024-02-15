@@ -4,11 +4,25 @@
         .rd-nav-item{
             margin-right: -0.7rem;
         }
-        @media screen and (min-width: 420px) {
-        .mobile-login {
-            display: none;
-        }
 
+        .login-box{
+            margin-left: 30%;
+            margin-top:10%;
+            margin-bottom:10%;
+        }
+        @media screen and (min-width: 420px) {
+            .mobile-login {
+                display: none;
+            }
+
+
+    }
+    @media screen and (max-width: 420px) {
+        .login-box{
+                margin-left: -4%!important;
+                margin-top:20%;
+                margin-bottom:10%;
+            }
     }
     .breadcrumbs-custom-inset{
             margin-top: 1rem!important;

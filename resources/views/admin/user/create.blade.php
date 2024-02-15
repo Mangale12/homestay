@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Sign up</title>
+@extends("frontend.layouts.app")
+@section('content')
+@include('frontend.includes.nav')
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
@@ -11,20 +9,6 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <style>
-    * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: #f2f2f2;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Roboto", sans-serif;
-}
 
 .login-box {
   width: 400px;
@@ -98,8 +82,6 @@ body {
   color: #fff;
 }
 </style>
-</head>
-<body>
 <!-- partial:index.partial.html -->
 <form action="{{ route('users.store') }}" method="POST">
     @csrf
@@ -130,9 +112,9 @@ body {
           </div>
 
           <div class="btn-container">
-            <button class="btn btn-primary" type="submit">Sign in</button>
-            <button class="btn btn-secondary"><span>Already have an account? <a href="{{ route('users.index') }}">Sign in</a>
-          </span></button>
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+           <a class="btn btn-secondary" href="{{ route('users.index') }}" style="color: white"><span>Already have an account? Sign in
+          </span></a>
           </div>
         </div>
       </div>
@@ -140,5 +122,4 @@ body {
 
 <!-- partial -->
 
-</body>
-</html>
+@endsection

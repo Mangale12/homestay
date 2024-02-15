@@ -83,7 +83,7 @@
 }
 </style>
 <!-- partial:index.partial.html -->
-<div class="login-box" style="margin-left: 30%; margin-top:10%; margin-bottom:10%;">
+<div class="login-box">
   <div class="login-header">
     <h5>Sign in</h5>
   </div>
@@ -118,10 +118,6 @@
                 <label for="rem">Don't you have account ?</label>
             </div>
             <a href="{{ route('users.create') }}">Signup here</a>
-            </div>
-            <div class="btn-container">
-            <button class="btn btn-primary">Sign in</button>
-            <button class="btn btn-secondary">Sign in with Google</button>
             </div>
         </div>
 </div>

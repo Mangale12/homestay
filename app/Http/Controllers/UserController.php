@@ -34,7 +34,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        return view('admin.user.create',compact('setting','socialmedia'));
     }
 
     /**
