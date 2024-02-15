@@ -3,6 +3,19 @@
     $mails = explode(',',$setting->email);
     $contacts = explode(',',$setting->contact);
 @endphp
+<style>
+    iframe{
+        width: 70%;
+    }
+    @media screen and (min-width: 420px) {
+        iframe{
+            width: 109!important%;
+        }
+        .navigate{
+            margin-left: -3rem;
+        }
+    }
+</style>
  <footer class="section footer-corporate footer-corporate-2 context-dark">
     <div class="footer-corporate-inset">
         <div class="container">
@@ -45,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-11 col-md-6 col-lg-6 col-xl-6">
+                <div class="col-6 col-md-6 col-lg-6 col-xl-6 navigate">
                     <div class="oh-desktop" style="width:200%;position:relative">
                         <div class="wow slideInLeft" data-wow-delay="0s">
                             <h5 class="text-spacing-100">Navigation</h5>
@@ -106,8 +119,8 @@ _gaq.push(['_trackPageview']);
     s.parentNode.insertBefore(ga, s);
 })();
 </script>
-
-<!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 (function(w, d, s, l, i) {
     w[l] = w[l] || [];

@@ -85,7 +85,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <input class="form-input" id="contact-children-8" type="number" name="children" value="{{ old('children') }}">
-                                                        <label class="ml-3 form-label" for="contact-member-8">No Of Children</label>
+                                                        <label class="ml-3 form-label" for="contact-children-8">No Of Children</label>
                                                     </div>
 
                                                 </div>

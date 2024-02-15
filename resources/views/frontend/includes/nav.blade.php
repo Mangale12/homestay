@@ -4,8 +4,63 @@
         .rd-nav-item{
             margin-right: -0.7rem;
         }
+        @media screen and (min-width: 420px) {
+        .mobile-login {
+            display: none;
+        }
+
+    }
+    .breadcrumbs-custom-inset{
+            margin-top: 1rem!important;
+        }
     </style>
+    @if(Route::is("home"))
+    <div class="rd-navbar-aside-right mobile-login rd-navbar-collapse" style="margin-left:16rem; margin-top: -2rem;; position:fixed;z-index:12121; color:black;">
+        <ul class="rd-navbar-corporate-contacts">
+            @if(Auth::check())
+            <li>
+                <div class="unit unit-spacing-xs">
+                    <div class="unit-body"><a class="link-phone" href="tel:{{ $contact[0] }}">{{ Auth::user()->name }}</a></div>
+                </div>
+            </li>
+            @else
+            <li>
+
+                <ul class="list-inline list-inline-md rd-navbar-corporate-list-social">
+                    <li><a class="icon fa " href="{{ route('users.index') }}" style="color: black;">Login</a></li>
+                </ul>
+            </li>
+            @endif
+
+
+        {{-- </ul><a class="button button-md button-ujarak button-default-outline" href="#">Get in touch</a> --}}
+    </div>
+    @else{
+        <div class="rd-navbar-aside-right mobile-login rd-navbar-collapse" style="margin-left:16rem; margin-top: -0.5rem; position:fixed;z-index:12121; color:black;">
+            <ul class="rd-navbar-corporate-contacts">
+                @if(Auth::check())
+                <li>
+                    <div class="unit unit-spacing-xs">
+                        <div class="unit-body"><a class="link-phone" href="tel:{{ $contact[0] }}">{{ Auth::user()->name }}</a></div>
+                    </div>
+                </li>
+                @else
+                <li>
+
+                    <ul class="list-inline list-inline-md rd-navbar-corporate-list-social">
+                        <li><a class="icon fa " href="{{ route('users.index') }}" style="color: black;">Login</a></li>
+                    </ul>
+                </li>
+                @endif
+
+
+            {{-- </ul><a class="button button-md button-ujarak button-default-outline" href="#">Get in touch</a> --}}
+        </div>
+    }
+    @endif
+
     <div class="rd-navbar-wrap">
+
         <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed"
             data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px"
             data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
@@ -65,6 +120,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="rd-navbar-main-outer">
                 <div class="rd-navbar-main">
                     <div class="rd-navbar-nav-wrap">
@@ -115,6 +171,8 @@
                     </div>
                 </div>
             </div>
+
         </nav>
     </div>
 </header>
+

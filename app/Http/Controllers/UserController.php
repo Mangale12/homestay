@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mail;
+use App\Models\SiteSetting;
+use App\Models\SocialSetting;
 use App\Mail\EmailVerified;
 
 class UserController extends Controller
@@ -20,8 +22,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        return view('admin.user.login');
+        $setting=SiteSetting::first();
+        $socialmedia = SocialSetting::first();
+        return view('admin.user.login',compact('setting','socialmedia'));
     }
 
     /**
